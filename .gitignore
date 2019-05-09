@@ -1,2 +1,8 @@
 *.class
 *.log
+*.class
+*.log
+.idea
+spark-docker/spark-job-sample/project/
+spark-docker/spark-job-sample/target/
+*.iml
