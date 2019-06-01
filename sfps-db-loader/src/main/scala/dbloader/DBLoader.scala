@@ -8,7 +8,7 @@ import java.util.NoSuchElementException
 
 object DBLoader extends App {
 
-  // TODO: read DN_NAME from .env
+  // TODO: read DB_NAME from .env
   lazy val DB_NAME = "sfps_db"
   val train_filename = "../../train.csv"
 
@@ -21,9 +21,6 @@ object DBLoader extends App {
     "",
     ExecutionContexts.synchronous
   )
-
-  // Create train table
-  (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
 
   // Insert 1 row into specified table
   def insert1(tablename: String, keys: String, row: String) : Update0 =
@@ -47,19 +44,23 @@ object DBLoader extends App {
       }
     }
 
-  def addLineToDB(tablename: String, line: Map[String, String]) = {
-    // Format column names and values into SQL-friendly format
-    val k = line.keys.reduce(_ + "," + _)
-    val v = line.values.map(formatStringForSql(_)).reduce(_ + "," + _)
-    insert1(tablename, k, v).run.transact(xa).unsafeRunSync
+  def addLineToDB(tablename: String, columnNames: String, line: Seq[String]) = {
+    // Format values into SQL-friendly format
+    val values = line.map(formatStringForSql(_)).reduce(_ + "," + _)
+
+    insert1(tablename, columnNames, values).run.transact(xa).unsafeRunSync
     print('.')
   }
 
+  // Delete and create train table
+  (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
+
   val reader = CSVReader.open(train_filename)
-  val it = reader.iteratorWithHeaders
+  val it = reader.iterator
+  val columnNames: String = it.next.reduce(_ + ',' + _)
   try {
     while (true) {
-      addLineToDB("train", it.next)
+      addLineToDB("train", columnNames, it.next)
     }
   } catch {
     case e: java.util.NoSuchElementException => println("EOF")
