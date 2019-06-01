@@ -11,6 +11,7 @@ object DBLoader extends App {
   // TODO: read DB_NAME from .env
   lazy val DB_NAME = "sfps_db"
   val train_filename = "../../train.csv"
+  val test_filename = "../../test.csv"
 
   // Create db transactor
   implicit val cs = IO.contextShift(ExecutionContexts.synchronous)
@@ -52,12 +53,14 @@ object DBLoader extends App {
     print('.')
   }
 
+
   // Delete and create train table
   (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
 
   val reader = CSVReader.open(train_filename)
   val it = reader.iterator
   val columnNames: String = it.next.reduce(_ + ',' + _)
+  println(columnNames)
   try {
     while (true) {
       addLineToDB("train", columnNames, it.next)
@@ -66,4 +69,23 @@ object DBLoader extends App {
     case e: java.util.NoSuchElementException => println("EOF")
   }
   reader.close()
+
+
+  // TODO: refactor repeated code?
+  // Delete and create test table
+  (SqlCommands.dropTest, SqlCommands.createTest).mapN(_ + _).transact(xa).unsafeRunSync
+
+  val readerTest = CSVReader.open(test_filename)
+  val itTest = readerTest.iterator
+  val columnNamesTest: String = itTest.next.reduce(_ + ',' + _)
+  println(columnNamesTest)
+  try {
+    while (true) {
+      addLineToDB("test", columnNames, itTest.next)
+    }
+  } catch {
+    case e: java.util.NoSuchElementException => println("EOF")
+  }
+  readerTest.close()
+
 }
