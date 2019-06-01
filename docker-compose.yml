@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5442:5432"
+
+  # db_loader:
+  #   ...
+  #   links:
+  #     - db
+# volumes:
+#   grafana_config:
+#     driver: local
