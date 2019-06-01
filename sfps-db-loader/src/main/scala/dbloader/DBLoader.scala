@@ -2,7 +2,6 @@ package sfps.dbloader
 
 import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
-import scala.io.Source
 import com.github.tototoshi.csv.CSVReader
 import java.util.NoSuchElementException
 
@@ -66,7 +65,7 @@ object DBLoader extends App {
       addLineToDB("train", columnNames, it.next)
     }
   } catch {
-    case e: java.util.NoSuchElementException => println("EOF")
+    case e: java.util.NoSuchElementException => println("EOF train")
   }
   reader.close()
 
@@ -84,7 +83,7 @@ object DBLoader extends App {
       addLineToDB("test", columnNames, itTest.next)
     }
   } catch {
-    case e: java.util.NoSuchElementException => println("EOF")
+    case e: java.util.NoSuchElementException => println("EOF test")
   }
   readerTest.close()
 
