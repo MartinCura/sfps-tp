@@ -7,4 +7,7 @@
 *target/
 *.iml
 
+.bloop/
 .metals/
+
+.env
