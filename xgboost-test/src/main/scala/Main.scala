@@ -36,12 +36,12 @@ object Main {
 
         //STAGE 1: TRAINING AND SAVING
 
-        val pipe = new StringLabeledPipeline
-        pipe.preProccess(rawInput, "class").foreach(transformedDataFrame => {
-          pipe.assemble(sch, transformedDataFrame, List(FIELD_1, FIELD_2, FIELD_3, FIELD_4))
-            .foreach(pipes => {
+        val modelCreator = new StringLabeledPipeline
+        modelCreator.preProccess(rawInput, "class").foreach(transformedDataFrame => {
+          modelCreator.assemble(sch, transformedDataFrame, List(FIELD_1, FIELD_2, FIELD_3, FIELD_4))
+            .foreach(assembledPipelineModel => {
               //SIDE EFFECTS!!!
-              new PipelineSaver().saveToJpmml(pipes, transformedDataFrame, MODEL_FILE_PATH)
+              new PipelineSaver().saveToJpmml(assembledPipelineModel, transformedDataFrame, MODEL_FILE_PATH)
           })
         })
 
