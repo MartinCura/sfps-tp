@@ -9,5 +9,6 @@
 
 .bloop/
 .metals/
+.vscode/
 
 .env
