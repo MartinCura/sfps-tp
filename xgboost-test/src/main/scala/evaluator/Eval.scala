@@ -4,6 +4,7 @@ import java.io.InputStream
 
 import org.dmg.pmml.FieldName
 import org.jpmml.evaluator.{InputField, LoadingModelEvaluatorBuilder, ModelEvaluator}
+
 import scala.collection.JavaConverters._
 
 

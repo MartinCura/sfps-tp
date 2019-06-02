@@ -5,7 +5,6 @@ import java.io.File
 import org.apache.spark.ml.PipelineModel
 import org.apache.spark.sql.DataFrame
 import org.jpmml.sparkml.PMMLBuilder
-import pipelines.GeneralPipeline
 
 class PipelineSaver {
 
