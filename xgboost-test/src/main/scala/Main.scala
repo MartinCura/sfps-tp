@@ -40,6 +40,7 @@ object Main {
 
       val Array(training, test) = rawInput.randomSplit(Array(0.8, 0.2), 123)
 
+      //acá van las features a evaluar, todo tiene que ser DoubleType, así que si no es hay que correr un StringIndexer.
       val assembler = new VectorAssembler()
       .setInputCols(Array("sepal_length", "sepal_width", "petal_length", "petal_width"))
       .setHandleInvalid("keep")
@@ -51,21 +52,16 @@ object Main {
         .setHandleInvalid("keep")
         .fit(rawInput)
 
-      // booster.setFeaturesCol("features")
-      // booster.setLabelCol("classIndex")
-
        val classifier = new DecisionTreeClassifier()
          .setLabelCol("label")
          .setFeaturesCol("features")
-      
-
-      //val xgbClassificationModel = xgbClassifier.fit(xgbInput)
-      //val results = xgbClassificationModel.transform(testSet)
-
+    
+      //la transformación de la label la dejo afuera del pipeline porque si no jpmml no lo toma.
       val trSch = labelIndexer.transform(rawInput)
       val pipeline = new Pipeline().setStages(Array(assembler, classifier))
       val pipelineModel = pipeline.fit(trSch)
 
+      //ejemplo de corrida batch
       val trTest = labelIndexer.transform(test)
       val prediction = pipelineModel.transform(trTest)
       prediction.show(false)
