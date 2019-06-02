@@ -59,10 +59,11 @@ domain_proc,
 mai_advice,
 mai_verification,
 mai_reason,
-mai_risk,
-mai_status,
-mai_unique,
-mai_avg_secs"""
+mai_risk"""
+// maibis_score"""
+// mai_status,
+// mai_unique,
+// mai_avg_secs"""
 // mai_buys,
 // mai_searches,
 // eulerBadge,
@@ -123,7 +124,8 @@ mai_avg_secs"""
   // sql"SELECT * FROM tabletest".query[TestRow].stream.quick.unsafeRunSync
     //.query[(DataSchema.Label, DataSchema.DataRow)]
   println("")
-  (sql"SELECT " ++ Fragment.const0(columns) ++ sql" FROM train").query[DataSchema.DataRow]
+  (sql"SELECT " ++ Fragment.const0(columns) ++ sql" FROM train")
+    .query[DataSchema.DataRow]
     .stream
     .take(1)
     .quick
