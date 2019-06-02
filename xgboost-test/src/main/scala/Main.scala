@@ -1,25 +1,35 @@
+import java.io.{File, InputStream}
+
+import javax.xml.transform.stream.{StreamResult, StreamSource}
+import org.apache.spark.ml.{Model, Pipeline}
+import org.apache.spark.ml.classification.RandomForestClassifier
+import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
+import org.apache.spark.mllib.linalg.Vector
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
-import scala.io.Source
-import org.apache.spark.ml.feature.StringIndexer
-import org.apache.spark.ml.feature.VectorAssembler
-import ml.dmlc.xgboost4j.scala.spark.XGBoostClassifier
-import java.io.IOException
-import java.io.File
-import org.apache.spark.sql.types.StructType
-import org.apache.spark.ml.Pipeline
-import org.apache.spark.ml.feature.RFormula
+import org.dmg.pmml.FieldName
+import org.jpmml.evaluator.{InputField, LoadingModelEvaluatorBuilder, ModelEvaluator}
+import org.jpmml.model.JAXBUtil
 import org.jpmml.sparkml._
-import org.apache.spark.ml.{Pipeline, PipelineModel}
-import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
-import org.apache.spark.ml.feature._
-import org.apache.spark.ml.tuning._
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.types._
-import org.dmg.pmml.PMML
-import org.apache.spark.ml.classification.DecisionTreeClassifier
+
+import scala.collection.JavaConverters._
 
 object Main {
+
+    val FIELD_1 = "sepal_length"
+    val FIELD_2 = "sepal_width"
+    val FIELD_3 = "petal_length"
+    val FIELD_4 = "petal_width"
+    val FIELD_5 = "class"
+
+    def getSchema() = {
+      new StructType(Array(
+        StructField(FIELD_1, DoubleType, true),
+        StructField(FIELD_2, DoubleType, true),
+        StructField(FIELD_3, DoubleType, true),
+        StructField(FIELD_4, DoubleType, true),
+        StructField(FIELD_5, StringType, true)))
+    }
 
     def main(args: Array[String]): Unit = { 
 
@@ -27,22 +37,13 @@ object Main {
       .config("spark.master", "local")
       .getOrCreate();
 
-      import spark.implicits._
-
-      val sch = new StructType(Array(
-      StructField("sepal_length", DoubleType, true),
-      StructField("sepal_width", DoubleType, true),
-      StructField("petal_length", DoubleType, true),
-      StructField("petal_width", DoubleType, true),
-      StructField("class", StringType, true)))
+      val sch = getSchema
 
       val rawInput = spark.read.schema(sch).csv("src/main/resources/iris.data")
 
-      val Array(training, test) = rawInput.randomSplit(Array(0.8, 0.2), 123)
-
       //acá van las features a evaluar, todo tiene que ser DoubleType, así que si no es hay que correr un StringIndexer.
       val assembler = new VectorAssembler()
-      .setInputCols(Array("sepal_length", "sepal_width", "petal_length", "petal_width"))
+      .setInputCols(Array(FIELD_1, FIELD_2, FIELD_3, FIELD_4))
       .setHandleInvalid("keep")
       .setOutputCol("features")
 
@@ -52,7 +53,7 @@ object Main {
         .setHandleInvalid("keep")
         .fit(rawInput)
 
-       val classifier = new DecisionTreeClassifier()
+       val classifier = new RandomForestClassifier()
          .setLabelCol("label")
          .setFeaturesCol("features")
     
@@ -61,16 +62,65 @@ object Main {
       val pipeline = new Pipeline().setStages(Array(assembler, classifier))
       val pipelineModel = pipeline.fit(trSch)
 
-      //ejemplo de corrida batch
-      val trTest = labelIndexer.transform(test)
-      val prediction = pipelineModel.transform(trTest)
-      prediction.show(false)
-
 
       //Guardar el modelo en formato JPMML
-      val pmmlBytes = new PMMLBuilder(trSch.schema, pipelineModel).buildFile(new File("src/main/resources/xgboostModel"))
-    
+      val pmml = new PMMLBuilder(trSch.schema, pipelineModel).build
+      new PMMLBuilder(trSch.schema, pipelineModel).buildFile(new File("src/main/resources/xgboostModel.pmml"))
+
+      
+      //mostrar resultado
+      JAXBUtil.marshalPMML(pmml, new StreamResult(System.out))
+
+
+      // Eval pipeline
+      //Example set of features.
+      val rawArgs = List(5.1, 3.5, 12.4, 7.2)
+
+      openFile("xgboostModel.pmml").map(file => evaluateSetOfFeatures(rawArgs, evaluator(file)))
+        .map(result => result match {
+          case Left(msg) => println("error")
+          case Right(evaluation) => println(evaluation.head)
+        }
+
+      )
+
+      spark.close()
+
     }
+
+
+
+    def openFile(path: String) : Option[InputStream] = {
+      Some(this.getClass.getClassLoader.getResourceAsStream(path))
+    }
+
+    def evaluator(pmmlIs: InputStream) : ModelEvaluator[_] = {
+      new LoadingModelEvaluatorBuilder()
+        .load(pmmlIs)
+        .build()
+    }
+
+
+    def evaluateSetOfFeatures(features: List[Double], evaluator: ModelEvaluator[_]) : Either[String, Map[FieldName,_]] = {
+      val activeFields: List[InputField] = evaluator.getActiveFields.asScala.toList
+
+      val zippedArgsWithIndex = activeFields.zipWithIndex
+      val arguments = zippedArgsWithIndex.map{ argWithIndex =>
+        (argWithIndex._1.getFieldName, features(argWithIndex._2))
+      }.toMap.asJava
+
+      try {
+        Right(evaluator.evaluate(arguments).asScala.toMap)
+      } catch {
+        case e : Exception => Left(e.getMessage)
+    }
+
+
+
+
+    }
+
+    
 
     
 }
