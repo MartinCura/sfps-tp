@@ -9,10 +9,13 @@ import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructTy
 import org.jpmml.model.JAXBUtil
 import org.jpmml.sparkml._
 import evaluator.Eval
+import pipelines.StringLabeledPipeline
+import saver.PipelineSaver
 
 object Main {
 
-    val MODEL_FILE_PATH = "src/main/resources/iris.data"
+    val RESOURCES_FILE_PATH = "src/main/resources/iris.data"
+    val MODEL_FILE_PATH = "src/main/resources/xgboostModel.pmml"
 
     val FIELD_1 = "sepal_length"
     val FIELD_2 = "sepal_width"
@@ -37,40 +40,25 @@ object Main {
 
         val sch = getSchema()
 
-        val rawInput = spark.read.schema(sch).csv("src/main/resources/iris.data")
+        val rawInput = spark.read.schema(sch).csv(RESOURCES_FILE_PATH)
 
-        //acá van las features a evaluar, todo tiene que ser DoubleType, así que si no es hay que correr un StringIndexer.
-        val assembler = new VectorAssembler()
-        .setInputCols(Array(FIELD_1, FIELD_2, FIELD_3, FIELD_4))
-        .setHandleInvalid("keep")
-        .setOutputCol("features")
+        //STAGE 1: TRAINING AND SAVING
 
-        val labelIndexer = new StringIndexer()
-          .setInputCol("class")
-          .setOutputCol("label")
-          .setHandleInvalid("keep")
-          .fit(rawInput)
-
-         val classifier = new RandomForestClassifier()
-           .setLabelCol("label")
-           .setFeaturesCol("features")
-
-        //la transformación de la label la dejo afuera del pipeline porque si no jpmml no lo toma.
-        val trSch = labelIndexer.transform(rawInput)
-        val pipeline = new Pipeline().setStages(Array(assembler, classifier))
-        val pipelineModel = pipeline.fit(trSch)
-
-
-        //Guardar el modelo en formato JPMML
-        val pmml = new PMMLBuilder(trSch.schema, pipelineModel).build
-        new PMMLBuilder(trSch.schema, pipelineModel).buildFile(new File(MODEL_FILE_PATH))
+        val pipe = new StringLabeledPipeline
+        pipe.preProccess(rawInput, "class").foreach(transformedDataFrame => {
+          pipe.assemble(sch, transformedDataFrame, List(FIELD_1, FIELD_2, FIELD_3, FIELD_4))
+            .foreach(pipes => {
+              //SIDE EFFECTS!!!
+              new PipelineSaver().saveToJpmml(pipes, transformedDataFrame, MODEL_FILE_PATH)
+          })
+        })
 
 
         //mostrar resultado
-        JAXBUtil.marshalPMML(pmml, new StreamResult(System.out))
+        //JAXBUtil.marshalPMML(pmml, new StreamResult(System.out))
 
 
-        // Eval pipeline
+        // STAGE 2: LOAD AND EVAL JPMML
         //Example set of features.
         val rawArgs = List(5.1, 3.5, 12.4, 7.2)
 
