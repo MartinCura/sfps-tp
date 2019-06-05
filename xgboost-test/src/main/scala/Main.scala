@@ -24,6 +24,24 @@ object Main {
         StructField(FIELD_5, StringType, true)))
     }
 
+
+    def getSchema2() = {
+      new StructType(Array(
+        StructField(FIELD_1, DoubleType, true),
+        StructField(FIELD_2, DoubleType, true),
+        StructField(FIELD_3, DoubleType, true),
+        StructField(FIELD_4, DoubleType, true),
+        StructField(FIELD_5, StringType, true)))
+    }
+
+
+    def getSchema(features: List[MyRowElement]) {
+        features.map(f => new StructField(f.toString(), DoubleType, true))
+    }
+
+
+
+    //Example of usage
     def main(args: Array[String]): Unit = {
 
         val spark = SparkSession .builder().appName("Spark SQL basic example")
