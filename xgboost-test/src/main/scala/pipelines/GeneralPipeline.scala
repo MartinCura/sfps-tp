@@ -6,9 +6,9 @@ import org.apache.spark.sql.types.StructType
 
 trait GeneralPipeline {
 
-  def preProccess(rawDataFrame: DataFrame, strings: String*): Option[DataFrame]
+  //def preProccess(rawDataFrame: DataFrame, strings: String*): Option[DataFrame]
 
-  def assemble(schema: StructType, dataFrame: DataFrame, features: List[String]) : Option[PipelineModel]
+  def assemble(schema: StructType, dataFrame: DataFrame, label: String, features: List[String]) : Option[PipelineModel]
 
 
 }
