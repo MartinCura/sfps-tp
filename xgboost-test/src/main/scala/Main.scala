@@ -5,8 +5,11 @@ import pipelines.StringLabeledPipeline
 import saver.PipelineSaver
 
 object Main {
+    
+
 
     val RESOURCES_FILE_PATH = "src/main/resources/iris.data"
+    val SHORT_TRAIN_PATH = "src/main/resources/iris.data"
     val MODEL_FILE_PATH = "src/main/resources/xgboostModel.pmml"
 
     val FIELD_1 = "sepal_length"
@@ -52,6 +55,7 @@ object Main {
 
         val rawInput = spark.read.schema(sch).csv(RESOURCES_FILE_PATH)
 
+        
         //STAGE 1: TRAINING AND SAVING
 
         val modelCreator = new StringLabeledPipeline
