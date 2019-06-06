@@ -6,9 +6,7 @@ import saver.PipelineSaver
 import types._
 
 object Main {
-    
-
-
+  
     val RESOURCES_FILE_PATH = "src/main/resources/iris.data"
     val SHORT_TRAIN_PATH = "src/main/resources/iris.data"
     val MODEL_FILE_PATH = "src/main/resources/xgboostModel.pmml"
@@ -27,8 +25,6 @@ object Main {
         StructField(FIELD_4, DoubleType, true),
         StructField(FIELD_5, StringType, true)))
     }
-
-
 
 
 
