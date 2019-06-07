@@ -35,4 +35,6 @@ object ETL extends App {
 
   data.map(_.productIterator.foreach(println))
 
+  // val someCancelled = Cancelled(Some(4))
+
 }

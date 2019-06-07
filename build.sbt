@@ -25,6 +25,8 @@ lazy val etl = (project in file("sfps-etl"))
     libraryDependencies += "org.tpolecat" %% "doobie-core"      % doobieVersion,
     libraryDependencies += "org.tpolecat" %% "doobie-postgres"  % doobieVersion,
     libraryDependencies += "org.tpolecat" %% "doobie-specs2"    % doobieVersion,
+  ).dependsOn(
+    training
   )
 
 lazy val training = (project in file("xgboost-test"))

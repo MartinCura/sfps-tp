@@ -1,11 +1,11 @@
-package types
+package sfps.types
 
 import java.util.Locale
 import java.time.LocalDateTime
 
 abstract class MyRowElement extends Serializable with Product {
     def toDouble() : Option[Double]
-    override def toString(): String = this.getClass.getName 
+    override def toString(): String = this.getClass.getName
 }
 
 abstract class CountryCode(code: Option[String]) extends MyRowElement {
@@ -13,30 +13,30 @@ abstract class CountryCode(code: Option[String]) extends MyRowElement {
     val countryDictionary = Map("AR" -> 54.0D, "BR" -> 78.0D)
     override def toDouble(): Option[Double] = {
         code.flatMap(countryDictionary.get(_))
-    }   
+    }
 }
- 
+
 abstract class MyInteger(number: Option[Int]) extends MyRowElement {
     override def toDouble(): Option[Double] = {
         number.flatMap(x => Option(x.toDouble))
     }
 }
 
-case class MaiScore(number: Option[Int]) extends MyInteger(number) 
-case class DeviceMatch(number: Option[Int]) extends MyInteger(number) 
-case class FactorCodes(number: Option[Int]) extends MyInteger(number) 
-case class FirstEncounter(number: Option[Int]) extends MyInteger(number) 
-case class IcAddress(number: Option[Int]) extends MyInteger(number) 
-case class IcInternet(number: Option[Int]) extends MyInteger(number) 
+case class MaiScore(number: Option[Int]) extends MyInteger(number)
+case class DeviceMatch(number: Option[Int]) extends MyInteger(number)
+case class FactorCodes(number: Option[Int]) extends MyInteger(number)
+case class FirstEncounter(number: Option[Int]) extends MyInteger(number)
+case class IcAddress(number: Option[Int]) extends MyInteger(number)
+case class IcInternet(number: Option[Int]) extends MyInteger(number)
 case class IcSuspicious(number: Option[Int]) extends MyInteger(number)
-case class IcVelocity(number: Option[Int]) extends MyInteger(number) 
+case class IcVelocity(number: Option[Int]) extends MyInteger(number)
 case class Icidentity(number: Option[Int]) extends MyInteger(number)
-case class IpRoutingMethod(number: Option[Int]) extends MyInteger(number) 
+case class IpRoutingMethod(number: Option[Int]) extends MyInteger(number)
 case class ReasonCode(number: Option[Int]) extends MyInteger(number)
-case class TimeOnPage(number: Option[Int]) extends MyInteger(number) 
+case class TimeOnPage(number: Option[Int]) extends MyInteger(number)
 
 case class BillingCountryCode(code: Option[String]) extends CountryCode(code) {
-    override def toString(): String = "billingCountryCode" 
+    override def toString(): String = "billingCountryCode"
 }
 
 //BOOLEAN
@@ -61,8 +61,8 @@ case class CaseMinutesDistance(n: Option[Int]) extends MyInteger(n)
 case class Apocrypha(n: Option[Int]) extends MyInteger(n)
 
 case class MyRow(
-      maiScore: MaiScore, 
-      deviceMatch: DeviceMatch, 
+      maiScore: MaiScore,
+      deviceMatch: DeviceMatch,
       factorCodes: FactorCodes,
       firstEncounter: FirstEncounter,
       apocrypha: Apocrypha
@@ -84,5 +84,3 @@ case class MyRow(
     //   caseDate: CaseDate,
     //   caseMinutesDistance: CaseMinutesDistance
 )
-
-

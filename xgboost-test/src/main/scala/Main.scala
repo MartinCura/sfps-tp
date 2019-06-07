@@ -3,10 +3,10 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
 import pipelines.StringLabeledPipeline
 import saver.PipelineSaver
-import types._
+import sfps.types._
 
 object Main {
-  
+
     val RESOURCES_FILE_PATH = "src/main/resources/iris.data"
     val SHORT_TRAIN_PATH = "src/main/resources/iris.data"
     val MODEL_FILE_PATH = "src/main/resources/xgboostModel.pmml"
@@ -45,7 +45,7 @@ object Main {
 
         import spark.implicits._
 
-        
+
         val rowsExample = Seq(Example(1.0D, 2.0D, 3.0D, 4.0D, 3.0D),
                               Example(1.0D, 2.0D, 3.8D, 4.0D, 3.0D),
                               Example(1.0D, 2.0D, 78.0D, 4.0D, 4.0D),
@@ -62,7 +62,7 @@ object Main {
               //SIDE EFFECTS!!!
               new PipelineSaver().saveToJpmml(assembledPipelineModel, exampleDataframe, MODEL_FILE_PATH)
           })
-        
+
 
         //Dejo esto comentado que era lo del dataset de prueba:
         //STAGE 1: TRAINING AND SAVING
@@ -73,7 +73,7 @@ object Main {
 
         // STAGE 2: LOAD AND EVAL JPMML
         //Example set of features.
-        
+
         //callEvaluator()
 
         spark.stop()
@@ -98,7 +98,7 @@ object Main {
               new PipelineSaver().saveToJpmml(assembledPipelineModel, transformedDataFrame, MODEL_FILE_PATH)
           })
         })
-        
+
         spark.stop()
       }
 
