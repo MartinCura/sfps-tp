@@ -4,6 +4,25 @@ import shapeless.labelled
 
 object Schema {
 
+  type ReducedRow = (
+    MaiScore, DeviceMatch, FactorCodes, FirstEncounter,
+    IcAddress, IcInternet, IcSuspicious, IcVelocity, IcIdentity,
+    IpRoutingMethod, ReasonCode, TimeOnPage, BillingCountryCode, Cancelled,
+    CardCountryCode, Pp1, Pp30, Pp60, Pp90, CaseDate, CaseMinutesDistance,
+  )
+
+  val reducedColumns = """
+    mai_score, DeviceMatch, FactorCodes, FirstEncounter,
+    IcAddress, IcInternet, IcSuspicious, IcVelocity, IcIdentity,
+    IpRoutingMethod, ReasonCode, TimeOnPage, billingCountryCode, cancelled,
+    cardCountryCode, pp_1, pp_30, pp_60, pp_90, caseDate, case_minutes_distance
+  """
+
+
+  /// OLD schema
+
+  type DataRow = (RowId, ActivityFields, TripFields, MaiFields1, MaiFields2, OnlineFields, PaymentFields, OtherFields, Label)
+
   case class RowId(
     id:               Int,
   )
@@ -115,8 +134,6 @@ object Schema {
   case class Label(
     apocrypha:        Int
   )
-
-  type DataRow = (RowId, ActivityFields, TripFields, MaiFields1, MaiFields2, OnlineFields, PaymentFields, OtherFields, Label)
 
   val columns = """
     id,

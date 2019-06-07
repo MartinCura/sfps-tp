@@ -37,7 +37,7 @@ object ETL extends App {
   private def selectStatement =
     sql"SELECT " ++ Fragment.const0(Schema.columns) ++ sql" FROM train"
 
-  // private def reducedSelectStatement = sql"SELECT " ++ Fragment.const0(Semigroup.reducedColumns) ++ sql" FROM train"
+  private def reducedSelectStatement = sql"SELECT " ++ Fragment.const0(Schema.reducedColumns) ++ sql" FROM train"
 
   def getStream(): Stream[ConnectionIO, Schema.DataRow] =
     selectStatement.query[Schema.DataRow].stream
@@ -49,11 +49,10 @@ object ETL extends App {
 
   def getNextRows(data: Stream[IO, Schema.DataRow], n: Int) = data.take(n).compile.toList.unsafeRunSync
 
-  def testRow(): List[MaiScore] = {
+  def getReducedData(n: Int): List[Schema.ReducedRow] = {
     val xa = transactor()
     // println(BillingCountryCode(Some("ARG")).toString())
-
-    return sql"SELECT mai_score FROM train".query[MaiScore].stream.take(2).compile.toList.transact(xa).unsafeRunSync
+    return reducedSelectStatement.query[Schema.ReducedRow].stream.take(n).compile.toList.transact(xa).unsafeRunSync
   }
 
 }
