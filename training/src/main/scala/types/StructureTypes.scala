@@ -2,6 +2,7 @@ package sfps.types
 
 import java.util.Locale
 import java.time.LocalDateTime
+import sfps.common.CountryCodes
 
 abstract class MyRowElement extends Serializable with Product {
   def toDouble() : Option[Double]
@@ -9,11 +10,11 @@ abstract class MyRowElement extends Serializable with Product {
 }
 
 abstract class GenericCountryCode(shortName: Option[String]) extends MyRowElement {
-  //TODO martín
-  val countryDictionary = Map("AR" -> 54.0D, "BR" -> 78.0D)
-  override def toDouble(): Option[Double] = {
-    shortName.flatMap(countryDictionary.get(_))
-  }
+  def toDouble(): Option[Double] =
+    CountryCodes.getCode(shortName) match {
+      case None => None
+      case code => Some(code.get.toDouble)
+    }
 }
 
 abstract class MyInteger(number: Option[Int]) extends MyRowElement {
