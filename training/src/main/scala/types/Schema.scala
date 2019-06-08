@@ -19,6 +19,22 @@ object Schema {
   """
 
 
+  val MicroRowFeatures = List(
+    MaiScore, DeviceMatch, FactorCodes, FirstEncounter,
+    Apocrypha
+  )
+
+  type MicroRow = (
+    MaiScore, DeviceMatch, FactorCodes, FirstEncounter,
+    Apocrypha
+  )
+
+  val microColumns = """
+    mai_score, DeviceMatch, FactorCodes, FirstEncounter,
+    APOCRYPHA
+  """
+
+
   /// OLD schema
 
   type DataRow = (RowId, ActivityFields, TripFields, MaiFields1, MaiFields2, OnlineFields, PaymentFields, OtherFields, Label)

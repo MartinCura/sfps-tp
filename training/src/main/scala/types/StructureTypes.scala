@@ -9,20 +9,20 @@ abstract class MyRowElement extends Serializable with Product {
   override def toString(): String = this.getClass.getName
 }
 
+abstract class MyInteger(number: Option[Int]) extends MyRowElement {
+  override def toDouble(): Option[Double] = {
+    number.flatMap(x => Option(x.toDouble))
+  }
+}
+
 abstract class GenericCountryCode(shortName: Option[String]) extends MyRowElement {
   def toDouble(): Option[Double] =
     CountryCodes.getCode(shortName) match {
       case None => None
       case code => Some(code.get.toDouble)
     }
-    // Another version:
+    /// Another version:
     // shortName.flatMap(CountryCodes.getCode2(_)).flatMap(c => Some(c.toDouble))
-}
-
-abstract class MyInteger(number: Option[Int]) extends MyRowElement {
-  override def toDouble(): Option[Double] = {
-    number.flatMap(x => Option(x.toDouble))
-  }
 }
 
 case class MaiScore(number: Option[Int]) extends MyInteger(number)
@@ -38,12 +38,12 @@ case class IpRoutingMethod(number: Option[Int]) extends MyInteger(number)
 case class ReasonCode(number: Option[Int]) extends MyInteger(number)
 case class TimeOnPage(number: Option[Int]) extends MyInteger(number)
 
+//BOOLEAN
+case class Cancelled(number: Option[Int]) extends MyInteger(number)
+
 case class BillingCountryCode(code: Option[String]) extends GenericCountryCode(code) {
   override def toString(): String = "billingCountryCode"
 }
-
-//BOOLEAN
-case class Cancelled(number: Option[Int]) extends MyInteger(number)
 
 case class CardCountryCode(code: Option[String]) extends GenericCountryCode(code) {
   override def toString(): String = "cardCountryCode"
