@@ -1,6 +1,10 @@
+import java.io.FileOutputStream
+
 import evaluator.Eval
+import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
+import org.jpmml.model.MetroJAXBUtil
 import pipelines.StringLabeledPipeline
 import saver.PipelineSaver
 import types._
@@ -9,7 +13,7 @@ object Main {
   
     val RESOURCES_FILE_PATH = "src/main/resources/iris.data"
     val SHORT_TRAIN_PATH = "src/main/resources/iris.data"
-    val MODEL_FILE_PATH = "src/main/resources/xgboostModel.pmml"
+    val MODEL_FILE_PATH = "xgboostModel.pmml"
 
     val FIELD_1 = "sepal_length"
     val FIELD_2 = "sepal_width"
@@ -57,14 +61,29 @@ object Main {
 
         // Creación del modelo y guardado a pmml:
         val modelCreator = new StringLabeledPipeline
-        modelCreator.assemble(exampleDataframe.schema, exampleDataframe, "apocrypha", List("maiScore","deviceMatch","factorCodes","firstEncounter"))
-            .foreach(assembledPipelineModel => {
-              //SIDE EFFECTS!!!
-              new PipelineSaver().saveToJpmml(assembledPipelineModel, exampleDataframe, MODEL_FILE_PATH)
-          })
-        
+        val pmml = modelCreator.assemble(exampleDataframe.schema,
+          exampleDataframe, "apocrypha", List("maiScore","deviceMatch","factorCodes","firstEncounter"))
+            .map(assembledPipelineModel => {
+              val pmml = new PipelineSaver().toPmml(assembledPipelineModel, exampleDataframe)
+              pmml
+            })
 
-        //Dejo esto comentado que era lo del dataset de prueba:
+
+
+        //Saving the model in a file.
+        pmml.foreach(p => {
+          val fs = FileSystem.get(spark.sparkContext.hadoopConfiguration)
+          println(spark.sparkContext.hadoopConfiguration)
+          // Output file can be created from file system.
+          val output = fs.create(new Path(MODEL_FILE_PATH))
+          MetroJAXBUtil.marshalPMML(pmml.get, output)
+          output.flush()
+          output.close()
+        })
+
+
+
+      //Dejo esto comentado que era lo del dataset de prueba:
         //STAGE 1: TRAINING AND SAVING
         //callModel()
 
@@ -76,7 +95,7 @@ object Main {
         
         //callEvaluator()
 
-        spark.stop()
+        //spark.stop()
 
       }
 
@@ -94,8 +113,7 @@ object Main {
         modelCreator.preProccess(rawInput, "class").foreach(transformedDataFrame => {
           modelCreator.assemble(sch, transformedDataFrame, "class", List(FIELD_1, FIELD_2, FIELD_3, FIELD_4))
             .foreach(assembledPipelineModel => {
-              //SIDE EFFECTS!!!
-              new PipelineSaver().saveToJpmml(assembledPipelineModel, transformedDataFrame, MODEL_FILE_PATH)
+              new PipelineSaver().toPmml(assembledPipelineModel, transformedDataFrame, MODEL_FILE_PATH)
           })
         })
         

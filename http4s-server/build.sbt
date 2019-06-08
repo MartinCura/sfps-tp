@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-literal" % "0.6.1"
 )
 
-libraryDependencies += "sfps.tp" %% "xgboost-sample" % "1.0"
+libraryDependencies += "sfps.tp" %% "xgboost-evaluator" % "1.0"
 
 scalacOptions ++= Seq(
   "-deprecation",

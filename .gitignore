@@ -3,7 +3,10 @@
 *.class
 *.log
 .idea
-*project/
+*project/project
+*project/target
+*project/.bloop
+*project/build.properties
 *target/
 *.iml
 
