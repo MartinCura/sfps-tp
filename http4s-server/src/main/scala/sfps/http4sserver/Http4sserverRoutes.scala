@@ -9,7 +9,6 @@ import sfps.http4sserver.EvaluatorRepo.Flower
 
 object Http4sserverRoutes {
 
-
   def modelEvaluationRoutes[F[_]: Sync](M: EvaluatorRepo[F]): HttpRoutes[F] = {
 
     val dsl = new Http4sDsl[F]{}
