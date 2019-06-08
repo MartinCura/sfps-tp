@@ -18,4 +18,7 @@ object CountryCodes {
     case _ => cc.get(shortName.get)
   }
 
+  def getCode2(shortName: String): Option[Int] =
+    cc.get(shortName)
+
 }

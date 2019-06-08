@@ -15,6 +15,8 @@ abstract class GenericCountryCode(shortName: Option[String]) extends MyRowElemen
       case None => None
       case code => Some(code.get.toDouble)
     }
+    // Another version:
+    // shortName.flatMap(CountryCodes.getCode2(_)).flatMap(c => Some(c.toDouble))
 }
 
 abstract class MyInteger(number: Option[Int]) extends MyRowElement {
