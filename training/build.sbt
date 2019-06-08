@@ -18,7 +18,10 @@ lazy val root = (project in file("."))
     name := "sfps-training",
     libraryDependencies += scalaTest % Test,
 
-    // Dobie
+    // CSVReader
+    libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.5",
+
+    // Doobie
     libraryDependencies += "org.tpolecat" %% "doobie-core"      % doobieVersion,
     libraryDependencies += "org.tpolecat" %% "doobie-postgres"  % doobieVersion,
     libraryDependencies += "org.tpolecat" %% "doobie-specs2"    % doobieVersion,

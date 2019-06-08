@@ -11,7 +11,7 @@ import sfps.types._
  * val data = getData(None)
  * val fiveRows = getNextRows(data, 5)
  **/
-object ETL extends App {
+object ETL {
   // TODO: move some things to initialization with parameter table name
 
   // TODO: read DB_NAME from some constants / env file

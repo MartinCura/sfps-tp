@@ -8,11 +8,11 @@ abstract class MyRowElement extends Serializable with Product {
   override def toString(): String = this.getClass.getName
 }
 
-abstract class CountryCode(code: Option[String]) extends MyRowElement {
+abstract class GenericCountryCode(shortName: Option[String]) extends MyRowElement {
   //TODO martín
   val countryDictionary = Map("AR" -> 54.0D, "BR" -> 78.0D)
   override def toDouble(): Option[Double] = {
-    code.flatMap(countryDictionary.get(_))
+    shortName.flatMap(countryDictionary.get(_))
   }
 }
 
@@ -35,14 +35,14 @@ case class IpRoutingMethod(number: Option[Int]) extends MyInteger(number)
 case class ReasonCode(number: Option[Int]) extends MyInteger(number)
 case class TimeOnPage(number: Option[Int]) extends MyInteger(number)
 
-case class BillingCountryCode(code: Option[String]) extends CountryCode(code) {
+case class BillingCountryCode(code: Option[String]) extends GenericCountryCode(code) {
   override def toString(): String = "billingCountryCode"
 }
 
 //BOOLEAN
 case class Cancelled(number: Option[Int]) extends MyInteger(number)
 
-case class CardCountryCode(code: Option[String]) extends CountryCode(code) {
+case class CardCountryCode(code: Option[String]) extends GenericCountryCode(code) {
   override def toString(): String = "cardCountryCode"
 }
 
