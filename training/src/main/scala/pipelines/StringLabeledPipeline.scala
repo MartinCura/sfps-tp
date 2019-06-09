@@ -14,7 +14,6 @@ class StringLabeledPipeline extends GeneralPipeline {
                features: List[String]) : Option[PipelineModel] = {
 
     Some(pipeModel(List(assembler(features), RFclassifier(label))).fit(dataFrame))
-
   }
 
   def pipeModel(stages: List[_ <: PipelineStage]) : Pipeline = {
@@ -24,13 +23,13 @@ class StringLabeledPipeline extends GeneralPipeline {
   //acá van las features a evaluar, todo tiene que ser DoubleType, así que si no es hay que correr un StringIndexer.
   def assembler(featureFields: List[String]) : VectorAssembler =
     new VectorAssembler()
-    .setInputCols(featureFields.toArray)
-    .setHandleInvalid("keep")
-    .setOutputCol("features")
+      .setInputCols(featureFields.toArray)
+      .setHandleInvalid("keep")
+      .setOutputCol("features")
 
   def RFclassifier(label: String) = new RandomForestClassifier()
-    .setLabelCol(label)
-    .setFeaturesCol("features")
+      .setLabelCol(label)
+      .setFeaturesCol("features")
 
   def preProccess(rawDataFrame: DataFrame, strings: String*): Option[DataFrame] = {
     //TODO handle exceptions
@@ -42,8 +41,8 @@ class StringLabeledPipeline extends GeneralPipeline {
   val LABEL = "label"
   def labelIndexerPreProcess(rawDataFrame: DataFrame, labelDataFieldName: String) : Model[_] =
     new StringIndexer()
-    .setInputCol(labelDataFieldName)
-    .setOutputCol(LABEL)
-    .setHandleInvalid("keep")
-    .fit(rawDataFrame)
+      .setInputCol(labelDataFieldName)
+      .setOutputCol(LABEL)
+      .setHandleInvalid("keep")
+      .fit(rawDataFrame)
 }
