@@ -26,14 +26,18 @@ object Training {
 
       import sparkSession.implicits._
 
-      val df = ETL.getMicroData(10).toDF()
+      val data = ETL.getMicroData(10)
+      val df = data.toDF()
 
       df.show() //
+
+      assert(df.count() > 0, "No rows")
+      val features = data(0).productIterator.toList.map(_.toString) // Do note it takes them from the Row members, NOT the case classes
 
       // Creación del modelo y guardado a pmml
       val modelCreator = new StringLabeledPipeline
       val pmml = modelCreator
-        .assemble(df.schema, df, Apocrypha.toString, Schema.MicroRowFeatures.map(_.toString))
+        .assemble(df.schema, df, Apocrypha.toString, features)
         .map(assembledPipelineModel => {
           val pmml = new PipelineSaver().toPmml(assembledPipelineModel, df)
           pmml
