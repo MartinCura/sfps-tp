@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 NCORES=4
-
 HOST=$(cat /etc/hostname)
 mkdir /tmp/spark-events
 ./sbin/start-history-server.sh
@@ -9,7 +8,7 @@ mkdir /tmp/spark-events
 ./bin/spark-submit --class="Main" --master spark://${HOST}:7077 /jobs/spark-trainer.jar
 
 echo "Done training, moving file to final location"
-mv ./xgboostModel.pmml ~
+mv ./xgboostModel.pmml /exchange/xgboostModel1.pmml
 
 # Si queremos que solo termine con `docker stop spark`
 echo "Spark finished, press Ctrl+C to end its Web UI... " && tail -f /dev/null
