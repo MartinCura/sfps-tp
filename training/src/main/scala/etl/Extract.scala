@@ -39,15 +39,15 @@ object ETL {
 
   private def reducedSelectStatement = sql"SELECT " ++ Fragment.const0(Schema.reducedColumns) ++ sql" FROM train"
 
-  // def getStream(): Stream[ConnectionIO, Schema.DataRow] =
-  //   selectStatement.query[Schema.DataRow].stream
+  def getStream(): Stream[ConnectionIO, Schema.DataRow] =
+    selectStatement.query[Schema.DataRow].stream
 
-  // def getData(n: Option[Int]) = n match {
-  //   case None => getStream().transact(transactor())             // Get a stream for all of it
-  //   case Some(n) => getStream().take(n).transact(transactor())  // Stream is cut off after `n` elements
-  // }
+  def getData(n: Option[Int]) = n match {
+    case None => getStream().transact(transactor())             // Get a stream for all of it
+    case Some(n) => getStream().take(n).transact(transactor())  // Stream is cut off after `n` elements
+  }
 
-  // def getNextRows(data: Stream[IO, Schema.DataRow], n: Int) = data.take(n).compile.toList.unsafeRunSync
+  def getNextRows(data: Stream[IO, Schema.DataRow], n: Int) = data.take(n).compile.toList.unsafeRunSync
 
   def getReducedData(n: Int): List[Schema.ReducedRow] = {
     val xa = transactor()
