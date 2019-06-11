@@ -3,7 +3,9 @@ package sfps.etl
 import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
 import fs2.Stream
+
 import sfps.types._
+import sfps.dbloader._
 
 /**
  * Sample usage:
@@ -58,5 +60,14 @@ object ETL {
 
   def getMicroData(n: Int): List[Schema.MicroRow] =
     microSelectStatement.query[Schema.MicroRow].stream.take(n).compile.toList.transact(transactor()).unsafeRunSync
+
+  // `columns`: Comma-separated column names in same order as corresponding features in `row`
+  def storeAndTransform(row: Seq[String], columns: String): Schema.MicroRow = {
+    val newRow: Schema.MicroRow = DBLoader.addAndGetBack("train", columns, row)
+    return newRow
+  }
+
+  // Treats row as if features are in the same order as in the CSVs
+  def storeAndTransform(row: Seq[String]): Schema.MicroRow = storeAndTransform(row, SqlCommands.featuresColumns)
 
 }

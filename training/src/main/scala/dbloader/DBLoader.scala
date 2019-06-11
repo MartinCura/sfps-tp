@@ -4,8 +4,9 @@ import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
 import com.github.tototoshi.csv.CSVReader
 import java.util.NoSuchElementException
+import sfps.types.Schema
 
-object DBLoader extends App {
+object DBLoader {
 
   // TODO: read DB_NAME from .env
   lazy val DB_NAME = "sfps_db"
@@ -29,7 +30,7 @@ object DBLoader extends App {
           VALUES """ ++ Fragments.parentheses(Fragment.const0(row))
     ).update
 
-  // Numbers go plain, empty values are NULL, and any other strings is surrounded by ''
+  // Numbers go plain, empty values are NULL, and any other strings is surrounded by single quotes ('')
   def formatStringForSql(s: String): String =
     try {
       s.toDouble
@@ -44,47 +45,56 @@ object DBLoader extends App {
       }
     }
 
+  def addAndGetBack(tablename: String, columnNames: String, line: Seq[String]) = {
+    val values = line.map(formatStringForSql(_)).reduce(_ + ',' + _)
+    insert1(tablename, columnNames, values).withUniqueGeneratedKeys[Schema.MicroRow](columnNames.split(','):_*)
+      .transact(xa).unsafeRunSync
+ }
+
   def addLineToDB(tablename: String, columnNames: String, line: Seq[String]) = {
     // Format values into SQL-friendly format
-    val values = line.map(formatStringForSql(_)).reduce(_ + "," + _)
+    val values = line.map(formatStringForSql(_)).reduce(_ + ',' + _)
 
-    insert1(tablename, columnNames, values).run.transact(xa).unsafeRunSync
-    print('.')
+    insert1(tablename, columnNames, values).run
+      .transact(xa).unsafeRunSync
   }
 
+  def main() {
+    println("Deleting and creating train table")
+    (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
 
-  // Delete and create train table
-  (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
-
-  val reader = CSVReader.open(train_filename)
-  val it = reader.iterator
-  val columnNames: String = it.next.reduce(_ + ',' + _)
-  println(columnNames)
-  try {
-    while (true) {
-      addLineToDB("train", columnNames, it.next)
+    val reader = CSVReader.open(train_filename)
+    val it = reader.iterator
+    val columnNames: String = it.next.reduce(_ + ',' + _)
+    println(columnNames)
+    try {
+      while (true) {
+        addLineToDB("train", columnNames, it.next)
+        print('.')
+      }
+    } catch {
+      case e: java.util.NoSuchElementException => println("EOF train")
     }
-  } catch {
-    case e: java.util.NoSuchElementException => println("EOF train")
-  }
-  reader.close()
+    reader.close()
 
 
-  // TODO: refactor repeated code?
-  // Delete and create test table
-  (SqlCommands.dropTest, SqlCommands.createTest).mapN(_ + _).transact(xa).unsafeRunSync
+    // TODO: refactor repeated code?
+    println("Deleting and creating test table")
+    (SqlCommands.dropTest, SqlCommands.createTest).mapN(_ + _).transact(xa).unsafeRunSync
 
-  val readerTest = CSVReader.open(test_filename)
-  val itTest = readerTest.iterator
-  val columnNamesTest: String = itTest.next.reduce(_ + ',' + _)
-  println(columnNamesTest)
-  try {
-    while (true) {
-      addLineToDB("test", columnNames, itTest.next)
+    val readerTest = CSVReader.open(test_filename)
+    val itTest = readerTest.iterator
+    val columnNamesTest: String = itTest.next.reduce(_ + ',' + _)
+    println(columnNamesTest)
+    try {
+      while (true) {
+        addLineToDB("test", columnNames, itTest.next)
+        print('.')
+      }
+    } catch {
+      case e: java.util.NoSuchElementException => println("EOF test")
     }
-  } catch {
-    case e: java.util.NoSuchElementException => println("EOF test")
+    readerTest.close()
   }
-  readerTest.close()
 
 }
