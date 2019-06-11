@@ -1,4 +1,4 @@
-// import Dependencies._
+//import Dependencies._
 
 ThisBuild / scalaVersion     := "2.12.8"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
@@ -12,6 +12,7 @@ info on this for more: https://github.com/typelevel/cats#getting-started. */
 scalacOptions += "-Ypartial-unification" // 2.11.9+
 
 lazy val doobieVersion = "0.7.0"
+lazy val framelessVersion = "0.8.0" // for Spark 2.4.0
 
 lazy val root = (project in file("."))
   .settings(
@@ -33,5 +34,11 @@ lazy val root = (project in file("."))
     libraryDependencies += "ml.dmlc" % "xgboost4j-spark" % "0.80",
     libraryDependencies += "org.jpmml" % "jpmml-sparkml" % "1.5.3",
     libraryDependencies += "org.jpmml" % "pmml-evaluator" % "1.4.9",
-    libraryDependencies += "org.jpmml" % "pmml-evaluator-extension" % "1.4.9"
+    libraryDependencies += "org.jpmml" % "pmml-evaluator-extension" % "1.4.9",
+
+    libraryDependencies += "org.typelevel" %% "frameless-dataset" % framelessVersion,
+    libraryDependencies += "org.typelevel" %% "frameless-ml"      % framelessVersion,
+    libraryDependencies += "org.typelevel" %% "frameless-cats"    % framelessVersion
+  
   )
+

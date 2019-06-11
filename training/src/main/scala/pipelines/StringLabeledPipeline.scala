@@ -16,9 +16,24 @@ class StringLabeledPipeline extends GeneralPipeline {
     Some(pipeModel(List(assembler(features), RFclassifier(label))).fit(dataFrame))
   }
 
+
+  def assemble2(schema: StructType,
+               dataFrame: DataFrame,
+               label: String) : Option[PipelineModel] = {
+
+    Some(pipeModel(List(RFclassifier(label))).fit(dataFrame))
+  }
+
+
   def pipeModel(stages: List[_ <: PipelineStage]) : Pipeline = {
     new Pipeline().setStages(stages.toArray)
   }
+
+  def typedAssembler(featureFields: List[String]) : VectorAssembler =
+    new VectorAssembler()
+      .setInputCols(featureFields.toArray)
+      .setHandleInvalid("keep")
+      .setOutputCol("features")
 
   //acá van las features a evaluar, todo tiene que ser DoubleType, así que si no es hay que correr un StringIndexer.
   def assembler(featureFields: List[String]) : VectorAssembler =
