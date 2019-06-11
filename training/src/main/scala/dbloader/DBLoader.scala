@@ -45,9 +45,10 @@ object DBLoader {
       }
     }
 
-  def addAndGetBack(tablename: String, columnNames: String, line: Seq[String]) = {
+  // I think this works but i'm not quite sure, have to test order is not messing everything up (always the same problem)
+  def addAndGetBack(tablename: String, columnNames: String, line: Seq[String]): Schema.DataRow = {
     val values = line.map(formatStringForSql(_)).reduce(_ + ',' + _)
-    insert1(tablename, columnNames, values).withUniqueGeneratedKeys[Schema.MicroRow](columnNames.split(','):_*)
+    return insert1(tablename, columnNames, values).withUniqueGeneratedKeys[Schema.DataRow](columnNames.split(','):_*)
       .transact(xa).unsafeRunSync
  }
 

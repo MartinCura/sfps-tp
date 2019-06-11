@@ -2,9 +2,10 @@ package sfps.types
 
 import shapeless.labelled
 
+/** Schema of data */
 object Schema {
 
-  // Test reduced rows
+  /** Reduced rows for testing */
 
   type ReducedRow = (
     MaiScore, DeviceMatch, FactorCodes, FirstEncounter,
@@ -20,6 +21,8 @@ object Schema {
     cardCountryCode, pp_1, pp_30, pp_60, pp_90, caseDate, case_minutes_distance
   """
 
+
+  /** Micro rows for testing */
 
   val MicroRowFeatures = List(
     MaiScore, DeviceMatch, FactorCodes, FirstEncounter,
