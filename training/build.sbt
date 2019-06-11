@@ -12,6 +12,7 @@ info on this for more: https://github.com/typelevel/cats#getting-started. */
 scalacOptions += "-Ypartial-unification" // 2.11.9+
 
 lazy val doobieVersion = "0.7.0"
+lazy val framelessVersion = "0.8.0"
 
 lazy val root = (project in file("."))
   .settings(
@@ -26,6 +27,11 @@ lazy val root = (project in file("."))
     libraryDependencies += "org.tpolecat" %% "doobie-postgres"  % doobieVersion,
     libraryDependencies += "org.tpolecat" %% "doobie-specs2"    % doobieVersion,
     libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.0",
+
+    // Frameless
+    libraryDependencies += "org.typelevel" %% "frameless-dataset" % framelessVersion,
+    libraryDependencies += "org.typelevel" %% "frameless-ml"      % framelessVersion,
+    libraryDependencies += "org.typelevel" %% "frameless-cats"    % framelessVersion,
 
     // Spark
     libraryDependencies += "org.apache.spark" %% "spark-mllib" % "2.4.0",
