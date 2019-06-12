@@ -5,7 +5,7 @@ mkdir /tmp/spark-events
 ./sbin/start-history-server.sh
 ./sbin/start-master.sh
 ./bin/spark-class org.apache.spark.deploy.worker.Worker  spark://${HOST}:7077 -c ${NCORES} -m 2048M &
-./bin/spark-submit --class="Main" --master spark://${HOST}:7077 /jobs/spark-trainer.jar
+./bin/spark-submit --class="Training" --master spark://${HOST}:7077 /jobs/spark-trainer.jar
 
 echo "Done training, moving file to final location"
 mv ./xgboostModel.pmml /exchange/xgboostModel1.pmml

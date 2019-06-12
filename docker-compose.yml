@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5442:5432"
+      - "5432:5432"
   
   spark:
     image: sfps-spark

@@ -13,7 +13,7 @@ Crea una imagen de docker con java y spark y ejecuta un job de scala.
 - Build & exec docker:
     ```
     docker build -t sfps-spark .
-    docker rm spark && docker create --name=spark -d -p 8080:8080 sfps-spark tail -f /dev/null
+    docker rm spark && docker create --name=spark -p 8080:8080 sfps-spark tail -f /dev/null
     docker start spark --interactive
     ```
 

@@ -1,4 +1,4 @@
-import Dependencies._
+//import Dependencies._
 
 ThisBuild / scalaVersion     := "2.12.8"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
@@ -16,7 +16,7 @@ lazy val doobieVersion = "0.7.0"
 lazy val root = (project in file("."))
   .settings(
     name := "sfps-db-loader",
-    libraryDependencies += scalaTest % Test,
+    //libraryDependencies += scalaTest % Test,
     // libraryDependencies += "org.tpolecat" %% "skunk-core" % "0.0.3",
     libraryDependencies += "org.tpolecat" %% "doobie-core"      % doobieVersion,
     libraryDependencies += "org.tpolecat" %% "doobie-postgres"  % doobieVersion,

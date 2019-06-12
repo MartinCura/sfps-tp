@@ -16,6 +16,14 @@ libraryDependencies += "org.jpmml" % "jpmml-sparkml" % "1.5.3"
 libraryDependencies += "org.jpmml" % "pmml-evaluator" % "1.4.9"
 libraryDependencies += "org.jpmml" % "pmml-evaluator-extension" % "1.4.9"
 
+// Doobie
+lazy val doobieVersion = "0.7.0"
+libraryDependencies += "org.tpolecat" %% "doobie-core"      % doobieVersion
+libraryDependencies += "org.tpolecat" %% "doobie-postgres"  % doobieVersion
+libraryDependencies += "org.tpolecat" %% "doobie-specs2"    % doobieVersion
+
+libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.5"
+
 assemblyShadeRules in assembly := Seq(
     ShadeRule.rename("org.jpmml.model.**" -> "org.shaded.jpmml.model.@1").inAll,
     ShadeRule.rename("org.dmg.pmml.**" -> "org.shaded.dmg.pmml.@1").inAll,
