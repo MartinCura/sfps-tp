@@ -3,6 +3,7 @@ package sfps.types
 import java.util.Locale
 import java.time.LocalDateTime
 import sfps.common.CountryCodes
+import java.time.format.DateTimeFormatter
 
 
 /** General types **/
@@ -30,7 +31,9 @@ abstract class MyString(text: Option[String], name: Option[String]) extends MyRo
 }
 abstract class MyDate(date: Option[String], name: Option[String]) extends MyRowElement(name) {
   def transform(dateString: String) = {
-    LocalDateTime.parse(dateString)
+    import java.util.Locale
+    val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+    LocalDateTime.parse(dateString, inputFormatter)
   }
   override def toDouble(): Option[Double] =
     date.flatMap(d => Option(transform(d).toEpochSecond(java.time.ZoneOffset.UTC)))

@@ -21,6 +21,7 @@ lazy val root = (project in file("."))
     // CSVReader
     libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.5",
 
+
     // Doobie
     libraryDependencies += "org.tpolecat" %% "doobie-core"      % doobieVersion,
     libraryDependencies += "org.tpolecat" %% "doobie-postgres"  % doobieVersion,

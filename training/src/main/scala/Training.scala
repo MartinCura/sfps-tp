@@ -5,18 +5,18 @@ import org.apache.spark.sql.SparkSession
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
 import org.jpmml.model.MetroJAXBUtil
-
 import pipelines.StringLabeledPipeline
 import saver.PipelineSaver
 import evaluator.Eval
 
 import sfps.types._
 import sfps.etl._
+import org.glassfish.jersey.spi.ExceptionMappers
 
 
 object Training {
 
-    val MODEL_FILE_PATH = "target/xgboostModel.pmml"
+    val MODEL_FILE_PATH = "xgboostModel.pmml"
 
     def main() = {
       val sparkSession = SparkSession.builder()
@@ -26,24 +26,30 @@ object Training {
 
       import sparkSession.implicits._
 
-      val data = ETL.getMicroData(10)
+      val LABEL = "apocrypha"
+      val labels = Schema.labels.filter(_.toString().toLowerCase != LABEL.toLowerCase())
+
+      //translate to double
+      val data = ETL.getData(None).map(Mappers.doubleTypedMapper(_)).compile.toList.unsafeRunSync()
+
+      println(data(20))
       val df = data.toDF()
 
       df.show() //
 
       assert(df.count() > 0, "No rows")
-      val features = data(0).productIterator.toList.map(_.toString) // Do note it takes them from the Row members, NOT the case classes
 
-      // Creación del modelo y guardado a pmml
+      
+      // model creation and pmml translation
       val modelCreator = new StringLabeledPipeline
       val pmml = modelCreator
-        .assemble(df.schema, df, Apocrypha.toString, features)
+        .assemble(df.schema, df, Apocrypha.toString.toLowerCase(), labels)
         .map(assembledPipelineModel => {
           val pmml = new PipelineSaver().toPmml(assembledPipelineModel, df)
           pmml
         })
 
-      // Saving the model in a file
+      //spark-friendly saving the model in a file
       pmml.foreach(p => {
         println(sparkSession.sparkContext.hadoopConfiguration)
         val fs = FileSystem.get(sparkSession.sparkContext.hadoopConfiguration)
