@@ -8,8 +8,8 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
-    ports:
-      - "5432:5432"
+#    ports:
+#      - "5432:5432"
   
   spark:
     image: sfps-spark
