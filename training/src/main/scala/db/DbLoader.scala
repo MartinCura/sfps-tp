@@ -4,9 +4,11 @@ import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
 import com.github.tototoshi.csv.CSVReader
 import java.util.NoSuchElementException
+import java.nio.file.{Paths, Files}
+
 import sfps.types.Schema
 
-object DBLoader {
+object DbLoader {
 
   // TODO: read DB_NAME from .env
   lazy val DB_NAME = "sfps_db"
@@ -46,6 +48,8 @@ object DBLoader {
   }
 
   def main() {
+    assert(Files.exists(Paths.get(train_filename)))
+
     println("Deleting and creating train table")
     (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
 
@@ -63,6 +67,8 @@ object DBLoader {
     }
     reader.close()
 
+
+    assert(Files.exists(Paths.get(test_filename)))
 
     // TODO: refactor repeated code?
     println("Deleting and creating test table")
