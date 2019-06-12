@@ -1,8 +1,23 @@
-package sfps.dbloader
+package sfps.db
 
 import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 
 object SqlCommands {
+
+  // Numbers go plain, empty values are NULL, and any other strings is surrounded by single quotes ('')
+  def formatStringForSql(s: String): String =
+    try {
+      s.toDouble
+      return s
+    } catch {
+      case ex: NumberFormatException => {
+        s match {
+          case "" => "NULL"
+          case "\"\"" => "''"
+          case _ => s"'${s.replace("'", "\"")}'"
+        }
+      }
+    }
 
   val dropTrain =
     sql"""

@@ -5,7 +5,7 @@ import cats._, cats.data._, cats.effect.IO, cats.implicits._
 import fs2.Stream
 
 import sfps.types._
-import sfps.dbloader._
+import sfps.db._
 
 /**
  * Sample usage:
