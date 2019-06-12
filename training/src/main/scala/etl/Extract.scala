@@ -5,7 +5,7 @@ import cats._, cats.data._, cats.effect.IO, cats.implicits._
 import fs2.Stream
 
 import sfps.types._
-import sfps.dbloader._
+import sfps.db._
 
 /**
  * Sample usage:
@@ -63,7 +63,7 @@ object ETL {
 
   // `columns`: Comma-separated column names in same order as corresponding features in `row`
   def storeAndTransform(row: Seq[String], columns: String): Schema.DataRow = {
-    val newRow: Schema.DataRow = DBLoader.addAndGetBack("train", columns, row)
+    val newRow: Schema.DataRow = DbLoader.addAndGetBack("train", columns, row)
     return newRow
   }
 

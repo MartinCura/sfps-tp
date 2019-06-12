@@ -1,12 +1,14 @@
-package sfps.dbloader
+package sfps.db
 
 import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
 import com.github.tototoshi.csv.CSVReader
 import java.util.NoSuchElementException
+import java.nio.file.{Paths, Files}
+
 import sfps.types.Schema
 
-object DBLoader {
+object DbLoader {
 
   // TODO: read DB_NAME from .env
   lazy val DB_NAME = "sfps_db"
@@ -30,37 +32,24 @@ object DBLoader {
           VALUES """ ++ Fragments.parentheses(Fragment.const0(row))
     ).update
 
-  // Numbers go plain, empty values are NULL, and any other strings is surrounded by single quotes ('')
-  def formatStringForSql(s: String): String =
-    try {
-      s.toDouble
-      return s
-    } catch {
-      case ex: NumberFormatException => {
-        s match {
-          case "" => "NULL"
-          case "\"\"" => "''"
-          case _ => s"'${s.replace("'", "\"")}'"
-        }
-      }
-    }
-
   // I think this works but i'm not quite sure, have to test order is not messing everything up (always the same problem)
   def addAndGetBack(tablename: String, columnNames: String, line: Seq[String]): Schema.DataRow = {
-    val values = line.map(formatStringForSql(_)).reduce(_ + ',' + _)
+    val values = line.map(SqlCommands.formatStringForSql(_)).reduce(_ + ',' + _)
     return insert1(tablename, columnNames, values).withUniqueGeneratedKeys[Schema.DataRow](columnNames.split(','):_*)
       .transact(xa).unsafeRunSync
  }
 
   def addLineToDB(tablename: String, columnNames: String, line: Seq[String]) = {
     // Format values into SQL-friendly format
-    val values = line.map(formatStringForSql(_)).reduce(_ + ',' + _)
+    val values = line.map(SqlCommands.formatStringForSql(_)).reduce(_ + ',' + _)
 
     insert1(tablename, columnNames, values).run
       .transact(xa).unsafeRunSync
   }
 
   def main() {
+    assert(Files.exists(Paths.get(train_filename)))
+
     println("Deleting and creating train table")
     (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
 
@@ -78,6 +67,8 @@ object DBLoader {
     }
     reader.close()
 
+
+    assert(Files.exists(Paths.get(test_filename)))
 
     // TODO: refactor repeated code?
     println("Deleting and creating test table")
