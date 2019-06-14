@@ -16,7 +16,7 @@ object DbLookup {
     implicit val cs = IO.contextShift(ExecutionContexts.synchronous)
     val xa = Transactor.fromDriverManager[IO](
       "org.postgresql.Driver",
-      s"jdbc:postgresql://localhost:5442/$DB_NAME",
+      s"jdbc:postgresql://localhost:5432/$DB_NAME",
       "postgres",
       "",
       ExecutionContexts.synchronous

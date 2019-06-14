@@ -6,12 +6,11 @@ import com.github.tototoshi.csv.CSVReader
 import java.util.NoSuchElementException
 import java.nio.file.{Paths, Files}
 
-// import sfps.types.Schema
-
 object DbLoader {
 
   // TODO: read DB_NAME from .env
   lazy val DB_NAME = "sfps_db"
+  lazy val HOST = "db"  // outside of docker: "localhost"
   val train_filename = "../../train.csv"
   val test_filename = "../../test.csv"
 
@@ -19,11 +18,18 @@ object DbLoader {
   implicit val cs = IO.contextShift(ExecutionContexts.synchronous)
   val xa = Transactor.fromDriverManager[IO](
     "org.postgresql.Driver",
-    s"jdbc:postgresql://localhost:5442/$DB_NAME",
+    s"jdbc:postgresql://$HOST:5432/$DB_NAME",
     "postgres",
     "",
     ExecutionContexts.synchronous
   )
+
+  // Use this to check a table exists before doing anything
+  def doesTableExist(tablename: String): Boolean = {
+    val statement = sql"""SELECT * FROM INFORMATION_SCHEMA.TABLES
+                          WHERE TABLE_NAME = '""" ++ Fragment.const0(tablename) ++ sql"'"
+    return (!statement.query.stream.compile.toList.transact(xa).unsafeRunSync.isEmpty)
+  }
 
   // Insert 1 row into specified table
   def insert1(tablename: String, keys: String, row: String) : Update0 =

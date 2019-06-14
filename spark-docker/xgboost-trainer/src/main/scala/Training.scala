@@ -19,6 +19,12 @@ object Training {
 
     def main(args: Array[String]) = {
 
+      // Check table exists before anything
+      if (!ETL.doesTableExist()) {
+        println("Table train does not exist, exiting.")
+        sys.exit
+      }
+
       val sparkSession = SparkSession.builder()
         .appName("SFPS training")
         .config("spark.master", "local")

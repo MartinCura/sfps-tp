@@ -36,6 +36,9 @@ object ETL {
     // import y._
   }
 
+  def doesTableExist(): Boolean =
+    DbLoader.doesTableExist("train")
+
   private def selectStatement =
     sql"SELECT " ++ Fragment.const0(Schema.columns) ++ sql" FROM train"
 
