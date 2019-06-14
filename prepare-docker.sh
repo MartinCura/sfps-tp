@@ -23,5 +23,5 @@ cd ..
 echo
 echo "> Done!"
 echo
-echo "> Now you can start everything with 'docker-compose up'."
-echo "> If you hadn't loaded the database yet, you will need to re-up everything after db-loader done."
+echo "> Now you can start anythin with 'docker-compose up db [service]' (dbloader, spark, or server)."
+echo "> Or you can just 'docker-compose up' and see everything go up."

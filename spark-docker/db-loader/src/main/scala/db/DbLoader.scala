@@ -57,7 +57,11 @@ object DbLoader {
   def main(args: Array[String]) {
     assert(Files.exists(Paths.get(train_filename)))
 
-    assert(!doesTableExist("train"))
+    // Check table exists before anything
+    if (DbLoader.doesTableExist("train")) {
+      println(" *** Table train already exists, exiting. *** ")
+      sys.exit
+    }
 
     println("Deleting and creating train table")
     (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
