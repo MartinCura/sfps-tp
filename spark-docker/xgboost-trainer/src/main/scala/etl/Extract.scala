@@ -4,7 +4,7 @@ import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
 import fs2.Stream
 
-import sfps.types._
+// import sfps.types._
 import sfps.db._
 
 /**
@@ -35,6 +35,9 @@ object ETL {
     // val y = xa.yolo
     // import y._
   }
+
+  def doesTableExist(): Boolean =
+    DbLoader.doesTableExist("train")
 
   private def selectStatement =
     sql"SELECT " ++ Fragment.const0(Schema.columns) ++ sql" FROM train"

@@ -1,6 +1,8 @@
-package sfps.types
+package sfps.db
 
 import shapeless.labelled
+
+import sfps.types._
 
 /** Schema of data */
 object Schema {
@@ -367,7 +369,7 @@ object Schema {
 }
 
 case class DoubleTypedDatasetRow(
-      id:               Double,  
+      id:               Double,
       deviceMatch:      Double,
       factorCodes:      Double,
       firstEncounter:   Double,
@@ -461,5 +463,3 @@ case class DoubleTypedDatasetRow(
       same_field_features: Double,
       apocrypha:        Double
     )
-
-

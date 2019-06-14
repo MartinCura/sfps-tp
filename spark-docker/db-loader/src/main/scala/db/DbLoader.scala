@@ -6,24 +6,31 @@ import com.github.tototoshi.csv.CSVReader
 import java.util.NoSuchElementException
 import java.nio.file.{Paths, Files}
 
-import sfps.types.Schema
-
 object DbLoader {
 
   // TODO: read DB_NAME from .env
   lazy val DB_NAME = "sfps_db"
-  val train_filename = "../../train.csv"
-  val test_filename = "../../test.csv"
+  lazy val HOST = "db"    // outside of docker: "localhost", inside: "db"
+  lazy val PORT = 5432    // outside: 5442, inside: 5432
+  val train_filename = "data/train.csv"
+  val  test_filename = "data/test.csv"
 
   // Create db transactor
   implicit val cs = IO.contextShift(ExecutionContexts.synchronous)
   val xa = Transactor.fromDriverManager[IO](
     "org.postgresql.Driver",
-    s"jdbc:postgresql://localhost:5442/$DB_NAME",
+    s"jdbc:postgresql://$HOST:$PORT/$DB_NAME",
     "postgres",
     "",
     ExecutionContexts.synchronous
   )
+
+  // Use this to check a table exists before doing anything
+  def doesTableExist(tablename: String): Boolean = {
+    val statement = sql"""SELECT * FROM INFORMATION_SCHEMA.TABLES
+                          WHERE TABLE_NAME = '""" ++ Fragment.const0(tablename) ++ sql"'"
+    return (!statement.query.stream.compile.toList.transact(xa).unsafeRunSync.isEmpty)
+  }
 
   // Insert 1 row into specified table
   def insert1(tablename: String, keys: String, row: String) : Update0 =
@@ -47,8 +54,14 @@ object DbLoader {
       .transact(xa).unsafeRunSync
   }
 
-  def main() {
+  def main(args: Array[String]) {
     assert(Files.exists(Paths.get(train_filename)))
+
+    // Check table exists before anything
+    if (DbLoader.doesTableExist("train")) {
+      println(" *** Table train already exists, exiting. *** ")
+      sys.exit
+    }
 
     println("Deleting and creating train table")
     (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync

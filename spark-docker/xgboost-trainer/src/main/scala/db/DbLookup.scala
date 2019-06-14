@@ -3,19 +3,21 @@ package sfps.db
 import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import Fragments.{ whereAndOpt }
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
-import sfps.types.Schema
+
 import sfps.types.MyRowElement
+// import sfps.db.Schema
 
 object DbLookup {
 
     // TODO: read DB_NAME from .env
     lazy val DB_NAME = "sfps_db"
+    lazy val HOST = "db"  // outside of docker: "localhost"
 
     // Create db transactor
     implicit val cs = IO.contextShift(ExecutionContexts.synchronous)
     val xa = Transactor.fromDriverManager[IO](
       "org.postgresql.Driver",
-      s"jdbc:postgresql://localhost:5442/$DB_NAME",
+      s"jdbc:postgresql://$HOST:5432/$DB_NAME",
       "postgres",
       "",
       ExecutionContexts.synchronous

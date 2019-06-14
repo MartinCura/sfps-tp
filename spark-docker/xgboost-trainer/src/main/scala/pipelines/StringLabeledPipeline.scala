@@ -1,6 +1,5 @@
 package pipelines
 
-
 import org.apache.spark.ml.classification.RandomForestClassifier
 import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
 import org.apache.spark.ml.{Model, Pipeline, PipelineModel, PipelineStage}
