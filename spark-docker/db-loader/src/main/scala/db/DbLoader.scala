@@ -56,6 +56,8 @@ object DbLoader {
   def main() {
     assert(Files.exists(Paths.get(train_filename)))
 
+    assert(!doesTableExist("train"))
+
     println("Deleting and creating train table")
     (SqlCommands.dropTrain, SqlCommands.createTrain).mapN(_ + _).transact(xa).unsafeRunSync
 
