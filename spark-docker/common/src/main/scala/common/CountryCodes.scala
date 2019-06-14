@@ -5,9 +5,6 @@ object CountryCodes {
   private lazy val shortNameColumn = "alpha-2"
   private lazy val codeColumn = "code-country"
 
-  // val reader = CSVReader.open(Source.fromResource("country_codes_2char.csv"))
-  // val cc: Map[String, Int] = reader.all().drop(1).map(c => (c(1), c(2).toInt)).toMap
-
   // Not too pretty (tho we don't actually use this one)
   def getShortName(id: Int): String =
     ccodes.find(_._2 == id).getOrElse(("", 0))._1
