@@ -23,7 +23,7 @@ ENV PATH $PATH:$JAVA_HOME/bin
 #  rm sbt-$SBT_VERSION.deb && \
 #  apt-get update && \
 #  apt-get install sbt && \
-#  sbt sbtVersion 
+#  sbt sbtVersion
 
 
 # SPARK
@@ -35,7 +35,7 @@ RUN curl -s ${SPARK_ARCHIVE} | tar -xz -C /usr/local/
 
 WORKDIR $SPARK_HOME
 
-COPY ./xgboost-trainer/target/scala-2.12/xgboost-trainer-assembly-1.0.jar /jobs/spark-trainer.jar
+COPY ./xgboost-trainer/target/scala-2.12/trainer-assembly-1.0.jar /jobs/spark-trainer.jar
 COPY ./scripts/start.sh /scripts/start.sh
 RUN chmod 777 /scripts/*
 

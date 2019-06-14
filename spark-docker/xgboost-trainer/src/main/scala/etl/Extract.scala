@@ -4,7 +4,7 @@ import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
 import fs2.Stream
 
-import sfps.types._
+// import sfps.types._
 import sfps.db._
 
 /**

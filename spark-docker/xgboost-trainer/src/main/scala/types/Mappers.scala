@@ -1,7 +1,6 @@
 package sfps.types
 
-import sfps.types._
-import sfps.etl._
+import sfps.db.{Schema, DoubleTypedDatasetRow}
 
 
 object Mappers {
@@ -28,7 +27,7 @@ object Mappers {
             x._3.countryCode.toDouble.getOrElse(NONE),
             x._3.countryFrom.toDouble().getOrElse(NONE),
             x._3.countryTo.toDouble().getOrElse(NONE),
-            x._3.distance_to_arrival.toDouble.getOrElse(NONE),  
+            x._3.distance_to_arrival.toDouble.getOrElse(NONE),
             x._3.distance_to_departure.toDouble().getOrElse(NONE),
             x._3.iataFrom.toDouble().getOrElse(NONE),
             x._3.iataTo.toDouble().getOrElse(NONE),
@@ -101,7 +100,7 @@ object Mappers {
             x._8.many_holders_for_card.toDouble.getOrElse(NONE),
             x._8.many_names_for_document.toDouble.getOrElse(NONE),
             x._8.same_field_features.toDouble.getOrElse(NONE),
-            
+
             x._9.apocrypha.toDouble().getOrElse(NONE)
           )
 

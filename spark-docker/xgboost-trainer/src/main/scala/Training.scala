@@ -3,21 +3,22 @@ import org.apache.spark.sql.SparkSession
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
 import org.jpmml.model.MetroJAXBUtil
+import org.glassfish.jersey.spi.ExceptionMappers
+
+import sfps.types._
+import sfps.db.Schema
+import sfps.etl.ETL
+
 import pipelines.StringLabeledPipeline
 import saver.PipelineSaver
 import evaluator.Eval
-
-import sfps.types._
-import sfps.etl._
-import org.glassfish.jersey.spi.ExceptionMappers
-
 
 object Training {
 
     val MODEL_FILE_PATH = "xgboostModel.pmml"
 
     def main(args: Array[String]) = {
-      
+
       val sparkSession = SparkSession.builder()
         .appName("SFPS training")
         .config("spark.master", "local")
@@ -38,7 +39,7 @@ object Training {
 
       assert(df.count() > 0, "No rows")
 
-      
+
       // model creation and pmml translation
       val modelCreator = new StringLabeledPipeline
       val pmml = modelCreator

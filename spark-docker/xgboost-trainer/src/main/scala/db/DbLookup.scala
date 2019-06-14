@@ -3,8 +3,9 @@ package sfps.db
 import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
 import Fragments.{ whereAndOpt }
 import cats._, cats.data._, cats.effect.IO, cats.implicits._
-import sfps.types.Schema
+
 import sfps.types.MyRowElement
+// import sfps.db.Schema
 
 object DbLookup {
 

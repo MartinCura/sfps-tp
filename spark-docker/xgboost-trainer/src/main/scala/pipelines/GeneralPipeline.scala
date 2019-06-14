@@ -10,5 +10,4 @@ trait GeneralPipeline {
 
   def assemble(schema: StructType, dataFrame: DataFrame, label: String, features: List[String]) : Option[PipelineModel]
 
-
 }

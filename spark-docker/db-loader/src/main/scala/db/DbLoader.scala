@@ -6,7 +6,7 @@ import com.github.tototoshi.csv.CSVReader
 import java.util.NoSuchElementException
 import java.nio.file.{Paths, Files}
 
-import sfps.types.Schema
+// import sfps.types.Schema
 
 object DbLoader {
 

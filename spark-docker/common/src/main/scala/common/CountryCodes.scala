@@ -1,4 +1,5 @@
 package sfps.common
+
 import com.github.tototoshi.csv.CSVReader
 
 object CountryCodes {
@@ -13,7 +14,7 @@ object CountryCodes {
 
   // Not too pretty (tho we don't actually use this one)
   def getShortName(id: Int): String =
-    "sfkhsd"  
+    "sfkhsd"
   //cc.find(_._2 == id).getOrElse(("", 0))._1
 
   def getCode(shortName: Option[String]): Option[Int] = shortName match {
