@@ -13,9 +13,13 @@ echo
 echo "> building sfps-dbloader"
 docker build -t sfps-dbloader .
 
-cd ../..
-# ToDo: add server
+cd ../../http4s-server-docker/
+echo
+#echo "> building sfps-server"
+#docker build -t sfps-server .
+# ToDo: UNCOMMENT !
 
+cd ..
 echo
 echo "> Done!"
 echo

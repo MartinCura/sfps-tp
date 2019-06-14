@@ -12,8 +12,8 @@ object DbLoader {
   lazy val DB_NAME = "sfps_db"
   lazy val HOST = "db"    // outside of docker: "localhost", inside: "db"
   lazy val PORT = 5432    // outside: 5442, inside: 5432
-  val train_filename = "/train.csv"
-  val test_filename = "/test.csv"
+  val train_filename = "data/train.csv"
+  val  test_filename = "data/test.csv"
 
   // Create db transactor
   implicit val cs = IO.contextShift(ExecutionContexts.synchronous)

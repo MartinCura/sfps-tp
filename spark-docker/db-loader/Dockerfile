@@ -26,7 +26,5 @@ ENV PATH $PATH:$JAVA_HOME/bin
 #  sbt sbtVersion
 
 COPY ./target/scala-2.12/db-loader-assembly-1.0.jar /db-loader.jar
-# COPY ./scripts/start.sh /scripts/start.sh
-# RUN chmod 777 /scripts/*
 
 ENTRYPOINT ["/usr/bin/java", "-jar", "/db-loader.jar"]
