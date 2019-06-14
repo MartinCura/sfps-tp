@@ -21,7 +21,7 @@ object Training {
 
       // Check table exists before anything
       if (!ETL.doesTableExist()) {
-        println("Table train does not exist, exiting.")
+        println(" *** Table train does not exist, exiting. *** ")
         sys.exit
       }
 

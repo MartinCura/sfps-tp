@@ -11,12 +11,21 @@ services:
     ports:
       - "5442:5432"
   
+  dbloader:
+    image: sfps-dbloader
+    volumes:
+      - "exchange:/exchange"
+    depends_on:
+      - db
+
   spark:
     image: sfps-spark
     ports:
       - "8080:8080"
     volumes:
       - "exchange:/exchange"
+    depends_on:
+      - db
   
   server:
     image: sfps-server
@@ -24,16 +33,10 @@ services:
       - "8088:8088"
     volumes:
       - "exchange:/exchange"
+    depends_on:
+      - db
 
 volumes:
-
   exchange:
     driver: local
-     
-  # db_loader: 
-  #   ...
-  #   links:
-  #     - db
-# volumes:
-#   grafana_config:
-#     driver: local
+

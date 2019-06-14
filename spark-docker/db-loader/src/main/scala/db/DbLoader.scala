@@ -10,15 +10,16 @@ object DbLoader {
 
   // TODO: read DB_NAME from .env
   lazy val DB_NAME = "sfps_db"
-  lazy val HOST = "db"  // outside of docker: "localhost"
-  val train_filename = "../../train.csv"
-  val test_filename = "../../test.csv"
+  lazy val HOST = "db"    // outside of docker: "localhost", inside: "db"
+  lazy val PORT = 5432    // outside: 5442, inside: 5432
+  val train_filename = "/train.csv"
+  val test_filename = "/test.csv"
 
   // Create db transactor
   implicit val cs = IO.contextShift(ExecutionContexts.synchronous)
   val xa = Transactor.fromDriverManager[IO](
     "org.postgresql.Driver",
-    s"jdbc:postgresql://$HOST:5432/$DB_NAME",
+    s"jdbc:postgresql://$HOST:$PORT/$DB_NAME",
     "postgres",
     "",
     ExecutionContexts.synchronous
@@ -53,7 +54,7 @@ object DbLoader {
       .transact(xa).unsafeRunSync
   }
 
-  def main() {
+  def main(args: Array[String]) {
     assert(Files.exists(Paths.get(train_filename)))
 
     assert(!doesTableExist("train"))

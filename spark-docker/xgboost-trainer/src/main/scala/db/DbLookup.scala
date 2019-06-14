@@ -11,12 +11,13 @@ object DbLookup {
 
     // TODO: read DB_NAME from .env
     lazy val DB_NAME = "sfps_db"
+    lazy val HOST = "db"  // outside of docker: "localhost"
 
     // Create db transactor
     implicit val cs = IO.contextShift(ExecutionContexts.synchronous)
     val xa = Transactor.fromDriverManager[IO](
       "org.postgresql.Driver",
-      s"jdbc:postgresql://localhost:5432/$DB_NAME",
+      s"jdbc:postgresql://$HOST:5432/$DB_NAME",
       "postgres",
       "",
       ExecutionContexts.synchronous

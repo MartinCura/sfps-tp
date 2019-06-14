@@ -4,6 +4,7 @@ lazy val commonSettings = Seq(
   scalaVersion := "2.12.8",
   organization := "com.fiuba.sfps",
   version      := "1.0",
+  test in assembly := {}
 )
 
 
@@ -31,6 +32,7 @@ lazy val dbloader = (project in file("db-loader"))
   .settings(
     name := "db-loader",
     commonSettings,
+    mainClass in assembly := Some("sfps.db.DbLoader"),
 
     libraryDependencies ++= Seq(
       "org.tpolecat" %% "doobie-core"      % doobieVersion,
