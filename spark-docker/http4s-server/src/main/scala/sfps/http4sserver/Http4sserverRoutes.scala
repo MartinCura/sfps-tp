@@ -5,7 +5,7 @@ import cats.implicits._
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 import org.http4s.circe.CirceEntityDecoder._
-import sfps.http4sserver.EvaluatorRepo.Flower
+import sfps.schema._
 
 object Http4sserverRoutes {
 
@@ -17,8 +17,8 @@ object Http4sserverRoutes {
       case req @ POST -> Root / "eval" =>
         for {
           // Decode a User request
-          flower <- req.as[Flower]
-          result <- M.eval(flower)
+          theRow <- req.as[RowDTO]
+          result <- M.eval(theRow)
           resp <- Ok(result)
         } yield resp
     }
