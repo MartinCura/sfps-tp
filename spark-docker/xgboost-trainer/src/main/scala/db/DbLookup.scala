@@ -40,7 +40,7 @@ object DbLookup {
     // }
 
     def isRowInTrain(row: Schema.DataRow): Boolean = {
-      val comparator: MyRowElement = row._2.pp_30
+      val comparator: MyRowElement = row._8.caseDate
       val comps = Map(comparator.toString() -> (comparator.toDouble match {
         case None => ""
         case x => x.get.toString
