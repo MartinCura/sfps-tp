@@ -25,15 +25,21 @@ ENV PATH $PATH:$JAVA_HOME/bin
 #  apt-get install sbt && \
 #  sbt sbtVersion
 
+# SPARK
+ARG SPARK_ARCHIVE=https://archive.apache.org/dist/spark/spark-2.4.2/spark-2.4.2-bin-hadoop2.6.tgz
+ENV SPARK_HOME /usr/local/spark-2.4.2-bin-hadoop2.6
 
-ENV SCALA_VERSION 2.12.8
-ENV SCALA_TARBALL https://downloads.lightbend.com/scala/2.12.8/scala-2.12.8.deb
-RUN curl -sSL $SCALA_TARBALL -o scala.deb             && \
-    dpkg -i scala.deb
+ENV PATH $PATH:${SPARK_HOME}/bin
+RUN curl -s ${SPARK_ARCHIVE} | tar -xz -C /usr/local/
 
-COPY ./target/scala-2.12/http4s-server-assembly-1.0.jar /server.jar
+WORKDIR $SPARK_HOME
 
-EXPOSE 8088
+COPY ./target/scala-2.12/trainer-assembly-1.0.jar /jobs/spark-trainer.jar
+COPY ./scripts/start.sh /scripts/start.sh
+RUN chmod 777 /scripts/*
 
-#DOES NOT WORK.
-ENTRYPOINT ["scala", "/server.jar"]
+# Spark Web UI and history monitoring
+EXPOSE 8080
+EXPOSE 18080
+
+ENTRYPOINT ["/bin/bash", "-c", "/scripts/start.sh"]

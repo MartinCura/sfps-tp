@@ -84,15 +84,16 @@ lazy val evaluator = (project in file("xgboost-evaluator"))
      assemblySettings,
 
      libraryDependencies ++= Seq(
-       "org.apache.spark" %% "spark-sql" % "2.4.0",
-       "org.apache.spark" %% "spark-mllib" % "2.4.0",
-       "ml.dmlc" % "xgboost4j" % "0.80",
-       "ml.dmlc" % "xgboost4j-spark" % "0.80",
+       "org.apache.spark" %% "spark-sql"    % sparkVersion,
+       "org.apache.spark" %% "spark-mllib"  % sparkVersion,
+       "ml.dmlc" % "xgboost4j"        % xgboostVersion,
+       "ml.dmlc" % "xgboost4j-spark"  % xgboostVersion,
        "org.jpmml" % "jpmml-sparkml" % "1.5.3",
        "org.jpmml" % "pmml-evaluator" % "1.4.9",
        "org.jpmml" % "pmml-evaluator-extension" % "1.4.9"
      )
 )
+
 
 /** Server */
 
@@ -104,7 +105,6 @@ val LogbackVersion = "1.2.3"
 lazy val server = (project in file("http4s-server"))
   .settings(
     name := "http4s-server",
-
     commonSettings,
     assemblySettings,
 
@@ -116,20 +116,17 @@ lazy val server = (project in file("http4s-server"))
       "io.circe"        %% "circe-generic"       % CirceVersion,
       "org.specs2"      %% "specs2-core"         % Specs2Version % "test",
       "ch.qos.logback"  %  "logback-classic"     % LogbackVersion,
-      "org.http4s" %% "http4s-circe" % Http4sVersion,
-      "io.circe" %% "circe-generic" % "0.6.1",
-      "io.circe" %% "circe-literal" % "0.6.1"
+    //  "io.circe"        %% "circe-generic"       % "0.6.1",
+      "io.circe" %% "circe-literal" % CirceVersion//% "0.6.1"
     ),
-    addCompilerPlugin("org.spire-math" %% "kind-projector"     % "0.9.6"),
-    addCompilerPlugin("com.olegpy"     %% "better-monadic-for" % "0.2.4")
+    addCompilerPlugin("org.typelevel" %% "kind-projector"     % "0.10.1"),
+    addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.2.4")
 
-
-
-).dependsOn(
-  common,
-  trainer,
-  evaluator
-)
+  ).dependsOn(
+    common,
+    trainer,
+    evaluator
+  )
 
 
 scalacOptions ++= Seq(
