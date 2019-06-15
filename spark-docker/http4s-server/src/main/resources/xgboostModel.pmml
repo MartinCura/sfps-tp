@@ -1,0 +1,3077 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+<Header>
+	<Application name="trainer" version="1.0"/>
+	<Timestamp>2019-06-14T22:48:19Z</Timestamp>
+</Header>
+<DataDictionary>
+	<DataField name="id" optype="continuous" dataType="double"/>
+	<DataField name="deviceMatch" optype="continuous" dataType="double"/>
+	<DataField name="factorCodes" optype="continuous" dataType="double"/>
+	<DataField name="firstEncounter" optype="continuous" dataType="double"/>
+	<DataField name="icAddress" optype="continuous" dataType="double"/>
+	<DataField name="icInternet" optype="continuous" dataType="double"/>
+	<DataField name="icVelocity" optype="continuous" dataType="double"/>
+	<DataField name="icidentity" optype="continuous" dataType="double"/>
+	<DataField name="ipRoutingMethod" optype="continuous" dataType="double"/>
+	<DataField name="reasonCode" optype="continuous" dataType="double"/>
+	<DataField name="timeOnPage" optype="continuous" dataType="double"/>
+	<DataField name="pp_1" optype="continuous" dataType="double"/>
+	<DataField name="pp_30" optype="continuous" dataType="double"/>
+	<DataField name="pp_60" optype="continuous" dataType="double"/>
+	<DataField name="distance_to_arrival" optype="continuous" dataType="double"/>
+	<DataField name="distance_to_departure" optype="continuous" dataType="double"/>
+	<DataField name="ip_city" optype="continuous" dataType="double"/>
+	<DataField name="lagTimeHours" optype="continuous" dataType="double"/>
+	<DataField name="speed_to_departure" optype="continuous" dataType="double"/>
+	<DataField name="triangulation_height" optype="continuous" dataType="double"/>
+	<DataField name="triangulation_height_speed" optype="continuous" dataType="double"/>
+	<DataField name="trip_distance" optype="continuous" dataType="double"/>
+	<DataField name="mai_score" optype="continuous" dataType="double"/>
+	<DataField name="mai_advice" optype="continuous" dataType="double"/>
+	<DataField name="mai_reason" optype="continuous" dataType="double"/>
+	<DataField name="mai_risk" optype="continuous" dataType="double"/>
+	<DataField name="mai_status" optype="continuous" dataType="double"/>
+	<DataField name="mai_unique" optype="continuous" dataType="double"/>
+	<DataField name="mai_avg_secs" optype="continuous" dataType="double"/>
+	<DataField name="mai_buys" optype="continuous" dataType="double"/>
+	<DataField name="mai_searches" optype="continuous" dataType="double"/>
+	<DataField name="mai_type" optype="continuous" dataType="double"/>
+	<DataField name="mai_all_pax" optype="continuous" dataType="double"/>
+	<DataField name="mai_last_secs" optype="continuous" dataType="double"/>
+	<DataField name="mai_language" optype="continuous" dataType="double"/>
+	<DataField name="mai_negative" optype="continuous" dataType="double"/>
+	<DataField name="mai_os" optype="continuous" dataType="double"/>
+	<DataField name="mai_policy_score" optype="continuous" dataType="double"/>
+	<DataField name="mai_pulevel" optype="continuous" dataType="double"/>
+	<DataField name="mai_city" optype="continuous" dataType="double"/>
+	<DataField name="maibis_score" optype="continuous" dataType="double"/>
+	<DataField name="maitris_score" optype="continuous" dataType="double"/>
+	<DataField name="online_airport_state" optype="continuous" dataType="double"/>
+	<DataField name="online_billing_address_state" optype="continuous" dataType="double"/>
+	<DataField name="online_cep_number_bond" optype="continuous" dataType="double"/>
+	<DataField name="online_city_bond" optype="continuous" dataType="double"/>
+	<DataField name="online_ddd" optype="continuous" dataType="double"/>
+	<DataField name="online_ddd_bond" optype="continuous" dataType="double"/>
+	<DataField name="online_death" optype="continuous" dataType="double"/>
+	<DataField name="online_email" optype="continuous" dataType="double"/>
+	<DataField name="online_ip_state" optype="continuous" dataType="double"/>
+	<DataField name="online_name" optype="continuous" dataType="double"/>
+	<DataField name="online_phone" optype="continuous" dataType="double"/>
+	<DataField name="online_queries" optype="continuous" dataType="double"/>
+	<DataField name="online_state_bond" optype="continuous" dataType="double"/>
+	<DataField name="cancelled" optype="continuous" dataType="double"/>
+	<DataField name="totalUsdAmount" optype="continuous" dataType="double"/>
+	<DataField name="paymentsInstallments" optype="continuous" dataType="double"/>
+	<DataField name="caseDate" optype="continuous" dataType="double"/>
+	<DataField name="case_minutes_distance" optype="continuous" dataType="double"/>
+	<DataField name="cases_count" optype="continuous" dataType="double"/>
+	<DataField name="channel" optype="continuous" dataType="double"/>
+	<DataField name="correl_id" optype="continuous" dataType="double"/>
+	<DataField name="count_different_cards" optype="continuous" dataType="double"/>
+	<DataField name="domain_proc" optype="continuous" dataType="double"/>
+	<DataField name="eulerBadge" optype="continuous" dataType="double"/>
+	<DataField name="hours_since_first_verification" optype="continuous" dataType="double"/>
+	<DataField name="many_holders_for_card" optype="continuous" dataType="double"/>
+	<DataField name="many_names_for_document" optype="continuous" dataType="double"/>
+	<DataField name="apocrypha" optype="categorical" dataType="double">
+		<Value value="0"/>
+		<Value value="1"/>
+	</DataField>
+</DataDictionary>
+<MiningModel functionName="classification">
+	<MiningSchema>
+		<MiningField name="apocrypha" usageType="target"/>
+		<MiningField name="id"/>
+		<MiningField name="deviceMatch"/>
+		<MiningField name="factorCodes"/>
+		<MiningField name="firstEncounter"/>
+		<MiningField name="icAddress"/>
+		<MiningField name="icInternet"/>
+		<MiningField name="icVelocity"/>
+		<MiningField name="icidentity"/>
+		<MiningField name="ipRoutingMethod"/>
+		<MiningField name="reasonCode"/>
+		<MiningField name="timeOnPage"/>
+		<MiningField name="pp_1"/>
+		<MiningField name="pp_30"/>
+		<MiningField name="pp_60"/>
+		<MiningField name="distance_to_arrival"/>
+		<MiningField name="distance_to_departure"/>
+		<MiningField name="ip_city"/>
+		<MiningField name="lagTimeHours"/>
+		<MiningField name="speed_to_departure"/>
+		<MiningField name="triangulation_height"/>
+		<MiningField name="triangulation_height_speed"/>
+		<MiningField name="trip_distance"/>
+		<MiningField name="mai_score"/>
+		<MiningField name="mai_advice"/>
+		<MiningField name="mai_reason"/>
+		<MiningField name="mai_risk"/>
+		<MiningField name="mai_status"/>
+		<MiningField name="mai_unique"/>
+		<MiningField name="mai_avg_secs"/>
+		<MiningField name="mai_buys"/>
+		<MiningField name="mai_searches"/>
+		<MiningField name="mai_type"/>
+		<MiningField name="mai_all_pax"/>
+		<MiningField name="mai_last_secs"/>
+		<MiningField name="mai_language"/>
+		<MiningField name="mai_negative"/>
+		<MiningField name="mai_os"/>
+		<MiningField name="mai_policy_score"/>
+		<MiningField name="mai_pulevel"/>
+		<MiningField name="mai_city"/>
+		<MiningField name="maibis_score"/>
+		<MiningField name="maitris_score"/>
+		<MiningField name="online_airport_state"/>
+		<MiningField name="online_billing_address_state"/>
+		<MiningField name="online_cep_number_bond"/>
+		<MiningField name="online_city_bond"/>
+		<MiningField name="online_ddd"/>
+		<MiningField name="online_ddd_bond"/>
+		<MiningField name="online_death"/>
+		<MiningField name="online_email"/>
+		<MiningField name="online_ip_state"/>
+		<MiningField name="online_name"/>
+		<MiningField name="online_phone"/>
+		<MiningField name="online_queries"/>
+		<MiningField name="online_state_bond"/>
+		<MiningField name="cancelled"/>
+		<MiningField name="totalUsdAmount"/>
+		<MiningField name="paymentsInstallments"/>
+		<MiningField name="caseDate"/>
+		<MiningField name="case_minutes_distance"/>
+		<MiningField name="cases_count"/>
+		<MiningField name="channel"/>
+		<MiningField name="correl_id"/>
+		<MiningField name="count_different_cards"/>
+		<MiningField name="domain_proc"/>
+		<MiningField name="eulerBadge"/>
+		<MiningField name="hours_since_first_verification"/>
+		<MiningField name="many_holders_for_card"/>
+		<MiningField name="many_names_for_document"/>
+	</MiningSchema>
+	<Output>
+		<OutputField name="pmml(prediction)" optype="categorical" dataType="double" feature="predictedValue" isFinalResult="false"/>
+		<OutputField name="prediction" optype="categorical" dataType="double" feature="transformedValue">
+			<MapValues outputColumn="data:output" dataType="double">
+				<FieldColumnPair field="pmml(prediction)" column="data:input"/>
+				<InlineTable>
+					<row>
+						<data:input>0</data:input>
+						<data:output>0</data:output>
+					</row>
+					<row>
+						<data:input>1</data:input>
+						<data:output>1</data:output>
+					</row>
+				</InlineTable>
+			</MapValues>
+		</OutputField>
+		<OutputField name="probability(0)" optype="continuous" dataType="double" feature="probability" value="0"/>
+		<OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+	</Output>
+	<Segmentation multipleModelMethod="average">
+		<Segment id="1">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="reasonCode"/>
+					<MiningField name="pp_60"/>
+					<MiningField name="distance_to_departure"/>
+					<MiningField name="ip_city"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_reason"/>
+					<MiningField name="mai_searches"/>
+					<MiningField name="mai_all_pax"/>
+					<MiningField name="online_name"/>
+					<MiningField name="cancelled"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+						<Node score="0" recordCount="29004">
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<ScoreDistribution value="0" recordCount="28295.0"/>
+							<ScoreDistribution value="1" recordCount="709.0"/>
+						</Node>
+						<Node>
+							<SimplePredicate field="distance_to_departure" operator="lessOrEqual" value="339.25"/>
+							<Node score="0" recordCount="765">
+								<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="39.5"/>
+								<ScoreDistribution value="0" recordCount="562.0"/>
+								<ScoreDistribution value="1" recordCount="203.0"/>
+							</Node>
+							<Node score="0" recordCount="957">
+								<SimplePredicate field="pp_60" operator="lessOrEqual" value="3.5"/>
+								<ScoreDistribution value="0" recordCount="876.0"/>
+								<ScoreDistribution value="1" recordCount="81.0"/>
+							</Node>
+							<Node score="1" recordCount="4">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="4.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_all_pax" operator="lessOrEqual" value="2.5"/>
+							<Node score="0" recordCount="470">
+								<SimplePredicate field="mai_advice" operator="lessOrEqual" value="3.5"/>
+								<ScoreDistribution value="0" recordCount="276.0"/>
+								<ScoreDistribution value="1" recordCount="194.0"/>
+							</Node>
+							<Node score="1" recordCount="313">
+								<True/>
+								<ScoreDistribution value="0" recordCount="72.0"/>
+								<ScoreDistribution value="1" recordCount="241.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="729">
+							<SimplePredicate field="online_name" operator="lessOrEqual" value="3.5"/>
+							<ScoreDistribution value="0" recordCount="608.0"/>
+							<ScoreDistribution value="1" recordCount="121.0"/>
+						</Node>
+						<Node score="1" recordCount="32">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="32.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="5075">
+						<SimplePredicate field="mai_reason" operator="lessOrEqual" value="10.0"/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="5075.0"/>
+					</Node>
+					<Node score="1" recordCount="3083">
+						<SimplePredicate field="mai_searches" operator="lessOrEqual" value="50.5"/>
+						<ScoreDistribution value="0" recordCount="2.0"/>
+						<ScoreDistribution value="1" recordCount="3081.0"/>
+					</Node>
+					<Node score="0" recordCount="1">
+						<SimplePredicate field="ip_city" operator="lessOrEqual" value="65628.5"/>
+						<ScoreDistribution value="0" recordCount="1.0"/>
+						<ScoreDistribution value="1" recordCount="0.0"/>
+					</Node>
+					<Node score="1" recordCount="115">
+						<True/>
+						<ScoreDistribution value="0" recordCount="1.0"/>
+						<ScoreDistribution value="1" recordCount="114.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="2">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="factorCodes"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="distance_to_departure"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_unique"/>
+					<MiningField name="mai_pulevel"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_state_bond"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="hours_since_first_verification"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="distance_to_departure" operator="lessOrEqual" value="663.3"/>
+						<Node>
+							<SimplePredicate field="mai_unique" operator="lessOrEqual" value="1.5"/>
+							<Node score="0" recordCount="22339">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="21668.0"/>
+								<ScoreDistribution value="1" recordCount="671.0"/>
+							</Node>
+							<Node score="1" recordCount="3343">
+								<True/>
+								<ScoreDistribution value="0" recordCount="2.0"/>
+								<ScoreDistribution value="1" recordCount="3341.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<Node score="0" recordCount="2102">
+								<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="6.85"/>
+								<ScoreDistribution value="0" recordCount="1815.0"/>
+								<ScoreDistribution value="1" recordCount="287.0"/>
+							</Node>
+							<Node score="1" recordCount="26">
+								<SimplePredicate field="factorCodes" operator="lessOrEqual" value="5.5"/>
+								<ScoreDistribution value="0" recordCount="6.0"/>
+								<ScoreDistribution value="1" recordCount="20.0"/>
+							</Node>
+							<Node score="0" recordCount="7">
+								<True/>
+								<ScoreDistribution value="0" recordCount="5.0"/>
+								<ScoreDistribution value="1" recordCount="2.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+							<Node score="1" recordCount="74">
+								<SimplePredicate field="online_state_bond" operator="lessOrEqual" value="1.5"/>
+								<ScoreDistribution value="0" recordCount="27.0"/>
+								<ScoreDistribution value="1" recordCount="47.0"/>
+							</Node>
+							<Node score="0" recordCount="233">
+								<True/>
+								<ScoreDistribution value="0" recordCount="144.0"/>
+								<ScoreDistribution value="1" recordCount="89.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="903">
+							<True/>
+							<ScoreDistribution value="0" recordCount="71.0"/>
+							<ScoreDistribution value="1" recordCount="832.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+						<Node score="0" recordCount="6215">
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="5960.0"/>
+							<ScoreDistribution value="1" recordCount="255.0"/>
+						</Node>
+						<Node score="1" recordCount="926">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="926.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="hours_since_first_verification" operator="lessOrEqual" value="1365.5"/>
+						<Node>
+							<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+							<Node score="0" recordCount="118">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="89.0"/>
+								<ScoreDistribution value="1" recordCount="29.0"/>
+							</Node>
+							<Node score="1" recordCount="127">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="127.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="2229">
+							<True/>
+							<ScoreDistribution value="0" recordCount="108.0"/>
+							<ScoreDistribution value="1" recordCount="2121.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="1723">
+						<SimplePredicate field="mai_pulevel" operator="lessOrEqual" value="1.5"/>
+						<ScoreDistribution value="0" recordCount="440.0"/>
+						<ScoreDistribution value="1" recordCount="1283.0"/>
+					</Node>
+					<Node score="0" recordCount="74">
+						<SimplePredicate field="mai_score" operator="lessOrEqual" value="94.5"/>
+						<ScoreDistribution value="0" recordCount="68.0"/>
+						<ScoreDistribution value="1" recordCount="6.0"/>
+					</Node>
+					<Node score="1" recordCount="11">
+						<True/>
+						<ScoreDistribution value="0" recordCount="3.0"/>
+						<ScoreDistribution value="1" recordCount="8.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="3">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="icAddress"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="ip_city"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_reason"/>
+					<MiningField name="mai_language"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="mai_os"/>
+					<MiningField name="online_city_bond"/>
+					<MiningField name="cancelled"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="mai_score" operator="lessOrEqual" value="68.5"/>
+						<Node>
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<Node>
+								<SimplePredicate field="online_city_bond" operator="lessOrEqual" value="2.5"/>
+								<Node>
+									<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="104.5"/>
+									<Node score="0" recordCount="4074">
+										<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+										<ScoreDistribution value="0" recordCount="3809.0"/>
+										<ScoreDistribution value="1" recordCount="265.0"/>
+									</Node>
+									<Node score="1" recordCount="671">
+										<True/>
+										<ScoreDistribution value="0" recordCount="0.0"/>
+										<ScoreDistribution value="1" recordCount="671.0"/>
+									</Node>
+								</Node>
+								<Node score="0" recordCount="22113">
+									<True/>
+									<ScoreDistribution value="0" recordCount="20913.0"/>
+									<ScoreDistribution value="1" recordCount="1200.0"/>
+								</Node>
+							</Node>
+							<Node>
+								<SimplePredicate field="mai_reason" operator="lessOrEqual" value="8.5"/>
+								<Node score="0" recordCount="528">
+									<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="480.0"/>
+									<ScoreDistribution value="1" recordCount="48.0"/>
+								</Node>
+								<Node score="1" recordCount="284">
+									<True/>
+									<ScoreDistribution value="0" recordCount="0.0"/>
+									<ScoreDistribution value="1" recordCount="284.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="2537">
+								<True/>
+								<ScoreDistribution value="0" recordCount="2234.0"/>
+								<ScoreDistribution value="1" recordCount="303.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<Node>
+								<SimplePredicate field="icAddress" operator="lessOrEqual" value="2.5"/>
+								<Node score="0" recordCount="2118">
+									<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="6.85"/>
+									<ScoreDistribution value="0" recordCount="1801.0"/>
+									<ScoreDistribution value="1" recordCount="317.0"/>
+								</Node>
+								<Node score="1" recordCount="490">
+									<True/>
+									<ScoreDistribution value="0" recordCount="232.0"/>
+									<ScoreDistribution value="1" recordCount="258.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="97">
+								<SimplePredicate field="mai_os" operator="lessOrEqual" value="-6.90410318E8"/>
+								<ScoreDistribution value="0" recordCount="3.0"/>
+								<ScoreDistribution value="1" recordCount="94.0"/>
+							</Node>
+							<Node score="0" recordCount="12">
+								<True/>
+								<ScoreDistribution value="0" recordCount="10.0"/>
+								<ScoreDistribution value="1" recordCount="2.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="3530">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="3530.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="0.05"/>
+							<Node score="0" recordCount="379">
+								<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="368.0"/>
+								<ScoreDistribution value="1" recordCount="11.0"/>
+							</Node>
+							<Node score="1" recordCount="9">
+								<SimplePredicate field="mai_language" operator="lessOrEqual" value="-2.0581581615E9"/>
+								<ScoreDistribution value="0" recordCount="1.0"/>
+								<ScoreDistribution value="1" recordCount="8.0"/>
+							</Node>
+							<Node score="0" recordCount="7">
+								<True/>
+								<ScoreDistribution value="0" recordCount="6.0"/>
+								<ScoreDistribution value="1" recordCount="1.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="427">
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="480.5"/>
+							<ScoreDistribution value="0" recordCount="360.0"/>
+							<ScoreDistribution value="1" recordCount="67.0"/>
+						</Node>
+						<Node score="0" recordCount="7">
+							<SimplePredicate field="ip_city" operator="lessOrEqual" value="65628.5"/>
+							<ScoreDistribution value="0" recordCount="7.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+						<Node score="1" recordCount="174">
+							<True/>
+							<ScoreDistribution value="0" recordCount="51.0"/>
+							<ScoreDistribution value="1" recordCount="123.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="2694">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="2694.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="4">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="reasonCode"/>
+					<MiningField name="pp_60"/>
+					<MiningField name="distance_to_departure"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="trip_distance"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_avg_secs"/>
+					<MiningField name="mai_searches"/>
+					<MiningField name="mai_pulevel"/>
+					<MiningField name="online_airport_state"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="paymentsInstallments"/>
+					<MiningField name="domain_proc"/>
+					<MiningField name="many_holders_for_card"/>
+					<MiningField name="many_names_for_document"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="distance_to_departure" operator="lessOrEqual" value="492.75"/>
+						<Node>
+							<SimplePredicate field="mai_score" operator="lessOrEqual" value="94.5"/>
+							<Node score="0" recordCount="23233">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="22593.0"/>
+								<ScoreDistribution value="1" recordCount="640.0"/>
+							</Node>
+							<Node score="1" recordCount="3039">
+								<SimplePredicate field="paymentsInstallments" operator="lessOrEqual" value="11.5"/>
+								<ScoreDistribution value="0" recordCount="4.0"/>
+								<ScoreDistribution value="1" recordCount="3035.0"/>
+							</Node>
+							<Node score="1" recordCount="59">
+								<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="3906.5"/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="59.0"/>
+							</Node>
+							<Node score="0" recordCount="7">
+								<True/>
+								<ScoreDistribution value="0" recordCount="5.0"/>
+								<ScoreDistribution value="1" recordCount="2.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<Node>
+								<SimplePredicate field="trip_distance" operator="lessOrEqual" value="1208.5"/>
+								<Node score="0" recordCount="105">
+									<SimplePredicate field="mai_risk" operator="lessOrEqual" value="3.5"/>
+									<ScoreDistribution value="0" recordCount="94.0"/>
+									<ScoreDistribution value="1" recordCount="11.0"/>
+								</Node>
+								<Node score="1" recordCount="15">
+									<True/>
+									<ScoreDistribution value="0" recordCount="2.0"/>
+									<ScoreDistribution value="1" recordCount="13.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="34">
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="0.05"/>
+								<ScoreDistribution value="0" recordCount="31.0"/>
+								<ScoreDistribution value="1" recordCount="3.0"/>
+							</Node>
+							<Node score="1" recordCount="74">
+								<True/>
+								<ScoreDistribution value="0" recordCount="19.0"/>
+								<ScoreDistribution value="1" recordCount="55.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="1008">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="1008.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+						<Node>
+							<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="0.095"/>
+							<Node>
+								<SimplePredicate field="many_names_for_document" operator="lessOrEqual" value="-4.999999947E7"/>
+								<Node score="0" recordCount="6561">
+									<SimplePredicate field="mai_score" operator="lessOrEqual" value="94.5"/>
+									<ScoreDistribution value="0" recordCount="5564.0"/>
+									<ScoreDistribution value="1" recordCount="997.0"/>
+								</Node>
+								<Node score="1" recordCount="252">
+									<True/>
+									<ScoreDistribution value="0" recordCount="74.0"/>
+									<ScoreDistribution value="1" recordCount="178.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="288">
+								<SimplePredicate field="mai_pulevel" operator="lessOrEqual" value="3.5"/>
+								<ScoreDistribution value="0" recordCount="77.0"/>
+								<ScoreDistribution value="1" recordCount="211.0"/>
+							</Node>
+							<Node score="0" recordCount="45">
+								<True/>
+								<ScoreDistribution value="0" recordCount="37.0"/>
+								<ScoreDistribution value="1" recordCount="8.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_avg_secs" operator="lessOrEqual" value="900.5"/>
+							<Node score="1" recordCount="153">
+								<SimplePredicate field="mai_searches" operator="lessOrEqual" value="4.5"/>
+								<ScoreDistribution value="0" recordCount="10.0"/>
+								<ScoreDistribution value="1" recordCount="143.0"/>
+							</Node>
+							<Node score="0" recordCount="34">
+								<True/>
+								<ScoreDistribution value="0" recordCount="17.0"/>
+								<ScoreDistribution value="1" recordCount="17.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="25">
+							<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="0.175"/>
+							<ScoreDistribution value="0" recordCount="4.0"/>
+							<ScoreDistribution value="1" recordCount="21.0"/>
+						</Node>
+						<Node score="0" recordCount="61">
+							<True/>
+							<ScoreDistribution value="0" recordCount="41.0"/>
+							<ScoreDistribution value="1" recordCount="20.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+						<Node>
+							<SimplePredicate field="online_airport_state" operator="lessOrEqual" value="0.5"/>
+							<Node score="0" recordCount="1298">
+								<SimplePredicate field="domain_proc" operator="lessOrEqual" value="0.054900000000000004"/>
+								<ScoreDistribution value="0" recordCount="1041.0"/>
+								<ScoreDistribution value="1" recordCount="257.0"/>
+							</Node>
+							<Node score="1" recordCount="56">
+								<True/>
+								<ScoreDistribution value="0" recordCount="16.0"/>
+								<ScoreDistribution value="1" recordCount="40.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="350">
+							<SimplePredicate field="mai_searches" operator="lessOrEqual" value="2.5"/>
+							<ScoreDistribution value="0" recordCount="130.0"/>
+							<ScoreDistribution value="1" recordCount="220.0"/>
+						</Node>
+						<Node score="0" recordCount="451">
+							<True/>
+							<ScoreDistribution value="0" recordCount="312.0"/>
+							<ScoreDistribution value="1" recordCount="139.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="2919">
+						<SimplePredicate field="mai_advice" operator="lessOrEqual" value="506.0"/>
+						<ScoreDistribution value="0" recordCount="179.0"/>
+						<ScoreDistribution value="1" recordCount="2740.0"/>
+					</Node>
+					<Node score="0" recordCount="17">
+						<SimplePredicate field="pp_60" operator="lessOrEqual" value="0.5"/>
+						<ScoreDistribution value="0" recordCount="16.0"/>
+						<ScoreDistribution value="1" recordCount="1.0"/>
+					</Node>
+					<Node score="1" recordCount="65">
+						<True/>
+						<ScoreDistribution value="0" recordCount="15.0"/>
+						<ScoreDistribution value="1" recordCount="50.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="5">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="firstEncounter"/>
+					<MiningField name="icInternet"/>
+					<MiningField name="ipRoutingMethod"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="trip_distance"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_reason"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_last_secs"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_airport_state"/>
+					<MiningField name="online_name"/>
+					<MiningField name="online_state_bond"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="many_holders_for_card"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="mai_score" operator="lessOrEqual" value="68.5"/>
+						<Node>
+							<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+							<Node>
+								<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+								<Node score="0" recordCount="22402">
+									<SimplePredicate field="online_name" operator="lessOrEqual" value="4.5"/>
+									<ScoreDistribution value="0" recordCount="21133.0"/>
+									<ScoreDistribution value="1" recordCount="1269.0"/>
+								</Node>
+								<Node score="1" recordCount="37">
+									<SimplePredicate field="firstEncounter" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="5.0"/>
+									<ScoreDistribution value="1" recordCount="32.0"/>
+								</Node>
+								<Node score="0" recordCount="22">
+									<True/>
+									<ScoreDistribution value="0" recordCount="18.0"/>
+									<ScoreDistribution value="1" recordCount="4.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="1174">
+								<SimplePredicate field="ipRoutingMethod" operator="lessOrEqual" value="1.5"/>
+								<ScoreDistribution value="0" recordCount="864.0"/>
+								<ScoreDistribution value="1" recordCount="310.0"/>
+							</Node>
+							<Node score="0" recordCount="855">
+								<SimplePredicate field="online_name" operator="lessOrEqual" value="1.5"/>
+								<ScoreDistribution value="0" recordCount="437.0"/>
+								<ScoreDistribution value="1" recordCount="418.0"/>
+							</Node>
+							<Node score="1" recordCount="252">
+								<True/>
+								<ScoreDistribution value="0" recordCount="37.0"/>
+								<ScoreDistribution value="1" recordCount="215.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<Node>
+								<SimplePredicate field="online_state_bond" operator="lessOrEqual" value="4.5"/>
+								<Node score="0" recordCount="7324">
+									<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="0.095"/>
+									<ScoreDistribution value="0" recordCount="6137.0"/>
+									<ScoreDistribution value="1" recordCount="1187.0"/>
+								</Node>
+								<Node score="1" recordCount="160">
+									<True/>
+									<ScoreDistribution value="0" recordCount="40.0"/>
+									<ScoreDistribution value="1" recordCount="120.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="274">
+								<SimplePredicate field="mai_last_secs" operator="lessOrEqual" value="728.5"/>
+								<ScoreDistribution value="0" recordCount="106.0"/>
+								<ScoreDistribution value="1" recordCount="168.0"/>
+							</Node>
+							<Node score="0" recordCount="247">
+								<True/>
+								<ScoreDistribution value="0" recordCount="157.0"/>
+								<ScoreDistribution value="1" recordCount="90.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="online_airport_state" operator="lessOrEqual" value="0.5"/>
+							<Node score="1" recordCount="1489">
+								<SimplePredicate field="icInternet" operator="lessOrEqual" value="3.5"/>
+								<ScoreDistribution value="0" recordCount="324.0"/>
+								<ScoreDistribution value="1" recordCount="1165.0"/>
+							</Node>
+							<Node score="0" recordCount="404">
+								<True/>
+								<ScoreDistribution value="0" recordCount="231.0"/>
+								<ScoreDistribution value="1" recordCount="173.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="2074">
+							<True/>
+							<ScoreDistribution value="0" recordCount="179.0"/>
+							<ScoreDistribution value="1" recordCount="1895.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="0.05"/>
+						<Node score="1" recordCount="327">
+							<SimplePredicate field="mai_reason" operator="lessOrEqual" value="10.0"/>
+							<ScoreDistribution value="0" recordCount="23.0"/>
+							<ScoreDistribution value="1" recordCount="304.0"/>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_advice" operator="lessOrEqual" value="7.5"/>
+							<Node score="0" recordCount="421">
+								<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="351.0"/>
+								<ScoreDistribution value="1" recordCount="70.0"/>
+							</Node>
+							<Node score="1" recordCount="84">
+								<True/>
+								<ScoreDistribution value="0" recordCount="8.0"/>
+								<ScoreDistribution value="1" recordCount="76.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="15">
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="12.0"/>
+							<ScoreDistribution value="1" recordCount="3.0"/>
+						</Node>
+						<Node score="1" recordCount="53">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="53.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="1452">
+						<SimplePredicate field="mai_reason" operator="lessOrEqual" value="10.0"/>
+						<ScoreDistribution value="0" recordCount="50.0"/>
+						<ScoreDistribution value="1" recordCount="1402.0"/>
+					</Node>
+					<Node>
+						<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+						<Node score="0" recordCount="367">
+							<SimplePredicate field="trip_distance" operator="lessOrEqual" value="1120.55"/>
+							<ScoreDistribution value="0" recordCount="189.0"/>
+							<ScoreDistribution value="1" recordCount="178.0"/>
+						</Node>
+						<Node score="1" recordCount="645">
+							<True/>
+							<ScoreDistribution value="0" recordCount="166.0"/>
+							<ScoreDistribution value="1" recordCount="479.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="365">
+						<True/>
+						<ScoreDistribution value="0" recordCount="7.0"/>
+						<ScoreDistribution value="1" recordCount="358.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="6">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="icAddress"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="distance_to_arrival"/>
+					<MiningField name="distance_to_departure"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="trip_distance"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_searches"/>
+					<MiningField name="mai_type"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="totalUsdAmount"/>
+					<MiningField name="caseDate"/>
+					<MiningField name="many_holders_for_card"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="distance_to_departure" operator="lessOrEqual" value="492.75"/>
+						<Node>
+							<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="65.5"/>
+							<Node>
+								<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+								<Node score="0" recordCount="1924">
+									<SimplePredicate field="distance_to_arrival" operator="lessOrEqual" value="1182.7"/>
+									<ScoreDistribution value="0" recordCount="1653.0"/>
+									<ScoreDistribution value="1" recordCount="271.0"/>
+								</Node>
+								<Node score="0" recordCount="989">
+									<SimplePredicate field="mai_score" operator="lessOrEqual" value="35.5"/>
+									<ScoreDistribution value="0" recordCount="762.0"/>
+									<ScoreDistribution value="1" recordCount="227.0"/>
+								</Node>
+								<Node score="1" recordCount="414">
+									<True/>
+									<ScoreDistribution value="0" recordCount="169.0"/>
+									<ScoreDistribution value="1" recordCount="245.0"/>
+								</Node>
+							</Node>
+							<Node>
+								<SimplePredicate field="trip_distance" operator="lessOrEqual" value="628.5999999999999"/>
+								<Node score="0" recordCount="395">
+									<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="241.0"/>
+									<ScoreDistribution value="1" recordCount="154.0"/>
+								</Node>
+								<Node score="1" recordCount="107">
+									<True/>
+									<ScoreDistribution value="0" recordCount="2.0"/>
+									<ScoreDistribution value="1" recordCount="105.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="1997">
+								<True/>
+								<ScoreDistribution value="0" recordCount="380.0"/>
+								<ScoreDistribution value="1" recordCount="1617.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_risk" operator="lessOrEqual" value="3.5"/>
+							<Node score="0" recordCount="15546">
+								<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+								<ScoreDistribution value="0" recordCount="14874.0"/>
+								<ScoreDistribution value="1" recordCount="672.0"/>
+							</Node>
+							<Node score="0" recordCount="5125">
+								<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="-4.9999999485E7"/>
+								<ScoreDistribution value="0" recordCount="4379.0"/>
+								<ScoreDistribution value="1" recordCount="746.0"/>
+							</Node>
+							<Node score="1" recordCount="144">
+								<True/>
+								<ScoreDistribution value="0" recordCount="41.0"/>
+								<ScoreDistribution value="1" recordCount="103.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="963">
+							<True/>
+							<ScoreDistribution value="0" recordCount="291.0"/>
+							<ScoreDistribution value="1" recordCount="672.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="icAddress" operator="lessOrEqual" value="2.5"/>
+							<Node score="0" recordCount="7466">
+								<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="15.149999999999999"/>
+								<ScoreDistribution value="0" recordCount="7026.0"/>
+								<ScoreDistribution value="1" recordCount="440.0"/>
+							</Node>
+							<Node score="0" recordCount="267">
+								<SimplePredicate field="totalUsdAmount" operator="lessOrEqual" value="231.5"/>
+								<ScoreDistribution value="0" recordCount="218.0"/>
+								<ScoreDistribution value="1" recordCount="49.0"/>
+							</Node>
+							<Node score="1" recordCount="461">
+								<True/>
+								<ScoreDistribution value="0" recordCount="230.0"/>
+								<ScoreDistribution value="1" recordCount="231.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<Node score="0" recordCount="55">
+								<SimplePredicate field="totalUsdAmount" operator="lessOrEqual" value="788.0"/>
+								<ScoreDistribution value="0" recordCount="54.0"/>
+								<ScoreDistribution value="1" recordCount="1.0"/>
+							</Node>
+							<Node score="1" recordCount="1">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="1.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="7">
+							<SimplePredicate field="caseDate" operator="lessOrEqual" value="1.49598877E9"/>
+							<ScoreDistribution value="0" recordCount="7.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+						<Node score="1" recordCount="63">
+							<True/>
+							<ScoreDistribution value="0" recordCount="4.0"/>
+							<ScoreDistribution value="1" recordCount="59.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="4156">
+						<SimplePredicate field="mai_searches" operator="lessOrEqual" value="50.5"/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="4156.0"/>
+					</Node>
+					<Node>
+						<SimplePredicate field="maibis_score" operator="lessOrEqual" value="40.5"/>
+						<Node score="0" recordCount="1">
+							<SimplePredicate field="mai_type" operator="lessOrEqual" value="-1.735772498E9"/>
+							<ScoreDistribution value="0" recordCount="1.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+						<Node score="1" recordCount="1">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="1.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="109">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="109.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="7">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="reasonCode"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_status"/>
+					<MiningField name="mai_last_secs"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="mai_pulevel"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_name"/>
+					<MiningField name="online_phone"/>
+					<MiningField name="online_queries"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="eulerBadge"/>
+					<MiningField name="hours_since_first_verification"/>
+					<MiningField name="many_holders_for_card"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="19.55"/>
+						<Node>
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<Node>
+								<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="0.095"/>
+								<Node score="0" recordCount="25574">
+									<SimplePredicate field="online_queries" operator="lessOrEqual" value="4.5"/>
+									<ScoreDistribution value="0" recordCount="23891.0"/>
+									<ScoreDistribution value="1" recordCount="1683.0"/>
+								</Node>
+								<Node score="0" recordCount="3157">
+									<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="3035.0"/>
+									<ScoreDistribution value="1" recordCount="122.0"/>
+								</Node>
+								<Node score="1" recordCount="452">
+									<True/>
+									<ScoreDistribution value="0" recordCount="0.0"/>
+									<ScoreDistribution value="1" recordCount="452.0"/>
+								</Node>
+							</Node>
+							<Node>
+								<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+								<Node score="0" recordCount="256">
+									<SimplePredicate field="eulerBadge" operator="lessOrEqual" value="6.241579365E8"/>
+									<ScoreDistribution value="0" recordCount="204.0"/>
+									<ScoreDistribution value="1" recordCount="52.0"/>
+								</Node>
+								<Node score="1" recordCount="45">
+									<True/>
+									<ScoreDistribution value="0" recordCount="7.0"/>
+									<ScoreDistribution value="1" recordCount="38.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="45">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="42.0"/>
+								<ScoreDistribution value="1" recordCount="3.0"/>
+							</Node>
+							<Node score="1" recordCount="110">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="110.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="2252">
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="1912.0"/>
+							<ScoreDistribution value="1" recordCount="340.0"/>
+						</Node>
+						<Node score="1" recordCount="3377">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="3377.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="online_name" operator="lessOrEqual" value="1.5"/>
+						<Node>
+							<SimplePredicate field="hours_since_first_verification" operator="lessOrEqual" value="1365.5"/>
+							<Node>
+								<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+								<Node score="0" recordCount="375">
+									<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="201.0"/>
+									<ScoreDistribution value="1" recordCount="174.0"/>
+								</Node>
+								<Node score="1" recordCount="39">
+									<True/>
+									<ScoreDistribution value="0" recordCount="0.0"/>
+									<ScoreDistribution value="1" recordCount="39.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="1427">
+								<True/>
+								<ScoreDistribution value="0" recordCount="94.0"/>
+								<ScoreDistribution value="1" recordCount="1333.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_last_secs" operator="lessOrEqual" value="560.5"/>
+							<Node score="0" recordCount="215">
+								<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="2.55"/>
+								<ScoreDistribution value="0" recordCount="109.0"/>
+								<ScoreDistribution value="1" recordCount="106.0"/>
+							</Node>
+							<Node score="1" recordCount="540">
+								<True/>
+								<ScoreDistribution value="0" recordCount="155.0"/>
+								<ScoreDistribution value="1" recordCount="385.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="914">
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="480.5"/>
+							<ScoreDistribution value="0" recordCount="656.0"/>
+							<ScoreDistribution value="1" recordCount="258.0"/>
+						</Node>
+						<Node score="1" recordCount="232">
+							<True/>
+							<ScoreDistribution value="0" recordCount="35.0"/>
+							<ScoreDistribution value="1" recordCount="197.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+						<Node>
+							<SimplePredicate field="online_phone" operator="lessOrEqual" value="2.5"/>
+							<Node score="1" recordCount="175">
+								<SimplePredicate field="mai_pulevel" operator="lessOrEqual" value="3.5"/>
+								<ScoreDistribution value="0" recordCount="4.0"/>
+								<ScoreDistribution value="1" recordCount="171.0"/>
+							</Node>
+							<Node score="0" recordCount="2">
+								<True/>
+								<ScoreDistribution value="0" recordCount="2.0"/>
+								<ScoreDistribution value="1" recordCount="0.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="304">
+							<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="104.5"/>
+							<ScoreDistribution value="0" recordCount="81.0"/>
+							<ScoreDistribution value="1" recordCount="223.0"/>
+						</Node>
+						<Node score="0" recordCount="36">
+							<True/>
+							<ScoreDistribution value="0" recordCount="30.0"/>
+							<ScoreDistribution value="1" recordCount="6.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="861">
+						<SimplePredicate field="mai_status" operator="lessOrEqual" value="3.5"/>
+						<ScoreDistribution value="0" recordCount="11.0"/>
+						<ScoreDistribution value="1" recordCount="850.0"/>
+					</Node>
+					<Node score="0" recordCount="24">
+						<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+						<ScoreDistribution value="0" recordCount="15.0"/>
+						<ScoreDistribution value="1" recordCount="9.0"/>
+					</Node>
+					<Node score="1" recordCount="77">
+						<True/>
+						<ScoreDistribution value="0" recordCount="15.0"/>
+						<ScoreDistribution value="1" recordCount="62.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="8">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="id"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="trip_distance"/>
+					<MiningField name="mai_buys"/>
+					<MiningField name="mai_type"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="correl_id"/>
+					<MiningField name="count_different_cards"/>
+					<MiningField name="many_holders_for_card"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="-4.9999999485E7"/>
+						<Node>
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<Node score="0" recordCount="30750">
+								<SimplePredicate field="maibis_score" operator="lessOrEqual" value="623.0"/>
+								<ScoreDistribution value="0" recordCount="29513.0"/>
+								<ScoreDistribution value="1" recordCount="1237.0"/>
+							</Node>
+							<Node>
+								<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="39.5"/>
+								<Node score="0" recordCount="52">
+									<SimplePredicate field="trip_distance" operator="lessOrEqual" value="864.15"/>
+									<ScoreDistribution value="0" recordCount="35.0"/>
+									<ScoreDistribution value="1" recordCount="17.0"/>
+								</Node>
+								<Node score="1" recordCount="103">
+									<True/>
+									<ScoreDistribution value="0" recordCount="19.0"/>
+									<ScoreDistribution value="1" recordCount="84.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="479">
+								<True/>
+								<ScoreDistribution value="0" recordCount="416.0"/>
+								<ScoreDistribution value="1" recordCount="63.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="6959">
+							<SimplePredicate field="mai_buys" operator="lessOrEqual" value="30.5"/>
+							<ScoreDistribution value="0" recordCount="4.0"/>
+							<ScoreDistribution value="1" recordCount="6955.0"/>
+						</Node>
+						<Node>
+							<SimplePredicate field="correl_id" operator="lessOrEqual" value="9591.5"/>
+							<Node score="1" recordCount="7">
+								<SimplePredicate field="id" operator="lessOrEqual" value="5169.0"/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="7.0"/>
+							</Node>
+							<Node score="0" recordCount="4">
+								<True/>
+								<ScoreDistribution value="0" recordCount="2.0"/>
+								<ScoreDistribution value="1" recordCount="2.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="68">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="68.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+						<Node>
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<Node score="0" recordCount="370">
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="146.9"/>
+								<ScoreDistribution value="0" recordCount="356.0"/>
+								<ScoreDistribution value="1" recordCount="14.0"/>
+							</Node>
+							<Node score="1" recordCount="1">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="1.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="267">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="267.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="0.685"/>
+						<Node score="1" recordCount="1266">
+							<SimplePredicate field="mai_type" operator="lessOrEqual" value="1.823148845E8"/>
+							<ScoreDistribution value="0" recordCount="47.0"/>
+							<ScoreDistribution value="1" recordCount="1219.0"/>
+						</Node>
+						<Node score="0" recordCount="2">
+							<True/>
+							<ScoreDistribution value="0" recordCount="2.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="7">
+						<SimplePredicate field="count_different_cards" operator="lessOrEqual" value="-4.9999975E7"/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="7.0"/>
+					</Node>
+					<Node score="0" recordCount="5">
+						<True/>
+						<ScoreDistribution value="0" recordCount="5.0"/>
+						<ScoreDistribution value="1" recordCount="0.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="9">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="deviceMatch"/>
+					<MiningField name="factorCodes"/>
+					<MiningField name="icVelocity"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="distance_to_departure"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="triangulation_height"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="trip_distance"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_airport_state"/>
+					<MiningField name="online_cep_number_bond"/>
+					<MiningField name="online_ddd_bond"/>
+					<MiningField name="online_name"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="channel"/>
+					<MiningField name="many_holders_for_card"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+						<Node>
+							<SimplePredicate field="online_name" operator="lessOrEqual" value="1.5"/>
+							<Node>
+								<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="6.85"/>
+								<Node>
+									<SimplePredicate field="online_ddd_bond" operator="lessOrEqual" value="1.5"/>
+									<Node score="0" recordCount="4464">
+										<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="0.095"/>
+										<ScoreDistribution value="0" recordCount="3864.0"/>
+										<ScoreDistribution value="1" recordCount="600.0"/>
+									</Node>
+									<Node score="1" recordCount="77">
+										<True/>
+										<ScoreDistribution value="0" recordCount="12.0"/>
+										<ScoreDistribution value="1" recordCount="65.0"/>
+									</Node>
+								</Node>
+								<Node score="1" recordCount="51">
+									<SimplePredicate field="factorCodes" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="13.0"/>
+									<ScoreDistribution value="1" recordCount="38.0"/>
+								</Node>
+								<Node score="0" recordCount="18975">
+									<True/>
+									<ScoreDistribution value="0" recordCount="18044.0"/>
+									<ScoreDistribution value="1" recordCount="931.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="468">
+								<SimplePredicate field="trip_distance" operator="lessOrEqual" value="914.8499999999999"/>
+								<ScoreDistribution value="0" recordCount="363.0"/>
+								<ScoreDistribution value="1" recordCount="105.0"/>
+							</Node>
+							<Node score="1" recordCount="677">
+								<SimplePredicate field="triangulation_height" operator="lessOrEqual" value="2341.045"/>
+								<ScoreDistribution value="0" recordCount="211.0"/>
+								<ScoreDistribution value="1" recordCount="466.0"/>
+							</Node>
+							<Node score="0" recordCount="220">
+								<True/>
+								<ScoreDistribution value="0" recordCount="177.0"/>
+								<ScoreDistribution value="1" recordCount="43.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="online_cep_number_bond" operator="lessOrEqual" value="2.5"/>
+							<Node>
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<Node score="0" recordCount="82">
+									<SimplePredicate field="deviceMatch" operator="lessOrEqual" value="1.5"/>
+									<ScoreDistribution value="0" recordCount="66.0"/>
+									<ScoreDistribution value="1" recordCount="16.0"/>
+								</Node>
+								<Node score="1" recordCount="60">
+									<True/>
+									<ScoreDistribution value="0" recordCount="17.0"/>
+									<ScoreDistribution value="1" recordCount="43.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="209">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="209.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="channel" operator="lessOrEqual" value="-9.28632E7"/>
+							<Node score="0" recordCount="366">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="313.0"/>
+								<ScoreDistribution value="1" recordCount="53.0"/>
+							</Node>
+							<Node score="1" recordCount="202">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="202.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="104">
+							<SimplePredicate field="icVelocity" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="41.0"/>
+							<ScoreDistribution value="1" recordCount="63.0"/>
+						</Node>
+						<Node score="0" recordCount="1564">
+							<True/>
+							<ScoreDistribution value="0" recordCount="1247.0"/>
+							<ScoreDistribution value="1" recordCount="317.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="distance_to_departure" operator="lessOrEqual" value="663.3"/>
+						<Node score="1" recordCount="1324">
+							<SimplePredicate field="mai_advice" operator="lessOrEqual" value="2.0"/>
+							<ScoreDistribution value="0" recordCount="248.0"/>
+							<ScoreDistribution value="1" recordCount="1076.0"/>
+						</Node>
+						<Node score="0" recordCount="6205">
+							<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="4508.0"/>
+							<ScoreDistribution value="1" recordCount="1697.0"/>
+						</Node>
+						<Node score="1" recordCount="876">
+							<True/>
+							<ScoreDistribution value="0" recordCount="22.0"/>
+							<ScoreDistribution value="1" recordCount="854.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_score" operator="lessOrEqual" value="30.5"/>
+						<Node>
+							<SimplePredicate field="online_airport_state" operator="lessOrEqual" value="0.5"/>
+							<Node score="0" recordCount="660">
+								<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+								<ScoreDistribution value="0" recordCount="540.0"/>
+								<ScoreDistribution value="1" recordCount="120.0"/>
+							</Node>
+							<Node score="1" recordCount="344">
+								<True/>
+								<ScoreDistribution value="0" recordCount="67.0"/>
+								<ScoreDistribution value="1" recordCount="277.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="256">
+							<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="11.45"/>
+							<ScoreDistribution value="0" recordCount="156.0"/>
+							<ScoreDistribution value="1" recordCount="100.0"/>
+						</Node>
+						<Node score="1" recordCount="478">
+							<True/>
+							<ScoreDistribution value="0" recordCount="61.0"/>
+							<ScoreDistribution value="1" recordCount="417.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="2465">
+						<True/>
+						<ScoreDistribution value="0" recordCount="349.0"/>
+						<ScoreDistribution value="1" recordCount="2116.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="10">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="firstEncounter"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_reason"/>
+					<MiningField name="mai_buys"/>
+					<MiningField name="mai_last_secs"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_billing_address_state"/>
+					<MiningField name="online_name"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="many_names_for_document"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+						<Node>
+							<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+							<Node score="0" recordCount="24702">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="24011.0"/>
+								<ScoreDistribution value="1" recordCount="691.0"/>
+							</Node>
+							<Node score="1" recordCount="1338">
+								<True/>
+								<ScoreDistribution value="0" recordCount="5.0"/>
+								<ScoreDistribution value="1" recordCount="1333.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="0.25"/>
+							<Node>
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<Node score="1" recordCount="7">
+									<SimplePredicate field="online_name" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="2.0"/>
+									<ScoreDistribution value="1" recordCount="5.0"/>
+								</Node>
+								<Node score="0" recordCount="120">
+									<True/>
+									<ScoreDistribution value="0" recordCount="109.0"/>
+									<ScoreDistribution value="1" recordCount="11.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="239">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="239.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="564">
+							<SimplePredicate field="online_billing_address_state" operator="lessOrEqual" value="2.5"/>
+							<ScoreDistribution value="0" recordCount="76.0"/>
+							<ScoreDistribution value="1" recordCount="488.0"/>
+						</Node>
+						<Node score="1" recordCount="289">
+							<SimplePredicate field="firstEncounter" operator="lessOrEqual" value="462.5"/>
+							<ScoreDistribution value="0" recordCount="13.0"/>
+							<ScoreDistribution value="1" recordCount="276.0"/>
+						</Node>
+						<Node score="0" recordCount="2">
+							<True/>
+							<ScoreDistribution value="0" recordCount="2.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+						<Node>
+							<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="11.45"/>
+							<Node>
+								<SimplePredicate field="mai_last_secs" operator="lessOrEqual" value="467.5"/>
+								<Node score="0" recordCount="865">
+									<SimplePredicate field="mai_score" operator="lessOrEqual" value="28.5"/>
+									<ScoreDistribution value="0" recordCount="655.0"/>
+									<ScoreDistribution value="1" recordCount="210.0"/>
+								</Node>
+								<Node score="1" recordCount="425">
+									<True/>
+									<ScoreDistribution value="0" recordCount="185.0"/>
+									<ScoreDistribution value="1" recordCount="240.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="5081">
+								<SimplePredicate field="many_names_for_document" operator="lessOrEqual" value="0.07500000000000001"/>
+								<ScoreDistribution value="0" recordCount="4319.0"/>
+								<ScoreDistribution value="1" recordCount="762.0"/>
+							</Node>
+							<Node score="1" recordCount="76">
+								<True/>
+								<ScoreDistribution value="0" recordCount="27.0"/>
+								<ScoreDistribution value="1" recordCount="49.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="536">
+							<SimplePredicate field="mai_reason" operator="lessOrEqual" value="28.5"/>
+							<ScoreDistribution value="0" recordCount="188.0"/>
+							<ScoreDistribution value="1" recordCount="348.0"/>
+						</Node>
+						<Node score="0" recordCount="36">
+							<SimplePredicate field="mai_buys" operator="lessOrEqual" value="2.5"/>
+							<ScoreDistribution value="0" recordCount="35.0"/>
+							<ScoreDistribution value="1" recordCount="1.0"/>
+						</Node>
+						<Node score="1" recordCount="6">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="6.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+						<Node score="0" recordCount="962">
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="588.0"/>
+							<ScoreDistribution value="1" recordCount="374.0"/>
+						</Node>
+						<Node score="1" recordCount="2377">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="2377.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="2491">
+						<True/>
+						<ScoreDistribution value="0" recordCount="22.0"/>
+						<ScoreDistribution value="1" recordCount="2469.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="11">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="reasonCode"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="triangulation_height"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_airport_state"/>
+					<MiningField name="online_ddd_bond"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="domain_proc"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="triangulation_height" operator="lessOrEqual" value="233.555"/>
+						<Node>
+							<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+							<Node score="0" recordCount="21501">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="21013.0"/>
+								<ScoreDistribution value="1" recordCount="488.0"/>
+							</Node>
+							<Node score="1" recordCount="1468">
+								<True/>
+								<ScoreDistribution value="0" recordCount="9.0"/>
+								<ScoreDistribution value="1" recordCount="1459.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="online_ddd_bond" operator="lessOrEqual" value="2.5"/>
+							<Node>
+								<SimplePredicate field="mai_score" operator="lessOrEqual" value="68.5"/>
+								<Node score="0" recordCount="4989">
+									<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+									<ScoreDistribution value="0" recordCount="4162.0"/>
+									<ScoreDistribution value="1" recordCount="827.0"/>
+								</Node>
+								<Node score="1" recordCount="1995">
+									<True/>
+									<ScoreDistribution value="0" recordCount="468.0"/>
+									<ScoreDistribution value="1" recordCount="1527.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="1054">
+								<True/>
+								<ScoreDistribution value="0" recordCount="61.0"/>
+								<ScoreDistribution value="1" recordCount="993.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="1677">
+							<True/>
+							<ScoreDistribution value="0" recordCount="481.0"/>
+							<ScoreDistribution value="1" recordCount="1196.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+						<Node>
+							<SimplePredicate field="domain_proc" operator="lessOrEqual" value="0.013600000000000001"/>
+							<Node score="0" recordCount="3168">
+								<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+								<ScoreDistribution value="0" recordCount="2817.0"/>
+								<ScoreDistribution value="1" recordCount="351.0"/>
+							</Node>
+							<Node score="1" recordCount="726">
+								<True/>
+								<ScoreDistribution value="0" recordCount="233.0"/>
+								<ScoreDistribution value="1" recordCount="493.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<Node score="1" recordCount="71">
+								<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="85.5"/>
+								<ScoreDistribution value="0" recordCount="11.0"/>
+								<ScoreDistribution value="1" recordCount="60.0"/>
+							</Node>
+							<Node score="0" recordCount="124">
+								<True/>
+								<ScoreDistribution value="0" recordCount="116.0"/>
+								<ScoreDistribution value="1" recordCount="8.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="202">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="202.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="online_airport_state" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="1.25"/>
+							<Node score="0" recordCount="281">
+								<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+								<ScoreDistribution value="0" recordCount="240.0"/>
+								<ScoreDistribution value="1" recordCount="41.0"/>
+							</Node>
+							<Node score="1" recordCount="26">
+								<True/>
+								<ScoreDistribution value="0" recordCount="8.0"/>
+								<ScoreDistribution value="1" recordCount="18.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="820">
+							<True/>
+							<ScoreDistribution value="0" recordCount="192.0"/>
+							<ScoreDistribution value="1" recordCount="628.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+						<Node score="1" recordCount="64">
+							<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="129.5"/>
+							<ScoreDistribution value="0" recordCount="15.0"/>
+							<ScoreDistribution value="1" recordCount="49.0"/>
+						</Node>
+						<Node score="0" recordCount="90">
+							<True/>
+							<ScoreDistribution value="0" recordCount="76.0"/>
+							<ScoreDistribution value="1" recordCount="14.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="1818">
+						<True/>
+						<ScoreDistribution value="0" recordCount="292.0"/>
+						<ScoreDistribution value="1" recordCount="1526.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="12">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="ipRoutingMethod"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="distance_to_arrival"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_reason"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_searches"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="mai_os"/>
+					<MiningField name="mai_policy_score"/>
+					<MiningField name="mai_city"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="cases_count"/>
+					<MiningField name="domain_proc"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<Node>
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="11.45"/>
+								<Node score="0" recordCount="5325">
+									<SimplePredicate field="mai_reason" operator="lessOrEqual" value="10.0"/>
+									<ScoreDistribution value="0" recordCount="4487.0"/>
+									<ScoreDistribution value="1" recordCount="838.0"/>
+								</Node>
+								<Node score="0" recordCount="22486">
+									<SimplePredicate field="mai_risk" operator="lessOrEqual" value="4.5"/>
+									<ScoreDistribution value="0" recordCount="21777.0"/>
+									<ScoreDistribution value="1" recordCount="709.0"/>
+								</Node>
+								<Node score="1" recordCount="24">
+									<True/>
+									<ScoreDistribution value="0" recordCount="5.0"/>
+									<ScoreDistribution value="1" recordCount="19.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="2048">
+								<True/>
+								<ScoreDistribution value="0" recordCount="1502.0"/>
+								<ScoreDistribution value="1" recordCount="546.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_advice" operator="lessOrEqual" value="3.5"/>
+							<Node score="1" recordCount="1352">
+								<SimplePredicate field="mai_searches" operator="lessOrEqual" value="2.5"/>
+								<ScoreDistribution value="0" recordCount="458.0"/>
+								<ScoreDistribution value="1" recordCount="894.0"/>
+							</Node>
+							<Node score="0" recordCount="1482">
+								<SimplePredicate field="maibis_score" operator="lessOrEqual" value="497.5"/>
+								<ScoreDistribution value="0" recordCount="1059.0"/>
+								<ScoreDistribution value="1" recordCount="423.0"/>
+							</Node>
+							<Node score="1" recordCount="297">
+								<True/>
+								<ScoreDistribution value="0" recordCount="94.0"/>
+								<ScoreDistribution value="1" recordCount="203.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="domain_proc" operator="lessOrEqual" value="0.01165"/>
+							<Node score="0" recordCount="217">
+								<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+								<ScoreDistribution value="0" recordCount="167.0"/>
+								<ScoreDistribution value="1" recordCount="50.0"/>
+							</Node>
+							<Node score="1" recordCount="1293">
+								<True/>
+								<ScoreDistribution value="0" recordCount="323.0"/>
+								<ScoreDistribution value="1" recordCount="970.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="1454">
+							<True/>
+							<ScoreDistribution value="0" recordCount="144.0"/>
+							<ScoreDistribution value="1" recordCount="1310.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+						<Node>
+							<SimplePredicate field="mai_os" operator="lessOrEqual" value="3.792972E7"/>
+							<Node score="1" recordCount="601">
+								<SimplePredicate field="domain_proc" operator="lessOrEqual" value="0.009649999999999999"/>
+								<ScoreDistribution value="0" recordCount="171.0"/>
+								<ScoreDistribution value="1" recordCount="430.0"/>
+							</Node>
+							<Node score="1" recordCount="241">
+								<SimplePredicate field="distance_to_arrival" operator="lessOrEqual" value="9557.150000000001"/>
+								<ScoreDistribution value="0" recordCount="23.0"/>
+								<ScoreDistribution value="1" recordCount="218.0"/>
+							</Node>
+							<Node score="0" recordCount="10">
+								<True/>
+								<ScoreDistribution value="0" recordCount="8.0"/>
+								<ScoreDistribution value="1" recordCount="2.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="334">
+							<SimplePredicate field="cases_count" operator="lessOrEqual" value="1.5"/>
+							<ScoreDistribution value="0" recordCount="15.0"/>
+							<ScoreDistribution value="1" recordCount="319.0"/>
+						</Node>
+						<Node score="0" recordCount="4">
+							<True/>
+							<ScoreDistribution value="0" recordCount="4.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="ipRoutingMethod" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="mai_city" operator="lessOrEqual" value="4.659603925E8"/>
+							<Node score="0" recordCount="1">
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="0.05"/>
+								<ScoreDistribution value="0" recordCount="1.0"/>
+								<ScoreDistribution value="1" recordCount="0.0"/>
+							</Node>
+							<Node score="1" recordCount="71">
+								<True/>
+								<ScoreDistribution value="0" recordCount="1.0"/>
+								<ScoreDistribution value="1" recordCount="70.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="7">
+							<SimplePredicate field="mai_policy_score" operator="lessOrEqual" value="-13.5"/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="7.0"/>
+						</Node>
+						<Node score="0" recordCount="4">
+							<True/>
+							<ScoreDistribution value="0" recordCount="4.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="2854">
+						<True/>
+						<ScoreDistribution value="0" recordCount="23.0"/>
+						<ScoreDistribution value="1" recordCount="2831.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="13">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="factorCodes"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_all_pax"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="online_airport_state"/>
+					<MiningField name="online_death"/>
+					<MiningField name="online_email"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="channel"/>
+					<MiningField name="hours_since_first_verification"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+							<Node score="0" recordCount="23289">
+								<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+								<ScoreDistribution value="0" recordCount="22614.0"/>
+								<ScoreDistribution value="1" recordCount="675.0"/>
+							</Node>
+							<Node>
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="34.2"/>
+								<Node score="1" recordCount="10">
+									<SimplePredicate field="factorCodes" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="2.0"/>
+									<ScoreDistribution value="1" recordCount="8.0"/>
+								</Node>
+								<Node score="0" recordCount="7455">
+									<True/>
+									<ScoreDistribution value="0" recordCount="7021.0"/>
+									<ScoreDistribution value="1" recordCount="434.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="202">
+								<SimplePredicate field="online_airport_state" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="132.0"/>
+								<ScoreDistribution value="1" recordCount="70.0"/>
+							</Node>
+							<Node score="1" recordCount="193">
+								<True/>
+								<ScoreDistribution value="0" recordCount="52.0"/>
+								<ScoreDistribution value="1" recordCount="141.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="online_email" operator="lessOrEqual" value="6.5"/>
+							<Node score="1" recordCount="134">
+								<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="50.5"/>
+								<ScoreDistribution value="0" recordCount="20.0"/>
+								<ScoreDistribution value="1" recordCount="114.0"/>
+							</Node>
+							<Node score="0" recordCount="286">
+								<SimplePredicate field="mai_score" operator="lessOrEqual" value="94.5"/>
+								<ScoreDistribution value="0" recordCount="242.0"/>
+								<ScoreDistribution value="1" recordCount="44.0"/>
+							</Node>
+							<Node score="1" recordCount="29">
+								<True/>
+								<ScoreDistribution value="0" recordCount="5.0"/>
+								<ScoreDistribution value="1" recordCount="24.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="hours_since_first_verification" operator="lessOrEqual" value="18408.0"/>
+							<Node score="0" recordCount="3">
+								<SimplePredicate field="mai_score" operator="lessOrEqual" value="9.5"/>
+								<ScoreDistribution value="0" recordCount="2.0"/>
+								<ScoreDistribution value="1" recordCount="1.0"/>
+							</Node>
+							<Node score="1" recordCount="43">
+								<True/>
+								<ScoreDistribution value="0" recordCount="1.0"/>
+								<ScoreDistribution value="1" recordCount="42.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="15">
+							<True/>
+							<ScoreDistribution value="0" recordCount="13.0"/>
+							<ScoreDistribution value="1" recordCount="2.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="8101">
+						<SimplePredicate field="mai_all_pax" operator="lessOrEqual" value="42.5"/>
+						<ScoreDistribution value="0" recordCount="1.0"/>
+						<ScoreDistribution value="1" recordCount="8100.0"/>
+					</Node>
+					<Node>
+						<SimplePredicate field="channel" operator="lessOrEqual" value="-3.67523518E8"/>
+						<Node score="0" recordCount="4">
+							<SimplePredicate field="online_death" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="4.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+						<Node score="1" recordCount="10">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="10.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="261">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="261.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="14">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="deviceMatch"/>
+					<MiningField name="ipRoutingMethod"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_reason"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_status"/>
+					<MiningField name="mai_avg_secs"/>
+					<MiningField name="mai_all_pax"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="paymentsInstallments"/>
+					<MiningField name="channel"/>
+					<MiningField name="hours_since_first_verification"/>
+					<MiningField name="many_holders_for_card"/>
+					<MiningField name="many_names_for_document"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="hours_since_first_verification" operator="lessOrEqual" value="3522.5"/>
+						<Node>
+							<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="-4.9999999485E7"/>
+							<Node>
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<Node>
+									<SimplePredicate field="mai_advice" operator="lessOrEqual" value="2.0"/>
+									<Node score="1" recordCount="66">
+										<SimplePredicate field="mai_avg_secs" operator="lessOrEqual" value="1206.5"/>
+										<ScoreDistribution value="0" recordCount="29.0"/>
+										<ScoreDistribution value="1" recordCount="37.0"/>
+									</Node>
+									<Node score="0" recordCount="52">
+										<True/>
+										<ScoreDistribution value="0" recordCount="47.0"/>
+										<ScoreDistribution value="1" recordCount="5.0"/>
+									</Node>
+								</Node>
+								<Node score="0" recordCount="9292">
+									<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="34.2"/>
+									<ScoreDistribution value="0" recordCount="8804.0"/>
+									<ScoreDistribution value="1" recordCount="488.0"/>
+								</Node>
+								<Node score="1" recordCount="468">
+									<True/>
+									<ScoreDistribution value="0" recordCount="232.0"/>
+									<ScoreDistribution value="1" recordCount="236.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="4352">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="4352.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_all_pax" operator="lessOrEqual" value="6.5"/>
+							<Node>
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<Node score="1" recordCount="72">
+									<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="85.5"/>
+									<ScoreDistribution value="0" recordCount="6.0"/>
+									<ScoreDistribution value="1" recordCount="66.0"/>
+								</Node>
+								<Node score="0" recordCount="49">
+									<True/>
+									<ScoreDistribution value="0" recordCount="46.0"/>
+									<ScoreDistribution value="1" recordCount="3.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="780">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="780.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="29">
+							<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+							<ScoreDistribution value="0" recordCount="27.0"/>
+							<ScoreDistribution value="1" recordCount="2.0"/>
+						</Node>
+						<Node score="0" recordCount="24">
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<ScoreDistribution value="0" recordCount="13.0"/>
+							<ScoreDistribution value="1" recordCount="11.0"/>
+						</Node>
+						<Node score="1" recordCount="72">
+							<True/>
+							<ScoreDistribution value="0" recordCount="1.0"/>
+							<ScoreDistribution value="1" recordCount="71.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="ipRoutingMethod" operator="lessOrEqual" value="1.5"/>
+							<Node score="0" recordCount="15469">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="15172.0"/>
+								<ScoreDistribution value="1" recordCount="297.0"/>
+							</Node>
+							<Node score="1" recordCount="609">
+								<True/>
+								<ScoreDistribution value="0" recordCount="1.0"/>
+								<ScoreDistribution value="1" recordCount="608.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="65.5"/>
+							<Node score="0" recordCount="1546">
+								<SimplePredicate field="channel" operator="lessOrEqual" value="1.096849236E9"/>
+								<ScoreDistribution value="0" recordCount="929.0"/>
+								<ScoreDistribution value="1" recordCount="617.0"/>
+							</Node>
+							<Node score="1" recordCount="248">
+								<True/>
+								<ScoreDistribution value="0" recordCount="16.0"/>
+								<ScoreDistribution value="1" recordCount="232.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="5139">
+							<True/>
+							<ScoreDistribution value="0" recordCount="4842.0"/>
+							<ScoreDistribution value="1" recordCount="297.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_reason" operator="lessOrEqual" value="1.5"/>
+						<Node score="1" recordCount="834">
+							<SimplePredicate field="mai_status" operator="lessOrEqual" value="3.5"/>
+							<ScoreDistribution value="0" recordCount="26.0"/>
+							<ScoreDistribution value="1" recordCount="808.0"/>
+						</Node>
+						<Node score="0" recordCount="4">
+							<SimplePredicate field="deviceMatch" operator="lessOrEqual" value="1.5"/>
+							<ScoreDistribution value="0" recordCount="4.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+						<Node score="1" recordCount="3">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="3.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="many_names_for_document" operator="lessOrEqual" value="-4.999999947E7"/>
+						<Node score="1" recordCount="906">
+							<SimplePredicate field="paymentsInstallments" operator="lessOrEqual" value="9.5"/>
+							<ScoreDistribution value="0" recordCount="136.0"/>
+							<ScoreDistribution value="1" recordCount="770.0"/>
+						</Node>
+						<Node score="0" recordCount="62">
+							<True/>
+							<ScoreDistribution value="0" recordCount="31.0"/>
+							<ScoreDistribution value="1" recordCount="31.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="211">
+						<True/>
+						<ScoreDistribution value="0" recordCount="8.0"/>
+						<ScoreDistribution value="1" recordCount="203.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="15">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="id"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_reason"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_all_pax"/>
+					<MiningField name="mai_last_secs"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_ddd"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="channel"/>
+					<MiningField name="count_different_cards"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="mai_reason" operator="lessOrEqual" value="10.0"/>
+						<Node>
+							<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="0.25"/>
+							<Node>
+								<SimplePredicate field="mai_advice" operator="lessOrEqual" value="2.0"/>
+								<Node>
+									<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+									<Node score="0" recordCount="118">
+										<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+										<ScoreDistribution value="0" recordCount="103.0"/>
+										<ScoreDistribution value="1" recordCount="15.0"/>
+									</Node>
+									<Node score="1" recordCount="49">
+										<True/>
+										<ScoreDistribution value="0" recordCount="5.0"/>
+										<ScoreDistribution value="1" recordCount="44.0"/>
+									</Node>
+								</Node>
+								<Node score="0" recordCount="156">
+									<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="113.0"/>
+									<ScoreDistribution value="1" recordCount="43.0"/>
+								</Node>
+								<Node score="1" recordCount="526">
+									<True/>
+									<ScoreDistribution value="0" recordCount="0.0"/>
+									<ScoreDistribution value="1" recordCount="526.0"/>
+								</Node>
+							</Node>
+							<Node>
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="19.55"/>
+								<Node score="1" recordCount="1042">
+									<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="129.5"/>
+									<ScoreDistribution value="0" recordCount="511.0"/>
+									<ScoreDistribution value="1" recordCount="531.0"/>
+								</Node>
+								<Node score="0" recordCount="3883">
+									<True/>
+									<ScoreDistribution value="0" recordCount="3217.0"/>
+									<ScoreDistribution value="1" recordCount="666.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="203">
+								<True/>
+								<ScoreDistribution value="0" recordCount="50.0"/>
+								<ScoreDistribution value="1" recordCount="153.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="maibis_score" operator="lessOrEqual" value="623.0"/>
+							<Node score="0" recordCount="1438">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="1058.0"/>
+								<ScoreDistribution value="1" recordCount="380.0"/>
+							</Node>
+							<Node score="1" recordCount="2315">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="2315.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="1290">
+							<SimplePredicate field="count_different_cards" operator="lessOrEqual" value="49.5"/>
+							<ScoreDistribution value="0" recordCount="104.0"/>
+							<ScoreDistribution value="1" recordCount="1186.0"/>
+						</Node>
+						<Node score="1" recordCount="7">
+							<SimplePredicate field="mai_last_secs" operator="lessOrEqual" value="23.5"/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="7.0"/>
+						</Node>
+						<Node score="0" recordCount="10">
+							<True/>
+							<ScoreDistribution value="0" recordCount="10.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_risk" operator="lessOrEqual" value="3.5"/>
+						<Node>
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<Node score="0" recordCount="24674">
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="19.55"/>
+								<ScoreDistribution value="0" recordCount="24228.0"/>
+								<ScoreDistribution value="1" recordCount="446.0"/>
+							</Node>
+							<Node score="0" recordCount="1412">
+								<SimplePredicate field="channel" operator="lessOrEqual" value="1.096849236E9"/>
+								<ScoreDistribution value="0" recordCount="1160.0"/>
+								<ScoreDistribution value="1" recordCount="252.0"/>
+							</Node>
+							<Node score="1" recordCount="59">
+								<True/>
+								<ScoreDistribution value="0" recordCount="16.0"/>
+								<ScoreDistribution value="1" recordCount="43.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="2623">
+							<True/>
+							<ScoreDistribution value="0" recordCount="2.0"/>
+							<ScoreDistribution value="1" recordCount="2621.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_last_secs" operator="lessOrEqual" value="1195.5"/>
+						<Node score="1" recordCount="522">
+							<SimplePredicate field="mai_all_pax" operator="lessOrEqual" value="21.5"/>
+							<ScoreDistribution value="0" recordCount="19.0"/>
+							<ScoreDistribution value="1" recordCount="503.0"/>
+						</Node>
+						<Node score="0" recordCount="4">
+							<SimplePredicate field="id" operator="lessOrEqual" value="8869.5"/>
+							<ScoreDistribution value="0" recordCount="3.0"/>
+							<ScoreDistribution value="1" recordCount="1.0"/>
+						</Node>
+						<Node score="1" recordCount="18">
+							<True/>
+							<ScoreDistribution value="0" recordCount="1.0"/>
+							<ScoreDistribution value="1" recordCount="17.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+						<Node score="0" recordCount="28">
+							<SimplePredicate field="online_ddd" operator="lessOrEqual" value="2.5"/>
+							<ScoreDistribution value="0" recordCount="27.0"/>
+							<ScoreDistribution value="1" recordCount="1.0"/>
+						</Node>
+						<Node score="1" recordCount="5">
+							<True/>
+							<ScoreDistribution value="0" recordCount="2.0"/>
+							<ScoreDistribution value="1" recordCount="3.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="118">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="118.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="16">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="reasonCode"/>
+					<MiningField name="pp_30"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_avg_secs"/>
+					<MiningField name="mai_pulevel"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_airport_state"/>
+					<MiningField name="online_billing_address_state"/>
+					<MiningField name="online_ddd_bond"/>
+					<MiningField name="online_ip_state"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="totalUsdAmount"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="65.5"/>
+						<Node>
+							<SimplePredicate field="mai_risk" operator="lessOrEqual" value="2.5"/>
+							<Node>
+								<SimplePredicate field="totalUsdAmount" operator="lessOrEqual" value="267.5"/>
+								<Node score="0" recordCount="2342">
+									<SimplePredicate field="mai_score" operator="lessOrEqual" value="68.5"/>
+									<ScoreDistribution value="0" recordCount="1898.0"/>
+									<ScoreDistribution value="1" recordCount="444.0"/>
+								</Node>
+								<Node score="1" recordCount="149">
+									<SimplePredicate field="mai_pulevel" operator="lessOrEqual" value="1.5"/>
+									<ScoreDistribution value="0" recordCount="29.0"/>
+									<ScoreDistribution value="1" recordCount="120.0"/>
+								</Node>
+								<Node score="0" recordCount="13">
+									<True/>
+									<ScoreDistribution value="0" recordCount="12.0"/>
+									<ScoreDistribution value="1" recordCount="1.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="843">
+								<SimplePredicate field="online_ip_state" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="276.0"/>
+								<ScoreDistribution value="1" recordCount="567.0"/>
+							</Node>
+							<Node score="0" recordCount="996">
+								<SimplePredicate field="online_ddd_bond" operator="lessOrEqual" value="2.5"/>
+								<ScoreDistribution value="0" recordCount="696.0"/>
+								<ScoreDistribution value="1" recordCount="300.0"/>
+							</Node>
+							<Node score="1" recordCount="394">
+								<True/>
+								<ScoreDistribution value="0" recordCount="132.0"/>
+								<ScoreDistribution value="1" recordCount="262.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="2375">
+							<SimplePredicate field="online_airport_state" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="763.0"/>
+							<ScoreDistribution value="1" recordCount="1612.0"/>
+						</Node>
+						<Node score="1" recordCount="2696">
+							<SimplePredicate field="mai_advice" operator="lessOrEqual" value="506.0"/>
+							<ScoreDistribution value="0" recordCount="222.0"/>
+							<ScoreDistribution value="1" recordCount="2474.0"/>
+						</Node>
+						<Node score="0" recordCount="48">
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="43.0"/>
+							<ScoreDistribution value="1" recordCount="5.0"/>
+						</Node>
+						<Node score="1" recordCount="31">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="31.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_advice" operator="lessOrEqual" value="2.0"/>
+						<Node>
+							<SimplePredicate field="online_billing_address_state" operator="lessOrEqual" value="2.5"/>
+							<Node>
+								<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+								<Node score="0" recordCount="123">
+									<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="0.55"/>
+									<ScoreDistribution value="0" recordCount="89.0"/>
+									<ScoreDistribution value="1" recordCount="34.0"/>
+								</Node>
+								<Node score="1" recordCount="60">
+									<True/>
+									<ScoreDistribution value="0" recordCount="24.0"/>
+									<ScoreDistribution value="1" recordCount="36.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="527">
+								<True/>
+								<ScoreDistribution value="0" recordCount="108.0"/>
+								<ScoreDistribution value="1" recordCount="419.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="401">
+							<True/>
+							<ScoreDistribution value="0" recordCount="44.0"/>
+							<ScoreDistribution value="1" recordCount="357.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_advice" operator="lessOrEqual" value="3.5"/>
+						<Node score="0" recordCount="19132">
+							<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="5.25"/>
+							<ScoreDistribution value="0" recordCount="18270.0"/>
+							<ScoreDistribution value="1" recordCount="862.0"/>
+						</Node>
+						<Node score="0" recordCount="1974">
+							<SimplePredicate field="pp_30" operator="lessOrEqual" value="2.5"/>
+							<ScoreDistribution value="0" recordCount="1687.0"/>
+							<ScoreDistribution value="1" recordCount="287.0"/>
+						</Node>
+						<Node score="1" recordCount="51">
+							<True/>
+							<ScoreDistribution value="0" recordCount="24.0"/>
+							<ScoreDistribution value="1" recordCount="27.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="online_airport_state" operator="lessOrEqual" value="0.5"/>
+						<Node score="0" recordCount="5453">
+							<SimplePredicate field="maibis_score" operator="lessOrEqual" value="704.5"/>
+							<ScoreDistribution value="0" recordCount="4680.0"/>
+							<ScoreDistribution value="1" recordCount="773.0"/>
+						</Node>
+						<Node score="1" recordCount="201">
+							<True/>
+							<ScoreDistribution value="0" recordCount="66.0"/>
+							<ScoreDistribution value="1" recordCount="135.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="806">
+						<SimplePredicate field="mai_avg_secs" operator="lessOrEqual" value="509.5"/>
+						<ScoreDistribution value="0" recordCount="290.0"/>
+						<ScoreDistribution value="1" recordCount="516.0"/>
+					</Node>
+					<Node score="0" recordCount="1544">
+						<True/>
+						<ScoreDistribution value="0" recordCount="969.0"/>
+						<ScoreDistribution value="1" recordCount="575.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="17">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="icInternet"/>
+					<MiningField name="icidentity"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="timeOnPage"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="mai_reason"/>
+					<MiningField name="mai_risk"/>
+					<MiningField name="mai_searches"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="online_city_bond"/>
+					<MiningField name="online_ddd_bond"/>
+					<MiningField name="online_ip_state"/>
+					<MiningField name="online_name"/>
+					<MiningField name="cancelled"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+						<Node>
+							<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="11.45"/>
+							<Node score="0" recordCount="26025">
+								<SimplePredicate field="online_city_bond" operator="lessOrEqual" value="2.5"/>
+								<ScoreDistribution value="0" recordCount="24213.0"/>
+								<ScoreDistribution value="1" recordCount="1812.0"/>
+							</Node>
+							<Node>
+								<SimplePredicate field="timeOnPage" operator="lessOrEqual" value="271146.5"/>
+								<Node score="0" recordCount="1027">
+									<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+									<ScoreDistribution value="0" recordCount="851.0"/>
+									<ScoreDistribution value="1" recordCount="176.0"/>
+								</Node>
+								<Node score="1" recordCount="385">
+									<True/>
+									<ScoreDistribution value="0" recordCount="184.0"/>
+									<ScoreDistribution value="1" recordCount="201.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="1828">
+								<True/>
+								<ScoreDistribution value="0" recordCount="1601.0"/>
+								<ScoreDistribution value="1" recordCount="227.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="maibis_score" operator="lessOrEqual" value="499.5"/>
+							<Node score="0" recordCount="1661">
+								<SimplePredicate field="online_name" operator="lessOrEqual" value="3.5"/>
+								<ScoreDistribution value="0" recordCount="1282.0"/>
+								<ScoreDistribution value="1" recordCount="379.0"/>
+							</Node>
+							<Node score="1" recordCount="45">
+								<SimplePredicate field="icidentity" operator="lessOrEqual" value="2.5"/>
+								<ScoreDistribution value="0" recordCount="4.0"/>
+								<ScoreDistribution value="1" recordCount="41.0"/>
+							</Node>
+							<Node score="0" recordCount="13">
+								<True/>
+								<ScoreDistribution value="0" recordCount="10.0"/>
+								<ScoreDistribution value="1" recordCount="3.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="online_name" operator="lessOrEqual" value="2.5"/>
+							<Node score="1" recordCount="252">
+								<SimplePredicate field="online_ip_state" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="68.0"/>
+								<ScoreDistribution value="1" recordCount="184.0"/>
+							</Node>
+							<Node score="0" recordCount="246">
+								<True/>
+								<ScoreDistribution value="0" recordCount="147.0"/>
+								<ScoreDistribution value="1" recordCount="99.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="74">
+							<SimplePredicate field="icInternet" operator="lessOrEqual" value="3.5"/>
+							<ScoreDistribution value="0" recordCount="4.0"/>
+							<ScoreDistribution value="1" recordCount="70.0"/>
+						</Node>
+						<Node score="0" recordCount="15">
+							<True/>
+							<ScoreDistribution value="0" recordCount="10.0"/>
+							<ScoreDistribution value="1" recordCount="5.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="mai_searches" operator="lessOrEqual" value="2.5"/>
+							<Node>
+								<SimplePredicate field="mai_reason" operator="lessOrEqual" value="10.0"/>
+								<Node score="1" recordCount="395">
+									<SimplePredicate field="mai_risk" operator="lessOrEqual" value="4.5"/>
+									<ScoreDistribution value="0" recordCount="126.0"/>
+									<ScoreDistribution value="1" recordCount="269.0"/>
+								</Node>
+								<Node score="0" recordCount="106">
+									<True/>
+									<ScoreDistribution value="0" recordCount="61.0"/>
+									<ScoreDistribution value="1" recordCount="45.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="721">
+								<True/>
+								<ScoreDistribution value="0" recordCount="504.0"/>
+								<ScoreDistribution value="1" recordCount="217.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="1499">
+							<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="34.2"/>
+							<ScoreDistribution value="0" recordCount="1338.0"/>
+							<ScoreDistribution value="1" recordCount="161.0"/>
+						</Node>
+						<Node score="1" recordCount="35">
+							<SimplePredicate field="online_ddd_bond" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="9.0"/>
+							<ScoreDistribution value="1" recordCount="26.0"/>
+						</Node>
+						<Node score="0" recordCount="281">
+							<True/>
+							<ScoreDistribution value="0" recordCount="179.0"/>
+							<ScoreDistribution value="1" recordCount="102.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="6101">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="6101.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="18">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="icAddress"/>
+					<MiningField name="timeOnPage"/>
+					<MiningField name="pp_1"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_searches"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="mai_pulevel"/>
+					<MiningField name="maitris_score"/>
+					<MiningField name="online_airport_state"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="case_minutes_distance"/>
+					<MiningField name="channel"/>
+					<MiningField name="hours_since_first_verification"/>
+					<MiningField name="many_holders_for_card"/>
+					<MiningField name="many_names_for_document"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="many_names_for_document" operator="lessOrEqual" value="0.065"/>
+						<Node>
+							<SimplePredicate field="mai_score" operator="lessOrEqual" value="68.5"/>
+							<Node>
+								<SimplePredicate field="online_airport_state" operator="lessOrEqual" value="0.5"/>
+								<Node>
+									<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="65.5"/>
+									<Node score="1" recordCount="2145">
+										<SimplePredicate field="hours_since_first_verification" operator="lessOrEqual" value="6355.5"/>
+										<ScoreDistribution value="0" recordCount="1016.0"/>
+										<ScoreDistribution value="1" recordCount="1129.0"/>
+									</Node>
+									<Node score="0" recordCount="2428">
+										<True/>
+										<ScoreDistribution value="0" recordCount="2039.0"/>
+										<ScoreDistribution value="1" recordCount="389.0"/>
+									</Node>
+								</Node>
+								<Node score="0" recordCount="20945">
+									<True/>
+									<ScoreDistribution value="0" recordCount="19586.0"/>
+									<ScoreDistribution value="1" recordCount="1359.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="9425">
+								<SimplePredicate field="many_holders_for_card" operator="lessOrEqual" value="-4.9999999485E7"/>
+								<ScoreDistribution value="0" recordCount="6406.0"/>
+								<ScoreDistribution value="1" recordCount="3019.0"/>
+							</Node>
+							<Node score="1" recordCount="614">
+								<True/>
+								<ScoreDistribution value="0" recordCount="128.0"/>
+								<ScoreDistribution value="1" recordCount="486.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="timeOnPage" operator="lessOrEqual" value="63582.5"/>
+							<Node score="1" recordCount="782">
+								<SimplePredicate field="maitris_score" operator="lessOrEqual" value="10.5"/>
+								<ScoreDistribution value="0" recordCount="70.0"/>
+								<ScoreDistribution value="1" recordCount="712.0"/>
+							</Node>
+							<Node score="0" recordCount="6">
+								<SimplePredicate field="icAddress" operator="lessOrEqual" value="1.5"/>
+								<ScoreDistribution value="0" recordCount="6.0"/>
+								<ScoreDistribution value="1" recordCount="0.0"/>
+							</Node>
+							<Node score="1" recordCount="1">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="1.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_pulevel" operator="lessOrEqual" value="1.5"/>
+							<Node score="1" recordCount="1461">
+								<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="157.5"/>
+								<ScoreDistribution value="0" recordCount="133.0"/>
+								<ScoreDistribution value="1" recordCount="1328.0"/>
+							</Node>
+							<Node score="0" recordCount="792">
+								<True/>
+								<ScoreDistribution value="0" recordCount="399.0"/>
+								<ScoreDistribution value="1" recordCount="393.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="159">
+							<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="152.0"/>
+							<ScoreDistribution value="1" recordCount="7.0"/>
+						</Node>
+						<Node score="1" recordCount="21">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="21.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="pp_1" operator="lessOrEqual" value="1.5"/>
+							<Node>
+								<SimplePredicate field="channel" operator="lessOrEqual" value="1.096849236E9"/>
+								<Node score="0" recordCount="497">
+									<SimplePredicate field="mai_advice" operator="lessOrEqual" value="3.5"/>
+									<ScoreDistribution value="0" recordCount="373.0"/>
+									<ScoreDistribution value="1" recordCount="124.0"/>
+								</Node>
+								<Node score="1" recordCount="196">
+									<True/>
+									<ScoreDistribution value="0" recordCount="58.0"/>
+									<ScoreDistribution value="1" recordCount="138.0"/>
+								</Node>
+							</Node>
+							<Node score="1" recordCount="97">
+								<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="85.5"/>
+								<ScoreDistribution value="0" recordCount="2.0"/>
+								<ScoreDistribution value="1" recordCount="95.0"/>
+							</Node>
+							<Node score="0" recordCount="6">
+								<True/>
+								<ScoreDistribution value="0" recordCount="6.0"/>
+								<ScoreDistribution value="1" recordCount="0.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="122">
+							<SimplePredicate field="mai_searches" operator="lessOrEqual" value="21.5"/>
+							<ScoreDistribution value="0" recordCount="9.0"/>
+							<ScoreDistribution value="1" recordCount="113.0"/>
+						</Node>
+						<Node score="0" recordCount="3">
+							<True/>
+							<ScoreDistribution value="0" recordCount="3.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="512">
+						<SimplePredicate field="case_minutes_distance" operator="lessOrEqual" value="-4.9999999E7"/>
+						<ScoreDistribution value="0" recordCount="4.0"/>
+						<ScoreDistribution value="1" recordCount="508.0"/>
+					</Node>
+					<Node score="0" recordCount="1">
+						<SimplePredicate field="hours_since_first_verification" operator="lessOrEqual" value="6355.5"/>
+						<ScoreDistribution value="0" recordCount="1.0"/>
+						<ScoreDistribution value="1" recordCount="0.0"/>
+					</Node>
+					<Node score="1" recordCount="6">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="6.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="19">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="reasonCode"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="triangulation_height_speed"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_all_pax"/>
+					<MiningField name="mai_last_secs"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="maibis_score"/>
+					<MiningField name="maitris_score"/>
+					<MiningField name="online_ddd"/>
+					<MiningField name="online_name"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="case_minutes_distance"/>
+					<MiningField name="hours_since_first_verification"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="hours_since_first_verification" operator="lessOrEqual" value="3522.5"/>
+						<Node>
+							<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+							<Node>
+								<SimplePredicate field="triangulation_height_speed" operator="lessOrEqual" value="0.25"/>
+								<Node score="0" recordCount="6654">
+									<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="6484.0"/>
+									<ScoreDistribution value="1" recordCount="170.0"/>
+								</Node>
+								<Node score="1" recordCount="703">
+									<True/>
+									<ScoreDistribution value="0" recordCount="2.0"/>
+									<ScoreDistribution value="1" recordCount="701.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="2391">
+								<SimplePredicate field="online_name" operator="lessOrEqual" value="2.5"/>
+								<ScoreDistribution value="0" recordCount="1665.0"/>
+								<ScoreDistribution value="1" recordCount="726.0"/>
+							</Node>
+							<Node score="1" recordCount="274">
+								<True/>
+								<ScoreDistribution value="0" recordCount="94.0"/>
+								<ScoreDistribution value="1" recordCount="180.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="online_ddd" operator="lessOrEqual" value="0.5"/>
+							<Node>
+								<SimplePredicate field="mai_all_pax" operator="lessOrEqual" value="3.5"/>
+								<Node score="0" recordCount="517">
+									<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="284.0"/>
+									<ScoreDistribution value="1" recordCount="233.0"/>
+								</Node>
+								<Node score="1" recordCount="1209">
+									<True/>
+									<ScoreDistribution value="0" recordCount="0.0"/>
+									<ScoreDistribution value="1" recordCount="1209.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="627">
+								<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="324.0"/>
+								<ScoreDistribution value="1" recordCount="303.0"/>
+							</Node>
+							<Node score="1" recordCount="219">
+								<True/>
+								<ScoreDistribution value="0" recordCount="6.0"/>
+								<ScoreDistribution value="1" recordCount="213.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="2542">
+							<True/>
+							<ScoreDistribution value="0" recordCount="215.0"/>
+							<ScoreDistribution value="1" recordCount="2327.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+						<Node score="0" recordCount="21573">
+							<SimplePredicate field="maibis_score" operator="lessOrEqual" value="744.5"/>
+							<ScoreDistribution value="0" recordCount="20899.0"/>
+							<ScoreDistribution value="1" recordCount="674.0"/>
+						</Node>
+						<Node>
+							<SimplePredicate field="mai_last_secs" operator="lessOrEqual" value="791.5"/>
+							<Node score="0" recordCount="168">
+								<SimplePredicate field="maitris_score" operator="lessOrEqual" value="3.5"/>
+								<ScoreDistribution value="0" recordCount="107.0"/>
+								<ScoreDistribution value="1" recordCount="61.0"/>
+							</Node>
+							<Node score="1" recordCount="9">
+								<True/>
+								<ScoreDistribution value="0" recordCount="2.0"/>
+								<ScoreDistribution value="1" recordCount="7.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="7">
+							<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="16.5"/>
+							<ScoreDistribution value="0" recordCount="1.0"/>
+							<ScoreDistribution value="1" recordCount="6.0"/>
+						</Node>
+						<Node score="0" recordCount="141">
+							<True/>
+							<ScoreDistribution value="0" recordCount="126.0"/>
+							<ScoreDistribution value="1" recordCount="15.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="3137">
+						<SimplePredicate field="case_minutes_distance" operator="lessOrEqual" value="4.5"/>
+						<ScoreDistribution value="0" recordCount="2.0"/>
+						<ScoreDistribution value="1" recordCount="3135.0"/>
+					</Node>
+					<Node>
+						<SimplePredicate field="hours_since_first_verification" operator="lessOrEqual" value="12618.5"/>
+						<Node score="0" recordCount="2">
+							<SimplePredicate field="mai_score" operator="lessOrEqual" value="12.5"/>
+							<ScoreDistribution value="0" recordCount="2.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+						</Node>
+						<Node score="1" recordCount="17">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="17.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="61">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="61.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+		<Segment id="20">
+			<True/>
+			<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+				<MiningSchema>
+					<MiningField name="deviceMatch"/>
+					<MiningField name="reasonCode"/>
+					<MiningField name="lagTimeHours"/>
+					<MiningField name="speed_to_departure"/>
+					<MiningField name="mai_score"/>
+					<MiningField name="mai_advice"/>
+					<MiningField name="mai_negative"/>
+					<MiningField name="online_ddd"/>
+					<MiningField name="cancelled"/>
+					<MiningField name="totalUsdAmount"/>
+					<MiningField name="domain_proc"/>
+				</MiningSchema>
+				<Node>
+					<True/>
+					<Node>
+						<SimplePredicate field="reasonCode" operator="lessOrEqual" value="165.5"/>
+						<Node>
+							<SimplePredicate field="mai_advice" operator="lessOrEqual" value="3.5"/>
+							<Node>
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="34.2"/>
+								<Node score="0" recordCount="22279">
+									<SimplePredicate field="mai_score" operator="lessOrEqual" value="94.5"/>
+									<ScoreDistribution value="0" recordCount="21048.0"/>
+									<ScoreDistribution value="1" recordCount="1231.0"/>
+								</Node>
+								<Node score="0" recordCount="55">
+									<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+									<ScoreDistribution value="0" recordCount="44.0"/>
+									<ScoreDistribution value="1" recordCount="11.0"/>
+								</Node>
+								<Node score="1" recordCount="38">
+									<True/>
+									<ScoreDistribution value="0" recordCount="0.0"/>
+									<ScoreDistribution value="1" recordCount="38.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="508">
+								<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+								<ScoreDistribution value="0" recordCount="435.0"/>
+								<ScoreDistribution value="1" recordCount="73.0"/>
+							</Node>
+							<Node score="1" recordCount="207">
+								<True/>
+								<ScoreDistribution value="0" recordCount="0.0"/>
+								<ScoreDistribution value="1" recordCount="207.0"/>
+							</Node>
+						</Node>
+						<Node>
+							<SimplePredicate field="online_ddd" operator="lessOrEqual" value="0.5"/>
+							<Node score="0" recordCount="5309">
+								<SimplePredicate field="speed_to_departure" operator="lessOrEqual" value="19.55"/>
+								<ScoreDistribution value="0" recordCount="4750.0"/>
+								<ScoreDistribution value="1" recordCount="559.0"/>
+							</Node>
+							<Node score="0" recordCount="146">
+								<SimplePredicate field="totalUsdAmount" operator="lessOrEqual" value="231.5"/>
+								<ScoreDistribution value="0" recordCount="91.0"/>
+								<ScoreDistribution value="1" recordCount="55.0"/>
+							</Node>
+							<Node score="1" recordCount="85">
+								<True/>
+								<ScoreDistribution value="0" recordCount="19.0"/>
+								<ScoreDistribution value="1" recordCount="66.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="1968">
+							<SimplePredicate field="mai_negative" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="1422.0"/>
+							<ScoreDistribution value="1" recordCount="546.0"/>
+						</Node>
+						<Node score="1" recordCount="253">
+							<True/>
+							<ScoreDistribution value="0" recordCount="9.0"/>
+							<ScoreDistribution value="1" recordCount="244.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="cancelled" operator="lessOrEqual" value="0.5"/>
+						<Node>
+							<SimplePredicate field="domain_proc" operator="lessOrEqual" value="0.054900000000000004"/>
+							<Node>
+								<SimplePredicate field="lagTimeHours" operator="lessOrEqual" value="39.5"/>
+								<Node score="0" recordCount="993">
+									<SimplePredicate field="deviceMatch" operator="lessOrEqual" value="1.5"/>
+									<ScoreDistribution value="0" recordCount="691.0"/>
+									<ScoreDistribution value="1" recordCount="302.0"/>
+								</Node>
+								<Node score="1" recordCount="403">
+									<True/>
+									<ScoreDistribution value="0" recordCount="156.0"/>
+									<ScoreDistribution value="1" recordCount="247.0"/>
+								</Node>
+							</Node>
+							<Node score="0" recordCount="1675">
+								<True/>
+								<ScoreDistribution value="0" recordCount="1473.0"/>
+								<ScoreDistribution value="1" recordCount="202.0"/>
+							</Node>
+						</Node>
+						<Node score="1" recordCount="103">
+							<True/>
+							<ScoreDistribution value="0" recordCount="21.0"/>
+							<ScoreDistribution value="1" recordCount="82.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="5955">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="5955.0"/>
+					</Node>
+				</Node>
+			</TreeModel>
+		</Segment>
+	</Segmentation>
+</MiningModel>
+</PMML>

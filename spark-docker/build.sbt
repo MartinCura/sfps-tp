@@ -77,13 +77,67 @@ lazy val trainer = (project in file("xgboost-trainer"))
 
 /** Evaluator */
 
-// lazy val evaluator = (project in file("xgboost-evaluator"))
-//   .settings(
-//     name := "evaluator",
-//     commonSettings,
+lazy val evaluator = (project in file("xgboost-evaluator"))
+  .settings(
+     name := "evaluator",
+     commonSettings,
+     assemblySettings,
 
-//     libraryDependencies ++= Seq( ... )
-//   )
+     libraryDependencies ++= Seq(
+       "org.apache.spark" %% "spark-sql"    % sparkVersion,
+       "org.apache.spark" %% "spark-mllib"  % sparkVersion,
+       "ml.dmlc" % "xgboost4j"        % xgboostVersion,
+       "ml.dmlc" % "xgboost4j-spark"  % xgboostVersion,
+       "org.jpmml" % "jpmml-sparkml" % "1.5.3",
+       "org.jpmml" % "pmml-evaluator" % "1.4.9",
+       "org.jpmml" % "pmml-evaluator-extension" % "1.4.9"
+     )
+)
+
+
+/** Server */
+
+val Http4sVersion = "0.20.1"
+val CirceVersion = "0.11.1"
+val Specs2Version = "4.1.0"
+val LogbackVersion = "1.2.3"
+
+lazy val server = (project in file("http4s-server"))
+  .settings(
+    name := "http4s-server",
+    commonSettings,
+    assemblySettings,
+
+    libraryDependencies ++= Seq(
+      "org.http4s"      %% "http4s-blaze-server" % Http4sVersion,
+      "org.http4s"      %% "http4s-blaze-client" % Http4sVersion,
+      "org.http4s"      %% "http4s-circe"        % Http4sVersion,
+      "org.http4s"      %% "http4s-dsl"          % Http4sVersion,
+      "io.circe"        %% "circe-generic"       % CirceVersion,
+      "org.specs2"      %% "specs2-core"         % Specs2Version % "test",
+      "ch.qos.logback"  %  "logback-classic"     % LogbackVersion,
+    //  "io.circe"        %% "circe-generic"       % "0.6.1",
+      "io.circe" %% "circe-literal" % CirceVersion//% "0.6.1"
+    ),
+    addCompilerPlugin("org.typelevel" %% "kind-projector"     % "0.10.1"),
+    addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.2.4")
+
+  ).dependsOn(
+    common,
+    trainer,
+    evaluator
+  )
+
+
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-encoding", "UTF-8",
+  "-language:higherKinds",
+  "-language:postfixOps",
+  "-feature",
+  "-Ypartial-unification",
+  "-Xfatal-warnings",
+)
 
 
 lazy val assemblySettings = Seq(

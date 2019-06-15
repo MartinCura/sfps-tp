@@ -33,7 +33,7 @@ services:
     ports:
       - "8088:8088"
     volumes:
-      - "exchange:/exchange"
+      - "exchange:/src/main/resources"
     depends_on:
       - db
 
