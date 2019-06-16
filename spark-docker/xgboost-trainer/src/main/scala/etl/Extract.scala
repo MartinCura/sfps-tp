@@ -65,10 +65,8 @@ object ETL {
     microSelectStatement.query[Schema.MicroRow].stream.take(n).compile.toList.transact(transactor()).unsafeRunSync
 
   // `columns`: Comma-separated column names in same order as corresponding features in `row`
-  def storeAndTransform(row: Seq[String], columns: String): Schema.DataRow = {
-    val newRow: Schema.DataRow = DbLoader.addAndGetBack("train", columns, row)
-    return newRow
-  }
+  def storeAndTransform(row: Seq[String], columns: String): Schema.DataRow =
+    DbLoader.addAndGetBack("train", columns, row)
 
   // Treats row as if features are in the same order as in the CSVs
   def storeAndTransform(row: Seq[String]): Schema.DataRow = storeAndTransform(row, SqlCommands.featuresColumns)

@@ -141,7 +141,7 @@ object SqlCommands {
       )
     ).update.run
 
-  // Without label and in the same order as files, lowercase as is stored by db
+  // Lowercase and in same order as files EXCEPT without id and label 'apocrypha' (which would be right before 'friendly')
   val featuresColumns = """
     mai_score,DeviceMatch,FactorCodes,FirstEncounter,
     IcAddress,IcInternet,IcSuspicious,IcVelocity,Icidentity,
@@ -154,7 +154,7 @@ object SqlCommands {
     mai_reason,mai_risk,maibis_score,mai_status,mai_unique,
     mai_avg_secs,mai_buys,mai_searches,eulerBadge,
     mai_pax,mai_type,mai_rels,mai_app,mai_urgency,
-    mai_network,mai_all_pax,mai_last_secs,APOCRYPHA,friendly,
+    mai_network,mai_all_pax,mai_last_secs,friendly,
     hours_since_first_verification,iataFrom,iataTo,ip_city,
     mai_language,mai_negative,mai_suspect,mai_os,mai_policy_score,
     mai_pulevel,maibis_reason,mai_city,mai_region,maitris_score,
@@ -166,6 +166,8 @@ object SqlCommands {
     paymentsCardType,paymentsInstallments,same_field_features,
     speed_to_departure,totalUsdAmount,triangulation_height,
     triangulation_height_speed,trip_distance
-  """.toLowerCase
+  """.toLowerCase.stripMargin//.replaceAll("\n", "").replaceAll(" ", "")
+
+  val allColumns = featuresColumns ++ ",apocrypha"
 
 }

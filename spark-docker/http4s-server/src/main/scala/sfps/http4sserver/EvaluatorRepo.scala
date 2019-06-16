@@ -7,8 +7,11 @@ import io.circe.{Encoder, Json}
 import org.http4s.EntityEncoder
 import org.http4s.circe.jsonEncoderOf
 import sfps.db.DbLookup
+import sfps.etl.ETL
 import sfps.schema._
 import sfps.types._
+import sfps.db.SqlCommands
+import sfps.db.DbLoader
 
 trait EvaluatorRepo[F[_]]{
   def eval(f: RowDTO): F[EvaluatorRepo.Result]
@@ -52,15 +55,19 @@ object EvaluatorRepo {
   }
 
   def impl[F[_]: Applicative]: EvaluatorRepo[F] = new EvaluatorRepo[F]{
-    def eval(f: RowDTO): F[Result] = {
+    def eval(rowToPredict: RowDTO): F[Result] = {
 
       //Chequeo base de datos
-      val result : String = DbLookup.getRowInTrain(RowDTO.mapToDataRow(f)) match {
+      val result : String = DbLookup.getRowInTrain(RowDTO.mapToDataRow(rowToPredict)) match {
         case Some(row) => row._9.apocrypha.toString()
-        case None => predict(f) match {
+        case None => predict(rowToPredict) match {
           case Left(error) => s"An error ocurred: $error"
           case Right(prediction) => {
-            //TODO SAVE IN DB
+            val withPredictedRow = rowToPredict.copy(apocrypha = Option(prediction))
+            val stringRows = RowDTO.mapToStringList(withPredictedRow)
+
+            DbLoader.addLineToDB("train", SqlCommands.allColumns, stringRows)
+
             prediction.toString
           }
         }
@@ -72,9 +79,3 @@ object EvaluatorRepo {
   }
 
 }
-
-
-
-
-
-
