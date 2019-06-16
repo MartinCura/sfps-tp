@@ -1,19 +1,15 @@
 # sfps-tp
 
-Build de los proyectos
+A script is provided to simplify building the whole multi-module project.
 
+Simply run
 ```
-cd spark-docker/xgboost-trainer
-sbt assembly
+./prepare-docker-compose.sh
 ```
+and be sure to put `train.csv` and test.csv` in the `data/` subfolder.
 
+Done that, you can run any service with
 ```
-cd spark-docker/
-docker build -t sfps-spark .
+docker-compose up db [service]
 ```
-
-#DOES NOT WORK
-#```
-#cd http4s-server-docker/
-#docker build -t sfps-server .
-#```
+where *service* can be any of [`dbloader`, `spark`, or `server`].
