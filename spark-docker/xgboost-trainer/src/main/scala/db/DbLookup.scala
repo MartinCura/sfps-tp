@@ -1,11 +1,16 @@
 package sfps.db
 
-import doobie._, doobie.implicits._, doobie.util.ExecutionContexts
-import Fragments.{ whereAndOpt }
-import cats._, cats.data._, cats.effect.IO, cats.implicits._
-
+import doobie._
+import doobie.implicits._
+import doobie.util.ExecutionContexts
+import Fragments.whereAndOpt
+import cats._
+import cats.data._
+import cats.effect.IO
+import cats.implicits._
 import sfps.types.MyRowElement
-// import sfps.db.Schema
+import sfps.db.Schema
+import sfps.db.Schema.DataRow
 
 object DbLookup {
 

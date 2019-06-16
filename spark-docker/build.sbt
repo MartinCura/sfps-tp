@@ -124,8 +124,10 @@ lazy val server = (project in file("http4s-server"))
 
   ).dependsOn(
     common,
+    //TODO improvement: sacar trainer de las dependencias (extraer lo que usa el server a commons)
     trainer,
-    evaluator
+    evaluator,
+    dbloader
   )
 
 
