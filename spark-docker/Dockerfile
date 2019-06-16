@@ -33,10 +33,16 @@ RUN curl -sSL $SCALA_TARBALL -o scala.deb && \
 #COPY ./target/scala-2.12/http4s-server-assembly-1.0.jar /server.jar
 # COPY . .
 COPY ./build.sbt /
+COPY ./project/build.properties /project/
+COPY ./project/plugins.sbt /project/
 COPY ./common/src /common/src
 COPY ./db-loader/src /db-loader/src
 COPY ./http4s-server/src /http4s-server/src
+COPY ./http4s-server/project /http4s-server/project
 COPY ./xgboost-evaluator/src /xgboost-evaluator/src
+COPY ./xgboost-evaluator/project/build.properties /xgboost-evaluator/project/
+COPY ./xgboost-trainer/src /xgboost-trainer/src
+COPY ./xgboost-trainer/project /xgboost-trainer/project
 
 EXPOSE 8088
 
