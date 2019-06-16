@@ -116,8 +116,8 @@ lazy val server = (project in file("http4s-server"))
       "io.circe"        %% "circe-generic"       % CirceVersion,
       "org.specs2"      %% "specs2-core"         % Specs2Version % "test",
       "ch.qos.logback"  %  "logback-classic"     % LogbackVersion,
-    //  "io.circe"        %% "circe-generic"       % "0.6.1",
-      "io.circe" %% "circe-literal" % CirceVersion//% "0.6.1"
+      "io.circe" %% "circe-literal" % CirceVersion,
+      "io.circe"  %% "circe-parser"   % CirceVersion
     ),
     addCompilerPlugin("org.typelevel" %% "kind-projector"     % "0.10.1"),
     addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.2.4")

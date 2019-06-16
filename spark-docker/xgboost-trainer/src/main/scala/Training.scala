@@ -11,7 +11,6 @@ import sfps.etl.ETL
 
 import pipelines.StringLabeledPipeline
 import saver.PipelineSaver
-import evaluator.Eval
 
 object Training {
 

@@ -49,4 +49,14 @@ object DbLookup {
       return !found.isEmpty && found.exists(_ == row)
     }
 
+    def getRowInTrain(row: Schema.DataRow): Option[Schema.DataRow] = {
+      val comparator: MyRowElement = row._8.caseDate
+      val comps = Map(comparator.toString() -> (comparator.toDouble match {
+        case None => ""
+        case x => x.get.toString
+      }))
+      val found: List[Schema.DataRow] = findRows("train", comps)
+      return found.headOption
+    }
+
 }
