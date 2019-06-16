@@ -9,7 +9,6 @@ import cats.data._
 import cats.effect.IO
 import cats.implicits._
 import sfps.types.MyRowElement
-import sfps.db.Schema
 import sfps.db.Schema.DataRow
 
 object DbLookup {

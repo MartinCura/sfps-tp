@@ -10,6 +10,7 @@ import sfps.db.DbLookup
 import sfps.etl.ETL
 import sfps.schema._
 import sfps.types._
+import sfps.db.SqlCommands
 
 trait EvaluatorRepo[F[_]]{
   def eval(f: RowDTO): F[EvaluatorRepo.Result]
@@ -62,9 +63,9 @@ object EvaluatorRepo {
           case Left(error) => s"An error ocurred: $error"
           case Right(prediction) => {
             val withPredictedRow = rowToPredict.copy(apocrypha = Option(prediction))
-            val stringRows =  RowDTO.mapToStringList(withPredictedRow)
-            //TODO make this work
-            //ETL.storeAndTransform(stringRows)
+            val stringRows = RowDTO.mapToStringList(withPredictedRow)
+
+            ETL.storeAndTransform(stringRows, SqlCommands.allColumns)  //TODO make this work
 
             prediction.toString
           }
@@ -77,9 +78,3 @@ object EvaluatorRepo {
   }
 
 }
-
-
-
-
-
-
