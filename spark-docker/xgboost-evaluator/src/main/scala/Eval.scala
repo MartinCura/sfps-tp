@@ -3,6 +3,7 @@ package evaluator
 import java.io.InputStream
 
 import org.dmg.pmml.FieldName
+import org.jpmml.evaluator.EvaluatorUtil
 import org.jpmml.evaluator.{InputField, LoadingModelEvaluatorBuilder, ModelEvaluator}
 
 import scala.collection.JavaConverters._
@@ -21,16 +22,17 @@ object Eval {
   }
 
 
-  def evaluateSetOfFeatures(features: List[Double], evaluator: ModelEvaluator[_]) : Either[String, Map[FieldName,_]] = {
+  def evaluateSetOfFeatures(label: String, features: List[Double], evaluator: ModelEvaluator[_]) : Either[String, Int] = {
     val activeFields: List[InputField] = evaluator.getActiveFields.asScala.toList
-
     val zippedArgsWithIndex = activeFields.zipWithIndex
-    val arguments = zippedArgsWithIndex.map{ argWithIndex =>
+
+    val arguments : java.util.Map[FieldName, Double] = zippedArgsWithIndex.map{ argWithIndex =>
       (argWithIndex._1.getFieldName, features(argWithIndex._2))
     }.toMap.asJava
 
     try {
-      Right(evaluator.evaluate(arguments).asScala.toMap)
+      val results = EvaluatorUtil.decodeAll(evaluator.evaluate(arguments))
+      Right(results.get(label).toString.toDouble.toInt)
     } catch {
       case e : Exception => Left(e.getMessage)
     }
