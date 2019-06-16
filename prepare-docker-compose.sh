@@ -24,5 +24,5 @@ cd ..
 echo
 echo "> Done!"
 echo
-echo "> Now you can start anythin with 'docker-compose up db [service]' (dbloader, spark, or server)."
-echo "> Or you can just 'docker-compose up' and see everything go up."
+echo "> Now you can start any service with 'docker-compose up db [service]' (dbloader, spark, or server)."
+echo "> Or you can just do 'docker-compose up' and see everything go up."

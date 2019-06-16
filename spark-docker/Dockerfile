@@ -31,7 +31,12 @@ RUN curl -sSL $SCALA_TARBALL -o scala.deb && \
     dpkg -i scala.deb
 
 #COPY ./target/scala-2.12/http4s-server-assembly-1.0.jar /server.jar
-COPY . .
+# COPY . .
+COPY ./build.sbt /
+COPY ./common/src /common/src
+COPY ./db-loader/src /db-loader/src
+COPY ./http4s-server/src /http4s-server/src
+COPY ./xgboost-evaluator/src /xgboost-evaluator/src
 
 EXPOSE 8088
 

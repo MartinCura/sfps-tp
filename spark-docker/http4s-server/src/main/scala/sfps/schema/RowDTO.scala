@@ -118,7 +118,6 @@ object RowDTO {
 
   def mapToStringList(row: RowDTO) : List[String] = {
     List(
-      mapToString(row.id),
       mapToString(row.mai_score),
       mapToString(row.DeviceMatch),
       mapToString(row.FactorCodes),

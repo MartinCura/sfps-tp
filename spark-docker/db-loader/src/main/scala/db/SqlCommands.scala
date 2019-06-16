@@ -168,6 +168,6 @@ object SqlCommands {
     triangulation_height_speed,trip_distance
   """.toLowerCase.stripMargin//.replaceAll("\n", "").replaceAll(" ", "")
 
-  val allColumns = "id," ++ featuresColumns ++ ",apocrypha"
+  val allColumns = featuresColumns ++ ",apocrypha"
 
 }

@@ -11,6 +11,7 @@ import sfps.etl.ETL
 import sfps.schema._
 import sfps.types._
 import sfps.db.SqlCommands
+import sfps.db.DbLoader
 
 trait EvaluatorRepo[F[_]]{
   def eval(f: RowDTO): F[EvaluatorRepo.Result]
@@ -65,7 +66,7 @@ object EvaluatorRepo {
             val withPredictedRow = rowToPredict.copy(apocrypha = Option(prediction))
             val stringRows = RowDTO.mapToStringList(withPredictedRow)
 
-            ETL.storeAndTransform(stringRows, SqlCommands.allColumns)  //TODO make this work
+            DbLoader.addLineToDB("train", SqlCommands.allColumns, stringRows)
 
             prediction.toString
           }
