@@ -1,5 +1,4 @@
 #!/bin/bash
-cd spark-docker/
 echo
 echo "> sbt assembly"
 sbt assembly
@@ -20,7 +19,6 @@ echo
 echo "> building sfps-server"
 docker build -t sfps-server .
 
-cd ..
 echo
 echo "> Done!"
 echo
